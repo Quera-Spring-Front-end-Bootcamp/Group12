@@ -31,7 +31,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
           ],
         },
         primaryShade: { light: 6, dark: 7 },
-        primaryColor: "asli",
+        primaryColor: "firuzei",
       }}
     >
       {children}
