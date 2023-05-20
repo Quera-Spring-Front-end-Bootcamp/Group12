@@ -14,7 +14,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       withGlobalStyles
       withNormalizeCSS
       theme={{
-        colorScheme: "dark",
+        colorScheme: "light",
 
         colors: {
           firuzei: [
