@@ -15,7 +15,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       withNormalizeCSS
       theme={{
         colorScheme: "light",
-
+        fontFamily:'dana , sans-serif',
         colors: {
           firuzei: [
             "#defdfd",
