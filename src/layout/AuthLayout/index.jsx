@@ -1,10 +1,10 @@
 import { Container, Flex,useMantineTheme } from '@mantine/core'; 
 import AuthHeader from '../AuthHeader';
-const AuthLayout = ({children}) => {
+const AuthLayout = ({children,title}) => {
     const height = 'calc(100vh - 210px)';
     return (
         <>
-            <AuthHeader title={"salam"}/>
+            <AuthHeader title={title}/>
         <Flex justify={"center"} align={"center"}  style={{minHeight:`${height}`} } direction={"column"}>
 
             
