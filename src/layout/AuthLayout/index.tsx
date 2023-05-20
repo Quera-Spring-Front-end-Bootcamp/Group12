@@ -1,10 +1,17 @@
-import { Container, Flex, useMantineTheme } from "@mantine/core";
+import { Flex } from "@mantine/core";
 import AuthHeader from "../AuthHeader";
-const AuthLayout = ({ children }) => {
+import { ReactNode } from "react";
+
+type props = {
+  children?: ReactNode,
+  loginPage: boolean
+}
+
+const AuthLayout = ({ children, loginPage } : props) => {
   const height = "calc(100vh - 210px)";
   return (
     <>
-      <AuthHeader title={"salam"} />
+      <AuthHeader loginPage={loginPage} />
       <Flex
         justify={"center"}
         align={"center"}
