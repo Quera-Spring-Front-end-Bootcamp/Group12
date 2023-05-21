@@ -1,10 +1,8 @@
-import { Button as MantineButton } from "@mantine/core"
-import type { ButtonProps as MantineButtonProps } from "@mantine/core"
+import { Button as MantineButton } from '@mantine/core';
+import type { ButtonProps as MantineButtonProps } from '@mantine/core';
 
-const Button = (props : MantineButtonProps) => {
-    return (
-        <MantineButton {...props} ></MantineButton>
-    )
-}
+const Button = (props : MantineButtonProps) => (
+  <MantineButton {...props} />
+);
 
 export default Button;

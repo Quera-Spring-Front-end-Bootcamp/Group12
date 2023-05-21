@@ -1,8 +1,5 @@
-import { Card as MantineCard } from "@mantine/core";
-import { CardProps as MantineCardProps } from "@mantine/core";
+import { Card as MantineCard, CardProps as MantineCardProps } from '@mantine/core';
 
-const Card = (props: MantineCardProps) => {
-  return <MantineCard {...props} ></MantineCard>;
-};
+const Card = (props: MantineCardProps) => <MantineCard {...props} />;
 
 export default Card;
