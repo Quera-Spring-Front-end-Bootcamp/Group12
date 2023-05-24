@@ -1,10 +1,10 @@
-import { Flex, Text } from "@mantine/core";
-import PasswordInput from "../../components/PasswordInput";
-import Card from "../../components/Card";
-import TextInput from "../../components/TextInput";
-import Anchor from "../../components/Anchor";
-import Button from "../../components/Button";
-import AuthLayout from "../../layout/AuthLayout";
+import { Flex, Text } from '@mantine/core';
+import PasswordInput from '../../components/PasswordInput';
+import Card from '../../components/Card';
+import TextInput from '../../components/TextInput';
+import Anchor from '../../components/Anchor';
+import Button from '../../components/Button';
+import AuthLayout from '../../layout/AuthLayout';
 
 const Login = () => (
   <AuthLayout loginPage>
@@ -25,9 +25,9 @@ const Login = () => (
           mb="29px"
           labelProps={{
             style: {
-              fontWeight: "400",
-              marginBottom: "8px",
-              fontSize: "14px",
+              fontWeight: '400',
+              marginBottom: '8px',
+              fontSize: '14px',
             },
           }}
         />
@@ -41,15 +41,15 @@ const Login = () => (
           fz="16px"
           labelProps={{
             style: {
-              fontWeight: "400",
-              marginButton: "8px",
-              fontSize: "14px",
+              fontWeight: '400',
+              marginButton: '8px',
+              fontSize: '14px',
             },
           }}
         />
-        <Anchor href="#" style={{alignSelf:'flex-start'}}>رمز عبور را فراموش کرده‌ای؟</Anchor>
+        <Anchor href="#" style={{ alignSelf: 'flex-start' }}>رمز عبور را فراموش کرده‌ای؟</Anchor>
 
-        <div style={{ width: "100%" }}>
+        <div style={{ width: '100%' }}>
           <Button h="40px" w="100%" fz="14px" fw="700" my="29px">
             ورود
           </Button>
