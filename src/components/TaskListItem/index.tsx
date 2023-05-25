@@ -1,11 +1,12 @@
-import Card from '../Card';
 import { CardProps } from '@mantine/core';
+import Card from '../Card';
 
-
-const TaskListItem = (props :CardProps ) => {
-    return (
-        <Card radius={'md'} shadow='sm' bg={'#ffffff'} {...props}
-        ></Card>
-    )
-}
+const TaskListItem = (props :CardProps) => (
+  <Card
+    radius="md"
+    shadow="sm"
+    bg="#ffffff"
+    {...props}
+  />
+);
 export default TaskListItem;
