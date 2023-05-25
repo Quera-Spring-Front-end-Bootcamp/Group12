@@ -13,7 +13,6 @@ const Login = () => {
   }
 
   return (
-
     <AuthLayout loginPage>
       <Card
         miw="402px"
@@ -23,7 +22,7 @@ const Login = () => {
       >
         <Flex direction="column" align="center" bg="#fff">
           <Text fz="32px" fw="600" color="#000" mb="29px">
-          به کوئرا تسک منیجر خوش برگشتی :)
+            به کوئرا تسک منیجر خوش برگشتی :)
           </Text>
           <TextInput
             dir="ltr"
@@ -54,18 +53,33 @@ const Login = () => {
               },
             }}
           />
-          <Link to="/forget" className="text-cyan-900 hover:underline  self-start">رمز عبور را فراموش کرده‌ای؟</Link>
+          <Link
+            to="/forget"
+            className="text-cyan-900 hover:underline  self-start"
+          >
+            رمز عبور را فراموش کرده‌ای؟
+          </Link>
 
           <div className="w-full">
-            <Button h="40px" w="100%" fz="14px" fw="700" my="29px" onClick={handleClick}>
-            ورود
+            <Button
+              h="40px"
+              w="100%"
+              fz="14px"
+              fw="700"
+              my="29px"
+              onClick={handleClick}
+            >
+              ورود
             </Button>
             <Flex justify="center" mt="20px" gap="7px">
               <Text fz="16px" fw="400">
-              ثبت نام نکرده ای؟
+                ثبت نام نکرده ای؟
               </Text>
-              <Link to="/register" className="text-cyan-800 hover:underline text-lg font-bold">
-              ثبت نام
+              <Link
+                to="/register"
+                className="text-cyan-800 hover:underline text-lg font-bold"
+              >
+                ثبت نام
               </Link>
             </Flex>
           </div>
