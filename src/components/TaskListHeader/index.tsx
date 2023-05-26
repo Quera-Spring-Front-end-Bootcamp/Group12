@@ -1,10 +1,13 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import { Text, Flex, CardProps } from '@mantine/core';
 import TaskListItem from '../TaskListItem';
 import { Plus, Dots } from '../../assets/icons';
 
 type TaskListHeaderProps = CardProps & {
-  color: string;
+
+  color?: string,
+  children?: ReactNode,
+
 };
 
 // popover not handled!
