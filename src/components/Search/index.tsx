@@ -1,9 +1,9 @@
-import React from 'react';
 import { TextInput as MantineTextInput } from '@mantine/core';
 
 import type { TextInputProps as MantineTextInputProps } from '@mantine/core';
 import { Search } from '../../assets/icons';
 import SvgProvier from '../../assets/icons/SvgProvider';
+
 
 interface SearchInputProps extends MantineTextInputProps {
   placeholder: string;

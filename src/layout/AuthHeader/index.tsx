@@ -1,6 +1,7 @@
 import { Flex, Text } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../components/Button';
+import Logo from '../../components/Logo';
 
 const AuthHeader = ({ loginPage }: { loginPage: boolean }) => {
   const navigate = useNavigate();
@@ -18,18 +19,7 @@ const AuthHeader = ({ loginPage }: { loginPage: boolean }) => {
       px="80px"
       pt="80px"
     >
-      <Text
-        fz="2rem"
-        fw="800"
-        bg="linear-gradient(90deg, #118C80 0%, #4AB7D8 120%)"
-        style={{
-          backgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          WebkitBackgroundClip: 'text',
-        }}
-      >
-        کوئرا تسک منیجر
-      </Text>
+      <Logo />
       <Flex align="center" gap="8px">
         <Text>{loginPage ? 'ثبت‌نام نکرده‌ای؟' : 'قبلا ثبت‌نام کرده‌ای؟'}</Text>
         <Button fw="700" fz="14" mr="7px" onClick={handleClick}>
