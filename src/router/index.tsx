@@ -4,8 +4,10 @@ import ForgetPassword from '../pages/ForgetPassword';
 import Register from '../pages/Register';
 import PrivateRoutes from './PrivateRoute';
 
+import MainLayout from '../layout/MainLayout';
+
 const MainRouter = () => {
-  const isLogin = false;
+  const isLogin = true;
   return (
     <BrowserRouter>
       <Routes>
@@ -15,11 +17,7 @@ const MainRouter = () => {
         <Route element={<PrivateRoutes isLogin={isLogin} />}>
           <Route
             path="/"
-            element={
-              <>
-                <p>Home</p>
-              </>
-            }
+            element={<MainLayout/>}
           />
         </Route>
         <Route
