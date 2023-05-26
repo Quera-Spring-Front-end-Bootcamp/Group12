@@ -4,9 +4,9 @@ import MainHeader from './MainHeader';
 export default function MainLayout() {
   return (
     <>
-      <AppShell
+      <AppShell bg={'#FAFBFC'}
 
-      navbar={<Navbar width={{ base: 300 }} height={500} p="xs">
+      navbar={<Navbar style={{borderLeft:'1px solid #d5d5d5'}} width={{ base: 300 }} height={500} p="xs" bg={'transparent'}>
         {/* Navbar content */}</Navbar>}
 
       header={<MainHeader/>}

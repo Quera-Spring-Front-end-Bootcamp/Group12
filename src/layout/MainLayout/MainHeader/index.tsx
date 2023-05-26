@@ -1,4 +1,4 @@
-import { Center, Flex, Header, Tabs, Text, Divider, useMantineTheme } from '@mantine/core';
+import { Center, Flex, Header, Tabs, Text, Divider, useMantineTheme, Badge } from '@mantine/core';
 import SearchInput from '../../../components/Search';
 import { Calender, CheckList, Column, Search, Share } from '../../../assets/icons';
 import Button from '../../../components/Button';
@@ -13,27 +13,39 @@ export default function MainHeader() {
         color: activeTab === index ? theme.colors.blue[7] : theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[9],
       });
     return (
-        <Header height={158} mr={50} ml={16}>
+        <Header height={158} mr={50} ml={16} bg={'transparent'} style={{borderBottom:'1px solid #d5d5d5'}}>
             
 
-            <Tabs mt={42} defaultValue="second">
+            <Tabs styles={(theme) => ({
+                // tabsList: {
+                //     borderBottom:'1px solid #d5d5d5'
+                // },
+                tab: {
+                    ...theme.fn.focusStyles(),
+                    '&[data-active]': {
+                        
+                        color: '#208D8E',
+                    },
+                    
+                }
+            })} mt={42} defaultValue="second" w={'100%'}>
 
-                <Tabs.List mb={20}>
+                <Tabs.List mb={20} w={'100%'}>
 
-                    <Flex align="center">
+                    <Flex align="center" w={'100%'}>
 
                         <Text fz={'20px'} fw={'600'} pr={16} className="cursor-default ">پروژه اول</Text>
-                        <Divider  orientation="vertical"/>
+                        <Divider mt={'10px'} h={'24px'} orientation="vertical"/>
 
-                        <Tabs.Tab icon={<SvgProvier color="#323232" style={{ height: "24px" }}><CheckList /></SvgProvier>} fz={'16px'} fw={'500'} value="first" className="cursor-pointer">نمایش لیستی</Tabs.Tab>
-                        <Divider  orientation="vertical"/>
+                        <Tabs.Tab icon={<SvgProvier  style={{ height: "24px" }}><CheckList /></SvgProvier>} fz={'16px'} fw={'500'} value="first" className="cursor-pointer">نمایش لیستی</Tabs.Tab>
+                        <Divider mt={'10px'} h={'24px'} orientation="vertical"/>
 
-                        <Tabs.Tab icon={<SvgProvier color="#323232" style={{ height: "24px" }}><Column /></SvgProvier>} fz={'16px'} fw={'500'} value="second" className="cursor-pointer">نمایش ستونی</Tabs.Tab>
-                        <Divider  orientation="vertical"/>
+                        <Tabs.Tab icon={<SvgProvier  style={{ height: "24px" }}><Column /></SvgProvier>} fz={'16px'} fw={'500'} value="second" className="cursor-pointer">نمایش ستونی</Tabs.Tab>
+                        <Divider mt={'10px'} h={'24px'} orientation="vertical"/>
                         
-                        <Tabs.Tab icon={<SvgProvier color="#323232" style={{ height: "24px" }}><Calender /></SvgProvier>} fz={'16px'} fw={'500'} value="third" className="cursor-pointer">تقویم</Tabs.Tab>
-                        <Divider  orientation="vertical"/>
-                        <Button fz={16} fw={500} leftIcon={<SvgProvier color="#323232" style={{ height: "16px" }}><Share /></SvgProvier>} ml="280px" style={{
+                        <Tabs.Tab icon={<SvgProvier  style={{ height: "24px" }}><Calender /></SvgProvier>} fz={'16px'} fw={'500'} value="third" className="cursor-pointer">تقویم</Tabs.Tab>
+                        <Divider mt={'10px'} h={'24px'}  orientation="vertical"/>
+                        <Button fz={16} fw={500} leftIcon={<SvgProvier color="#323232" style={{ height: "24px" }}><Share /></SvgProvier>} ml="auto" style={{
                             backgroundColor: 'transparent',
                             color: 'inherit'
                         }}>
@@ -46,7 +58,7 @@ export default function MainHeader() {
 
             <div className="flex  gap-4 items-center">
 
-                <SearchInput fw={500} fz={12} placeholder='جستجو بین تسک‌ها' className="border-none" />
+                <SearchInput  fw={500} fz={12} placeholder='جستجو بین تسک‌ها' className="border-none" />
                 <Divider  orientation="vertical"/>
                 <Button fw={500} fz={12} leftIcon={<SvgProvier color="#323232" style={{ height: "24px" }}><TwoLineSetting /></SvgProvier>} ml={30} style={{
                     backgroundColor: 'transparent',
@@ -54,7 +66,8 @@ export default function MainHeader() {
                 }}>
                     فیلترها
                 </Button>
-                <Text fw={500} fz={12} className="bg-sky-200">دسته‌بندی‌شده با: وضعیت</Text>
+                <Badge size='lg' color='cyan'>دسته‌بندی‌شده با: وضعیت</Badge>
+                <Text fw={500} fz={12} className="bg-sky-200"></Text>
             </div>
 
 
