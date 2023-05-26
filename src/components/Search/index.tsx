@@ -16,6 +16,6 @@ export default function SearchInput({ placeholder, ...props }: SearchInputProps)
     },
   };
   return (
-    <MantineTextInput  icon={<SvgProvier color="#323232" style={{ height: "24px" }}><Search /></SvgProvier>} placeholder={placeholder} styles={inputStyles} {...props} />
+    <MantineTextInput variant='unstyled'  icon={<SvgProvier color="#323232" style={{ height: "24px" }}><Search /></SvgProvier>} placeholder={placeholder} styles={inputStyles} {...props} />
   );
 }
