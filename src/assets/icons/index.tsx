@@ -19,6 +19,7 @@ import { ReactComponent as Delete } from './svg/Trash, Delete, Bin.svg';
 import { ReactComponent as Dots } from './svg/dots-menu.svg';
 import { ReactComponent as Done } from './svg/Checkmark, Done, Check.svg';
 import { ReactComponent as JustifyRight } from './svg/justify-right.svg';
+import { ReactComponent as Share } from './svg/Share.svg';
 
 export {
   Arrow,
@@ -42,4 +43,5 @@ export {
   Done,
   Dots,
   JustifyRight,
+  Share,
 };
