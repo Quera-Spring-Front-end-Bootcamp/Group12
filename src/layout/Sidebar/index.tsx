@@ -1,4 +1,4 @@
-import { Accordion, Box, Flex, NavLink, Text } from "@mantine/core";
+import { Accordion, Box, Flex, NavLink, Navbar, Text, ScrollArea } from "@mantine/core";
 import Logo from "../../components/Logo";
 import SearchInput from "../../components/Search";
 import Button from "../../components/Button";
@@ -6,24 +6,36 @@ import { Dots, Exit, PlusSquare } from "../../assets/icons";
 import SidebarProfile from "../../components/SiderbarProfile";
 
 const Sidebar = () => {
-  const minHeight = "calc(100vh - 125px)";
   return (
-    <Box w="25%" px="sm" bg={"inherit"} >
-      <Flex direction={"column"} align={"center"} pt={'40px'}>
-        <Logo />
-        <Flex
-          mt={"32px"}
-          w={"100%"}
-          mih={minHeight}
-          className="flex   justify-between flex-col !important "
-          px="md"
-        >
+    <>
+      <Navbar
+        bg={"inherit"}
+        width={{
+          // When viewport is larger than theme.breakpoints.sm, Navbar width will be 300
+          sm: 300,
+
+          // When viewport is larger than theme.breakpoints.lg, Navbar width will be 400
+          lg: 340,
+
+          // When other breakpoints do not match base width is used, defaults to 100%
+          base: 300,
+        }}
+      >
+        <Navbar.Section >
+          <Flex justify={"center"} align={"center"} pt={'40px'}>
+
+          <Logo />
+          </Flex>
+        </Navbar.Section>
+        <Navbar.Section grow component={ScrollArea}>
           <Accordion
             miw="100%"
-            // variant="filled"
+            // variant="default"
             chevronPosition="right"
             defaultValue="ورک‌اسپیس‌ها"
-            className="flex-4"
+            style={{
+
+            }}
           >
             <Flex justify="center" direction="column" align="center" w={"100%"}>
               <Accordion.Item value="workspaces" w={"100%"}>
@@ -130,16 +142,18 @@ const Sidebar = () => {
               </Accordion.Item>
             </Flex>
           </Accordion>
-          <Flex justify="flex-end" direction="column">
-            <SidebarProfile />
-            <Flex my="md" gap="md">
-              <Exit width="16px" color="#818181" />
-              <Text color="#818181">خروج</Text>
+        </Navbar.Section>
+        <Navbar.Section>
+          <Flex direction={"column"} p={'32px'}>
+          <SidebarProfile />
+          <Flex my="md" gap="md">
+            <Exit width="16px" color="#818181" />
+            <Text color="#818181">خروج</Text>
             </Flex>
-          </Flex>
-        </Flex>
-      </Flex>
-    </Box>
+            </Flex>
+        </Navbar.Section>
+      </Navbar>
+    </>
   );
 };
 
