@@ -18,7 +18,7 @@ import { ReactComponent as Search } from './svg/search-loupe.svg';
 import { ReactComponent as Delete } from './svg/Trash, Delete, Bin.svg';
 import { ReactComponent as Dots } from './svg/dots-menu.svg';
 import { ReactComponent as Done } from './svg/Checkmark, Done, Check.svg';
-import { ReactComponent as JustifyRight } from './justify-right.svg';
+import { ReactComponent as JustifyRight } from './svg/justify-right.svg';
 
 export {
   Arrow,
