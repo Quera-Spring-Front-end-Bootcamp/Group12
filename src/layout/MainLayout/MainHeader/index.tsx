@@ -4,22 +4,14 @@ import { Calender, CheckList, Column, Search, Share } from '../../../assets/icon
 import Button from '../../../components/Button';
 import { TwoLineSetting } from '../../../assets/icons';
 import SvgProvier from '../../../assets/icons/SvgProvider';
-import { useState } from 'react';
 
 export default function MainHeader() {
-    const theme = useMantineTheme();
-    const [activeTab, setActiveTab] = useState(0);
-    const tabStyle = (index: number) => ({
-        color: activeTab === index ? theme.colors.blue[7] : theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[9],
-      });
+
     return (
         <Header height={158} mr={50} ml={16} bg={'transparent'} style={{borderBottom:'1px solid #d5d5d5'}}>
             
 
             <Tabs styles={(theme) => ({
-                // tabsList: {
-                //     borderBottom:'1px solid #d5d5d5'
-                // },
                 tab: {
                     ...theme.fn.focusStyles(),
                     '&[data-active]': {
@@ -45,6 +37,7 @@ export default function MainHeader() {
                         
                         <Tabs.Tab icon={<SvgProvier  style={{ height: "24px" }}><Calender /></SvgProvier>} fz={'16px'} fw={'500'} value="third" className="cursor-pointer">تقویم</Tabs.Tab>
                         <Divider mt={'10px'} h={'24px'}  orientation="vertical"/>
+                        
                         <Button fz={16} fw={500} leftIcon={<SvgProvier color="#323232" style={{ height: "24px" }}><Share /></SvgProvier>} ml="auto" style={{
                             backgroundColor: 'transparent',
                             color: 'inherit'
@@ -67,7 +60,6 @@ export default function MainHeader() {
                     فیلترها
                 </Button>
                 <Badge size='lg' color='cyan'>دسته‌بندی‌شده با: وضعیت</Badge>
-                <Text fw={500} fz={12} className="bg-sky-200"></Text>
             </div>
 
 
