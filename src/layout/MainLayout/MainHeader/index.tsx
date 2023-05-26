@@ -8,7 +8,7 @@ import SvgProvier from '../../../assets/icons/SvgProvider';
 export default function MainHeader() {
 
     return (
-        <Header height={158} mr={50} ml={16} bg={'transparent'} style={{borderBottom:'1px solid #d5d5d5'}}>
+        <Header w={'75%'} height={158} mr={50} ml={16} bg={'transparent'} style={{borderBottom:'1px solid #d5d5d5'}}>
             
 
             <Tabs styles={(theme) => ({
