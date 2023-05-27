@@ -1,10 +1,9 @@
-import { Flex, Text } from '@mantine/core';
-import ProfileImage from '../ProfileImage';
+import { Avatar, Flex, Text } from '@mantine/core';
 
 const SidebarProfile = () => (
 
   <Flex align="center" gap="sm" w="100%">
-    <ProfileImage />
+    <Avatar size={'32px'} color='teal' radius={'xl'} variant='filled'>JD</Avatar>
     <Text>جهان داوری</Text>
   </Flex>
 
