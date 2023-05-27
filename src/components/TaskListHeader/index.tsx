@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react';
 import { Text, Flex, CardProps } from '@mantine/core';
 import TaskListItem from '../TaskListItem';
 import { Plus, Dots } from '../../assets/icons';
-
+import SvgProvier from '../../assets/icons/SvgProvider';
 type TaskListHeaderProps = CardProps & {
 
   color?: string,
@@ -21,7 +21,7 @@ const TaskListHeader = ({ children, color } : TaskListHeaderProps) => {
     <TaskListItem
       style={{
         borderTop: `1px solid ${color}`,
-        padding: '8px 12px',
+        padding: "8px 12px",
       }}
       shadow="0px 2px 8px rgba(0, 0, 0, 0.18)"
       radius="4px"
@@ -31,19 +31,19 @@ const TaskListHeader = ({ children, color } : TaskListHeaderProps) => {
         <Flex justify="flex-start" align="center" gap="4px">
           <Text
             style={{
-              fontSize: '16px',
-              fontWeight: '500',
+              fontSize: "16px",
+              fontWeight: "500",
             }}
           >
             {children}
           </Text>
           <Text
             style={{
-              backgroundColor: '#F4F4F4',
-              borderRadius: '50%',
-              padding: '2px 4px',
-              fontSize: '10px',
-              fontWeight: '500',
+              backgroundColor: "#F4F4F4",
+              borderRadius: "50%",
+              padding: "2px 4px",
+              fontSize: "10px",
+              fontWeight: "500",
             }}
           >
             {tasksNumber}
@@ -55,14 +55,15 @@ const TaskListHeader = ({ children, color } : TaskListHeaderProps) => {
           justify="end"
           gap="4px"
         >
-          <Text style={{ cursor: 'default' }}>
-            <Dots />
+          <Text style={{ cursor: "default" }}>
+            <SvgProvier color="black" style={{height: '20px'}} >
+              <Dots />
+            </SvgProvier>
           </Text>
-          <Text
-            onMouseDown={onMouseDownHandler}
-            style={{ cursor: 'default' }}
-          >
-            <Plus />
+          <Text onMouseDown={onMouseDownHandler} style={{ cursor: "default" }}>
+            <SvgProvier color="black" style={{ height: "20px" }}>
+              <Plus />
+            </SvgProvier>
           </Text>
         </Flex>
       </Flex>
