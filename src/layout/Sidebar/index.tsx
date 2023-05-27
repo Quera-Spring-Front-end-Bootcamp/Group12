@@ -1,4 +1,12 @@
-import { Accordion, Box, Flex, NavLink, Navbar, Text, ScrollArea } from "@mantine/core";
+import {
+  Accordion,
+  Box,
+  Flex,
+  NavLink,
+  Navbar,
+  Text,
+  ScrollArea,
+} from "@mantine/core";
 import Logo from "../../components/Logo";
 import SearchInput from "../../components/Search";
 import Button from "../../components/Button";
@@ -21,10 +29,9 @@ const Sidebar = () => {
           base: 300,
         }}
       >
-        <Navbar.Section >
-          <Flex justify={"center"} align={"center"} pt={'40px'}>
-
-          <Logo />
+        <Navbar.Section>
+          <Flex justify={"center"} align={"center"} pt={"40px"}>
+            <Logo />
           </Flex>
         </Navbar.Section>
         <Navbar.Section grow component={ScrollArea}>
@@ -33,9 +40,7 @@ const Sidebar = () => {
             // variant="default"
             chevronPosition="right"
             defaultValue="ورک‌اسپیس‌ها"
-            style={{
-
-            }}
+            style={{}}
           >
             <Flex justify="center" direction="column" align="center" w={"100%"}>
               <Accordion.Item value="workspaces" w={"100%"}>
@@ -52,11 +57,13 @@ const Sidebar = () => {
                   >
                     ساختن اسپیس جدید
                   </Button>
-                  <Box w={240}>
+                  <Box w={"100%"}>
                     <NavLink
-                      icon={<div className="bg-red-500 w-5 h-5 rounded-sm " />}
+                      w={"100%"}
+                      className="group"
+                      icon={<div className="bg-red-500 w-5 h-5 rounded-lg " />}
                       label={
-                        <div className=" flex justify-between  items-center group">
+                        <div className=" flex justify-between w-50 items-center ">
                           <Text fz="16px" fw="500">
                             درس مدیریت پروژه
                           </Text>
@@ -66,11 +73,26 @@ const Sidebar = () => {
                           />
                         </div>
                       }
-                    />
+                    >
+                      <NavLink
+                        className="group"
+                        label={
+                          <div className="flex justify-between">
+                            <Text>پروژه اول</Text>
+
+                            <Dots
+                              width="24px"
+                              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                            />
+                          </div>
+                        }
+                      />
+                    </NavLink>
 
                     <NavLink
+                      className="group"
                       label={
-                        <div className=" flex justify-between  items-center group">
+                        <div className=" flex justify-between  items-center">
                           <Text fz="16px" fw="500">
                             کارهای شخصی
                           </Text>
@@ -80,12 +102,12 @@ const Sidebar = () => {
                           />
                         </div>
                       }
-                      icon={<div className="bg-red-500 w-5 h-5 rounded-sm " />}
-                      rightSection={<></>}
+                      icon={<div className="bg-amber-500 w-5 h-5 rounded-lg " />}
                     >
                       <NavLink
+                        className="group"
                         label={
-                          <div className="flex justify-between  group">
+                          <div className="flex justify-between">
                             <Text>پروژه اول</Text>
 
                             <Dots
@@ -97,8 +119,9 @@ const Sidebar = () => {
                       />
 
                       <NavLink
+                        className="group"
                         label={
-                          <div className="flex justify-between  group">
+                          <div className="flex justify-between">
                             <Text>پروژه دوم</Text>
 
                             <Dots
@@ -110,9 +133,10 @@ const Sidebar = () => {
                       />
                     </NavLink>
                     <NavLink
-                      icon={<div className="bg-red-500 w-5 h-5 rounded-sm " />}
+                      className="group"
+                      icon={<div className="bg-green-500 w-5 h-5 rounded-lg " />}
                       label={
-                        <div className=" flex justify-between  items-center group">
+                        <div className=" flex justify-between  items-center">
                           <Text fz="16px" fw="500">
                             درس کامپایلر
                           </Text>
@@ -122,11 +146,26 @@ const Sidebar = () => {
                           />
                         </div>
                       }
-                    />
+                    >
+                      <NavLink
+                        className="group"
+                        label={
+                          <div className="flex justify-between">
+                            <Text>پروژه اول</Text>
+
+                            <Dots
+                              width="24px"
+                              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                            />
+                          </div>
+                        }
+                      />
+                    </NavLink>
                     <NavLink
-                      icon={<div className="bg-red-500 w-5 h-5 rounded-sm " />}
+                      className="group"
+                      icon={<div className="bg-blue-500 w-5 h-5 rounded-lg " />}
                       label={
-                        <div className=" flex justify-between  items-center group">
+                        <div className=" flex justify-between  items-center">
                           <Text fz="16px" fw="500">
                             درس الگوریتم
                           </Text>
@@ -136,7 +175,21 @@ const Sidebar = () => {
                           />
                         </div>
                       }
-                    />
+                    >
+                      <NavLink
+                        className="group"
+                        label={
+                          <div className="flex justify-between">
+                            <Text>پروژه اول</Text>
+
+                            <Dots
+                              width="24px"
+                              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                            />
+                          </div>
+                        }
+                      />
+                    </NavLink>
                   </Box>
                 </Accordion.Panel>
               </Accordion.Item>
@@ -144,13 +197,13 @@ const Sidebar = () => {
           </Accordion>
         </Navbar.Section>
         <Navbar.Section>
-          <Flex direction={"column"} p={'32px'}>
-          <SidebarProfile />
-          <Flex my="md" gap="md">
-            <Exit width="16px" color="#818181" />
-            <Text color="#818181">خروج</Text>
+          <Flex direction={"column"} p={"32px"}>
+            <SidebarProfile />
+            <Flex my="md" gap="md">
+              <Exit width="16px" color="#818181" />
+              <Text color="#818181">خروج</Text>
             </Flex>
-            </Flex>
+          </Flex>
         </Navbar.Section>
       </Navbar>
     </>

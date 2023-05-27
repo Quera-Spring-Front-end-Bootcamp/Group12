@@ -1,7 +1,7 @@
 import { AppShell } from '@mantine/core';
 import Sidebar from '../Sidebar';
 import List from '../../components/List';
-import MainPage from './MainHeader';
+import MainPage from './MainPage';
 import Button from '../../components/Button';
 import { PlusSquare } from '../../assets/icons';
 import SvgProvier from '../../assets/icons/SvgProvider';
