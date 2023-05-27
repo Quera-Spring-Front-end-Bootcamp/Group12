@@ -5,7 +5,6 @@ import Button from "../../../components/Button";
 import { TwoLineSetting } from "../../../assets/icons";
 import SvgProvier from "../../../assets/icons/SvgProvider";
 import { ReactNode } from "react";
-import BoardView from "../TaskViews/BoardView/Boardview";
 type props = {
   list?: ReactNode;
   column?: ReactNode;

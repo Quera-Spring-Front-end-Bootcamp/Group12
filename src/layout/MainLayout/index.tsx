@@ -6,13 +6,12 @@ import Button from '../../components/Button';
 import { PlusSquare } from '../../assets/icons';
 import SvgProvier from '../../assets/icons/SvgProvider';
 import BoardView from './TaskViews/BoardView/Boardview';
-import { ClassNames } from '@emotion/react';
 
 export default function MainLayout() {
   return (
     <>
       <AppShell bg={'#FAFBFC'}
-      className='relative h-screen overflow-scroll'
+      className='relative h-screen overflow-hidden'
       navbar={<Sidebar/>}
 
       
