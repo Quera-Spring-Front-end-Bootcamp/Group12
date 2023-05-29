@@ -6,6 +6,7 @@ import Button from '../../components/Button';
 import { PlusSquare } from '../../assets/icons';
 import SvgProvier from '../../assets/icons/SvgProvider';
 import BoardView from './TaskViews/BoardView/Boardview';
+import Calender from '../../components/Calender';
 
 export default function MainLayout() {
   return (
@@ -18,7 +19,7 @@ export default function MainLayout() {
 
       layout='alt'
     >
-        <MainPage list={<List />} column={<BoardView/> } />
+        <MainPage list={<List />} column={<BoardView/>} calender={<Calender/>} />
       <Button className='absolute bottom-6 left-4 z-10' leftIcon={<SvgProvier>
         <PlusSquare/>
       </SvgProvier>}>تسک جدید</Button>

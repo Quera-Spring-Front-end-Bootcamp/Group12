@@ -162,34 +162,7 @@ export default function MainPage({ list, column, calender }: props) {
         </div>
       </Tabs.Panel>
       <Tabs.Panel value="third">
-        <div className="flex  gap-4 items-center border-b-2 pb-1">
-          <SearchInput
-            fw={500}
-            fz={12}
-            placeholder="جستجو بین تسک‌ها"
-            className="border-none"
-          />
-          <Divider orientation="vertical" />
-          <Button
-            fw={500}
-            fz={12}
-            leftIcon={
-              <SvgProvier color="#323232" style={{ height: "24px" }}>
-                <TwoLineSetting />
-              </SvgProvier>
-            }
-            ml={30}
-            style={{
-              backgroundColor: "transparent",
-              color: "inherit",
-            }}
-          >
-            فیلترها
-          </Button>
-          <Badge size="lg" color="cyan">
-            دسته‌بندی‌شده با: وضعیت
-          </Badge>
-        </div>
+        
         <div className="mt-5">{calender ? calender : <p>hi</p>}</div>
       </Tabs.Panel>
     </Tabs>
