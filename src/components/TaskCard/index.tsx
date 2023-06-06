@@ -1,19 +1,5 @@
-import {
-  Flex,
-  Avatar,
-  Text,
-  Title,
-  Group,
-  Badge,
-  Divider,
-} from '@mantine/core';
-import {
-  CheckmarkSqaure,
-  Done,
-  Dots,
-  Flag,
-  JustifyRight,
-} from '../../assets/icons';
+import { Flex, Avatar, Text, Title, Group, Badge, Divider } from '@mantine/core';
+import { CheckmarkSqaure, Done, Dots, Flag, JustifyRight } from '../../assets/icons';
 import TaskListItem from '../TaskListItem';
 import SvgProvier from '../../assets/icons/SvgProvider';
 

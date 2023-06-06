@@ -24,7 +24,6 @@ const AuthHeader = ({ loginPage }: { loginPage: boolean }) => {
         <Text>{loginPage ? 'ثبت‌نام نکرده‌ای؟' : 'قبلا ثبت‌نام کرده‌ای؟'}</Text>
         <Button fw="700" fz="14" mr="7px" onClick={handleClick}>
           {loginPage ? 'ثبت نام' : 'ورود'}
-
         </Button>
       </Flex>
     </Flex>

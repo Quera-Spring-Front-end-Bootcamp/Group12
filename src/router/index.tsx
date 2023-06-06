@@ -15,10 +15,7 @@ const MainRouter = () => {
         <Route path="/forget" element={!isLogin ? <ForgetPassword /> : <Navigate to="/" />} />
         <Route path="/register" element={!isLogin ? <Register /> : <Navigate to="/" />} />
         <Route element={<PrivateRoutes isLogin={isLogin} />}>
-          <Route
-            path="/"
-            element={<MainLayout/>}
-          />
+          <Route path="/" element={<MainLayout />} />
         </Route>
         <Route
           path="*"

@@ -3,7 +3,7 @@ import MainRouter from './router';
 
 export default function App() {
   return (
-    <ThemeProvider >
+    <ThemeProvider>
       <MainRouter />
     </ThemeProvider>
   );

@@ -43,5 +43,5 @@ export {
   Done,
   Dots,
   JustifyRight,
-  Share,
+  Share
 };
