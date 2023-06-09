@@ -6,19 +6,14 @@ import AuthLayout from '../../layout/AuthLayout';
 
 const ForgetPassword = () => (
   <AuthLayout loginPage={false}>
-    <Card
-      miw="463px"
-      shadow="0px 12px 50px rgba(0, 0, 0, 0.18)"
-      radius="20px"
-      p="24px"
-    >
+    <Card miw="463px" shadow="0px 12px 50px rgba(0, 0, 0, 0.18)" radius="20px" p="24px">
       <Flex
         direction="column"
         align="center"
         gap="29px"
         bg="#fff"
         style={{
-          borderRadius: '20px',
+          borderRadius: '20px'
         }}
       >
         <Text fz="32px" fw="600" color="#000">
@@ -31,8 +26,8 @@ const ForgetPassword = () => (
             style: {
               fontWeight: '400',
               marginBottom: '8px',
-              fontSize: '14px',
-            },
+              fontSize: '14px'
+            }
           }}
         />
 

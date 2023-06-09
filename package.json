@@ -9,7 +9,12 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
-   "dependencies": {
+  "lint-staged": {
+    "**/*": [
+      "npx prettier --write --ignore-unknown"
+    ]
+  },
+  "dependencies": {
     "@emotion/react": "^11.11.0",
     "@fullcalendar/core": "^6.1.8",
     "@fullcalendar/daygrid": "^6.1.8",

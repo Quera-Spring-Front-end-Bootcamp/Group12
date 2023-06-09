@@ -3,21 +3,16 @@ import { ReactNode } from 'react';
 import AuthHeader from '../AuthHeader';
 
 type props = {
-  children?: ReactNode,
-  loginPage: boolean
+  children?: ReactNode;
+  loginPage: boolean;
 };
 
-const AuthLayout = ({ children, loginPage } : props) => {
+const AuthLayout = ({ children, loginPage }: props) => {
   const height = 'calc(100vh - 210px)';
   return (
     <>
       <AuthHeader loginPage={loginPage} />
-      <Flex
-        justify="center"
-        align="center"
-        style={{ minHeight: `${height}` }}
-        direction="column"
-      >
+      <Flex justify="center" align="center" style={{ minHeight: `${height}` }} direction="column">
         {children}
       </Flex>
       <div
@@ -29,7 +24,7 @@ const AuthLayout = ({ children, loginPage } : props) => {
           position: 'absolute',
           bottom: '0',
           right: '0',
-          zIndex: '-1',
+          zIndex: '-1'
         }}
       />
     </>
