@@ -10,8 +10,10 @@ import TextInput from "../../components/TextInput";
 import PasswordInput from "../../components/PasswordInput";
 import Checkbox from "../../components/Checkbox";
 import { BASE_URL } from "../../helpers";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
   const [err, setErr] = useState("");
   const errorHandle = (error: AxiosError<any, any>) => {
     if (error?.response?.data?.message === "Email address is already in use") {
@@ -24,11 +26,13 @@ const Register = () => {
       notifications.show({ message: error.message, color: "red" });
     }
   };
+
   const handleClick = async () => {
     try {
       setErr("");
-      const data = await axios.post(`${BASE_URL}/auth/register`, form.values);
+      await axios.post(`${BASE_URL}/auth/register`, form.values);
       form.reset();
+      navigate('/login')
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.log(error);
