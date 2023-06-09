@@ -11,7 +11,7 @@ const SvgProvier = (props: props) => (
       color: `${props.color || 'currentColor'}`,
       height: '24px',
       aspectRatio: '1/1',
-      ...props.style,
+      ...props.style
     }}
   >
     {props.children}

@@ -1,10 +1,11 @@
-import { Flex, Tabs, Text, Divider, Badge } from "@mantine/core";
-import SearchInput from "../../../components/Search";
-import { Calender, CheckList, Column, Share } from "../../../assets/icons";
-import Button from "../../../components/Button";
-import { TwoLineSetting } from "../../../assets/icons";
-import SvgProvier from "../../../assets/icons/SvgProvider";
-import { ReactNode } from "react";
+import { Flex, Tabs, Text, Divider, Badge } from '@mantine/core';
+import { ReactNode } from 'react';
+import SearchInput from '../../../components/Search';
+import { Calender, CheckList, Column, Share, TwoLineSetting } from '../../../assets/icons';
+import Button from '../../../components/Button';
+
+import SvgProvier from '../../../assets/icons/SvgProvider';
+
 type props = {
   list?: ReactNode;
   column?: ReactNode;
@@ -17,80 +18,80 @@ export default function MainPage({ list, column, calender }: props) {
       styles={(theme) => ({
         tab: {
           ...theme.fn.focusStyles(),
-          "&[data-active]": {
-            color: "#208D8E",
-          },
-        },
+          '&[data-active]': {
+            color: '#208D8E'
+          }
+        }
       })}
-      mah={'100vh'}
+      mah="100vh"
       mt={30}
       defaultValue="second"
-      w={"100%"}
+      w="100%"
     >
-      <Tabs.List mb={10} w={"100%"}>
-        <Flex align="center" w={"100%"}>
-          <Text fz={"20px"} fw={"600"} pr={16} className="cursor-default ">
+      <Tabs.List mb={10} w="100%">
+        <Flex align="center" w="100%">
+          <Text fz="20px" fw="600" pr={16} className="cursor-default ">
             پروژه اول
           </Text>
-          <Divider mt={"10px"} h={"24px"} orientation="vertical" />
+          <Divider mt="10px" h="24px" orientation="vertical" />
 
           <Tabs.Tab
             icon={
-              <SvgProvier style={{ height: "24px" }}>
+              <SvgProvier style={{ height: '24px' }}>
                 <CheckList />
               </SvgProvier>
             }
-            fz={"16px"}
-            fw={"500"}
+            fz="16px"
+            fw="500"
             value="first"
             className="cursor-pointer"
           >
             نمایش لیستی
           </Tabs.Tab>
-          <Divider mt={"10px"} h={"24px"} orientation="vertical" />
+          <Divider mt="10px" h="24px" orientation="vertical" />
 
           <Tabs.Tab
             icon={
-              <SvgProvier style={{ height: "24px" }}>
+              <SvgProvier style={{ height: '24px' }}>
                 <Column />
               </SvgProvier>
             }
-            fz={"16px"}
-            fw={"500"}
+            fz="16px"
+            fw="500"
             value="second"
             className="cursor-pointer"
           >
             نمایش ستونی
           </Tabs.Tab>
-          <Divider mt={"10px"} h={"24px"} orientation="vertical" />
+          <Divider mt="10px" h="24px" orientation="vertical" />
 
           <Tabs.Tab
             icon={
-              <SvgProvier style={{ height: "24px" }}>
+              <SvgProvier style={{ height: '24px' }}>
                 <Calender />
               </SvgProvier>
             }
-            fz={"16px"}
-            fw={"500"}
+            fz="16px"
+            fw="500"
             value="third"
             className="cursor-pointer"
           >
             تقویم
           </Tabs.Tab>
-          <Divider mt={"10px"} h={"24px"} orientation="vertical" />
+          <Divider mt="10px" h="24px" orientation="vertical" />
 
           <Button
             fz={16}
             fw={500}
             leftIcon={
-              <SvgProvier color="#323232" style={{ height: "24px" }}>
+              <SvgProvier color="#323232" style={{ height: '24px' }}>
                 <Share />
               </SvgProvier>
             }
             ml="auto"
             style={{
-              backgroundColor: "transparent",
-              color: "inherit",
+              backgroundColor: 'transparent',
+              color: 'inherit'
             }}
           >
             اشتراک‌گذاری
@@ -99,25 +100,20 @@ export default function MainPage({ list, column, calender }: props) {
       </Tabs.List>
       <Tabs.Panel value="first">
         <div className="flex  gap-4 items-center border-b-2 pb-1">
-          <SearchInput
-            fw={500}
-            fz={12}
-            placeholder="جستجو بین تسک‌ها"
-            className="border-none"
-          />
+          <SearchInput fw={500} fz={12} placeholder="جستجو بین تسک‌ها" className="border-none" />
           <Divider orientation="vertical" />
           <Button
             fw={500}
             fz={12}
             leftIcon={
-              <SvgProvier color="#323232" style={{ height: "24px" }}>
+              <SvgProvier color="#323232" style={{ height: '24px' }}>
                 <TwoLineSetting />
               </SvgProvier>
             }
             ml={30}
             style={{
-              backgroundColor: "transparent",
-              color: "inherit",
+              backgroundColor: 'transparent',
+              color: 'inherit'
             }}
           >
             فیلترها
@@ -126,29 +122,24 @@ export default function MainPage({ list, column, calender }: props) {
             دسته‌بندی‌شده با: وضعیت
           </Badge>
         </div>
-        <div className="mt-5">{list ? list : <p>hi</p>}</div>
+        <div className="mt-5">{list || <p>hi</p>}</div>
       </Tabs.Panel>
-      <Tabs.Panel value="second" mah={'100vh'}>
+      <Tabs.Panel value="second" mah="100vh">
         <div className="flex  gap-4 items-center border-b-2 pb-1">
-          <SearchInput
-            fw={500}
-            fz={12}
-            placeholder="جستجو بین تسک‌ها"
-            className="border-none"
-          />
+          <SearchInput fw={500} fz={12} placeholder="جستجو بین تسک‌ها" className="border-none" />
           <Divider orientation="vertical" />
           <Button
             fw={500}
             fz={12}
             leftIcon={
-              <SvgProvier color="#323232" style={{ height: "24px" }}>
+              <SvgProvier color="#323232" style={{ height: '24px' }}>
                 <TwoLineSetting />
               </SvgProvier>
             }
             ml={30}
             style={{
-              backgroundColor: "transparent",
-              color: "inherit",
+              backgroundColor: 'transparent',
+              color: 'inherit'
             }}
           >
             فیلترها
@@ -157,13 +148,10 @@ export default function MainPage({ list, column, calender }: props) {
             دسته‌بندی‌شده با: وضعیت
           </Badge>
         </div>
-        <div className="h-full overflow-y-scroll pt-5">
-          {column ? column: <p>hi</p>}
-        </div>
+        <div className="h-full overflow-y-scroll pt-5">{column || <p>hi</p>}</div>
       </Tabs.Panel>
       <Tabs.Panel value="third">
-        
-        <div className="mt-5">{calender ? calender : <p>hi</p>}</div>
+        <div className="mt-5">{calender || <p>hi</p>}</div>
       </Tabs.Panel>
     </Tabs>
   );

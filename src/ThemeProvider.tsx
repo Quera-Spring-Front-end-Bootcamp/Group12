@@ -1,17 +1,13 @@
-import {
-  MantineProvider,
-  MantineThemeOverride,
-  createEmotionCache,
-} from '@mantine/core';
+import { MantineProvider, MantineThemeOverride, createEmotionCache } from '@mantine/core';
 import rtlPlugin from 'stylis-plugin-rtl';
 
 const rtlCache = createEmotionCache({
   key: 'mantine-rtl',
-  stylisPlugins: [rtlPlugin],
+  stylisPlugins: [rtlPlugin]
 });
 
 export const theme: MantineThemeOverride = {
-  colorScheme: 'light',
+  colorScheme: 'light'
 };
 
 interface ThemeProviderProps {
@@ -40,11 +36,11 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
             '#208D8E',
             '#116768',
             '#003f3f',
-            '#001717',
-          ],
+            '#001717'
+          ]
         },
         primaryShade: { light: 6, dark: 7 },
-        primaryColor: 'firuzei',
+        primaryColor: 'firuzei'
       }}
     >
       {children}

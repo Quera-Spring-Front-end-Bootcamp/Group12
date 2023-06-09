@@ -8,10 +8,10 @@ const Logo = () => (
     style={{
       backgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
-      WebkitBackgroundClip: 'text',
+      WebkitBackgroundClip: 'text'
     }}
   >
-        کوئرا تسک منیجر
+    کوئرا تسک منیجر
   </Text>
 );
 
