@@ -1,4 +1,11 @@
-import { MantineProvider, MantineThemeOverride, createEmotionCache } from '@mantine/core';
+import {
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
+  MantineThemeOverride,
+  createEmotionCache
+} from '@mantine/core';
+import { useLocalStorage } from '@mantine/hooks';
 import rtlPlugin from 'stylis-plugin-rtl';
 
 const rtlCache = createEmotionCache({
@@ -15,35 +22,44 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: 'mantine-color-scheme',
+    defaultValue: 'light',
+    getInitialValueInEffect: true
+  });
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      emotionCache={rtlCache}
-      theme={{
-        dir: 'rtl',
-        colorScheme: 'light',
-        fontFamily: 'dana , sans-serif',
+    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        emotionCache={rtlCache}
+        theme={{
+          dir: 'rtl',
+          colorScheme,
+          fontFamily: 'dana , sans-serif',
 
-        colors: {
-          firuzei: [
-            '#defdfd',
-            '#bbf1f2',
-            '#95e7e8',
-            '#6dddde',
-            '#49d3d5',
-            '#30babb',
-            '#208D8E',
-            '#116768',
-            '#003f3f',
-            '#001717'
-          ]
-        },
-        primaryShade: { light: 6, dark: 7 },
-        primaryColor: 'firuzei'
-      }}
-    >
-      {children}
-    </MantineProvider>
+          colors: {
+            firuzei: [
+              '#defdfd',
+              '#bbf1f2',
+              '#95e7e8',
+              '#6dddde',
+              '#49d3d5',
+              '#30babb',
+              '#208D8E',
+              '#116768',
+              '#003f3f',
+              '#001717'
+            ]
+          },
+          primaryShade: { light: 6, dark: 7 },
+          primaryColor: 'firuzei'
+        }}
+      >
+        {children}
+      </MantineProvider>
+    </ColorSchemeProvider>
   );
 }
