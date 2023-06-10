@@ -10,9 +10,7 @@ const MainRouter = () => {
   
   const user = useSelector((state: any) => state.user.user)
   let isLogin: boolean = user.accessToken ? true : false;  
-  
-  console.log(user);
-  
+    
   return (
     <BrowserRouter>
       <Routes>

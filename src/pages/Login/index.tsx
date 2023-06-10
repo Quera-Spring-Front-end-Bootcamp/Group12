@@ -1,5 +1,5 @@
 import { Flex, Text } from '@mantine/core';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PasswordInput from '../../components/PasswordInput';
 import Card from '../../components/Card';
 import TextInput from '../../components/TextInput';
@@ -15,7 +15,6 @@ import { useDispatch } from 'react-redux';
 
 const Login = () => {
   const [err, setErr] = useState('');
-  const navigate = useNavigate();
   const { setUser } = userSlice.actions;
   const dispatch = useDispatch();
 
@@ -47,7 +46,6 @@ const Login = () => {
         refreshToken: response.data.data.refreshToken,
       }))
 
-      // navigate('/');
     } catch (error) {
       console.error(error);
       errorHandle(error);
