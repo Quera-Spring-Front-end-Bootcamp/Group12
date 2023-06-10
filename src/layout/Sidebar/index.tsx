@@ -4,9 +4,12 @@ import SearchInput from '../../components/Search';
 import Button from '../../components/Button';
 import { Dots, Exit, PlusSquare } from '../../assets/icons';
 import SidebarProfile from '../../components/SiderbarProfile';
+import userSlice from '../../data/userSlice/userSlice';
+import { useDispatch } from 'react-redux';
 
 function Sidebar() {
-
+  const dispatch = useDispatch();
+  const { clearUser } = userSlice.actions;
   return (
     <>
       <Navbar
@@ -190,19 +193,24 @@ function Sidebar() {
           </Accordion>
         </Navbar.Section>
         <Navbar.Section>
-          <Flex direction="column" p="32px">
+          <Flex align={'start'} direction="column" gap={'md'} p="32px">
             <SidebarProfile />
-            <Flex my="md" gap="md" className="cursor-pointer"
+            <Button
               onClick={() => {
                 localStorage.removeItem('user');
-              }}>
-              <Exit width="16px" color="#818181" />
-              <Text color="#818181">خروج</Text>
-            </Flex>
+                dispatch(clearUser());
+              }}
+              color="dark.3"
+              variant="subtle"
+              leftIcon={<Exit width="16px" />}
+            >
+              خروج
+            </Button>
           </Flex>
         </Navbar.Section>
       </Navbar>
-    </>)
+    </>
+  );
 }
 
 export default Sidebar;
