@@ -3,11 +3,16 @@ import Login from '../pages/Login';
 import ForgetPassword from '../pages/ForgetPassword';
 import Register from '../pages/Register';
 import PrivateRoutes from './PrivateRoute';
-
 import MainLayout from '../layout/MainLayout';
+import { useSelector } from 'react-redux';
 
 const MainRouter = () => {
-  const isLogin = false;
+  
+  const user = useSelector((state: any) => state.user.user)
+  let isLogin: boolean = user.accessToken ? true : false;  
+  
+  console.log(user);
+  
   return (
     <BrowserRouter>
       <Routes>

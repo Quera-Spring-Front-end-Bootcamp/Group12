@@ -190,7 +190,7 @@ const Sidebar = () => (
       <Navbar.Section>
         <Flex direction="column" p="32px">
           <SidebarProfile />
-          <Flex my="md" gap="md">
+          <Flex my="md" gap="md" className='cursor-pointer hover:text-gray-300' >
             <Exit width="16px" color="#818181" />
             <Text color="#818181">خروج</Text>
           </Flex>

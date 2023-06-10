@@ -10,12 +10,17 @@ import axios from 'axios';
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { notifications } from '@mantine/notifications';
+import userSlice from '../../data/userSlice/userSlice';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
   const [err, setErr] = useState('');
   const navigate = useNavigate();
+  const { setUser } = userSlice.actions;
+  const dispatch = useDispatch();
 
-  
+
+
   //Email or username and password check
   const errorHandle = (error: any) => {
     if (
@@ -31,9 +36,17 @@ const Login = () => {
 
   async function handleClick() {
     try {
-      setErr('');      
+      setErr('');
       const response = await axios.post(`${BASE_URL}/auth/login`, form.values);
-      //const { accessToken } = response.data.accessToken;
+      console.log(response);
+
+      dispatch(setUser({
+        username: response.data.data.toBeSendUserData.username,
+        email: response.data.data.toBeSendUserData.email,
+        accessToken: response.data.data.accessToken,
+        refreshToken: response.data.data.refreshToken,
+      }))
+
       // navigate('/');
     } catch (error) {
       console.error(error);
