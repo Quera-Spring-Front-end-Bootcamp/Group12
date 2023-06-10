@@ -7,10 +7,9 @@ import MainLayout from '../layout/MainLayout';
 import { useSelector } from 'react-redux';
 
 const MainRouter = () => {
-  
-  const user = useSelector((state: any) => state.user.user)
-  let isLogin: boolean = user.accessToken ? true : false;  
-    
+  const user = useSelector((state: any) => state.user.user);
+  let isLogin: boolean = user.accessToken ? true : false;
+
   return (
     <BrowserRouter>
       <Routes>

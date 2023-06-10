@@ -29,6 +29,7 @@
     "@mantine/nprogress": "^v6.0.13",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
+    "axios-auth-refresh": "^3.3.6",
     "dayjs": "^1.11.7",
     "eslint-config-mantine": "^2.0.0",
     "localforage": "^1.10.0",

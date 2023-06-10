@@ -5,10 +5,19 @@ import Button from '../../components/Button';
 import { Dots, Exit, PlusSquare } from '../../assets/icons';
 import SidebarProfile from '../../components/SiderbarProfile';
 import userSlice from '../../data/userSlice/userSlice';
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../data/reduxHooks';
+import { useEffect } from 'react';
+import myAxios from '../../helpers/myAxios';
 
 function Sidebar() {
-  const dispatch = useDispatch();
+  useEffect(() => {
+    const request = async () => {
+      const workspases = await myAxios.get(`/workspace/get-all`);
+      console.log(workspases);
+    };
+    request();
+  }, []);
+  const dispatch = useAppDispatch();
   const { clearUser } = userSlice.actions;
   return (
     <>
@@ -197,7 +206,6 @@ function Sidebar() {
             <SidebarProfile />
             <Button
               onClick={() => {
-                localStorage.removeItem('user');
                 dispatch(clearUser());
               }}
               color="dark.3"

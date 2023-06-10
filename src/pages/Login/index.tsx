@@ -5,8 +5,7 @@ import Card from '../../components/Card';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import AuthLayout from '../../layout/AuthLayout';
-import { BASE_URL } from '../../helpers';
-import axios from 'axios';
+import myAxios from '../../helpers/myAxios';
 import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { notifications } from '@mantine/notifications';
@@ -31,8 +30,7 @@ const Login = () => {
   async function handleClick() {
     try {
       setErr('');
-      const response = await axios.post(`${BASE_URL}/auth/login`, form.values);
-      console.log(response);
+      const response = await myAxios.post(`/auth/login`, form.values);
 
       dispatch(
         setUser({
