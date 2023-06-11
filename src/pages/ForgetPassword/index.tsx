@@ -3,8 +3,11 @@ import Card from '../../components/Card';
 import TextInput from '../../components/TextInput';
 import Button from '../../components/Button';
 import AuthLayout from '../../layout/AuthLayout';
+import { useNavigate } from 'react-router-dom';
 
-const ForgetPassword = () => (
+const ForgetPassword = () => {
+  const navigate = useNavigate()
+  return (
   <AuthLayout loginPage={false}>
     <Card miw="463px" shadow="0px 12px 50px rgba(0, 0, 0, 0.18)" radius="20px" p="24px">
       <Flex
@@ -31,12 +34,12 @@ const ForgetPassword = () => (
           }}
         />
 
-        <Button w="100%" fz="14px" fw="700">
+        <Button w="100%" fz="14px" fw="700" onClick={()=>navigate('/new-password')}>
           دریافت ایمیل بازیابی رمز عبور
         </Button>
       </Flex>
     </Card>
   </AuthLayout>
-);
+)};
 
 export default ForgetPassword;
