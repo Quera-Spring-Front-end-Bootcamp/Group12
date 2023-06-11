@@ -207,6 +207,7 @@ function Sidebar() {
             <Button
               onClick={() => {
                 dispatch(clearUser());
+                
               }}
               color="dark.3"
               variant="subtle"
