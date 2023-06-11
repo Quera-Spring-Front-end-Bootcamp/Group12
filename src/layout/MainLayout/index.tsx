@@ -10,7 +10,6 @@ import Calender from '../../components/Calender';
 
 export default function MainLayout() {
   const { colorScheme } = useMantineColorScheme();
-  console.log(useMantineColorScheme());
   return (
     <>
       <AppShell
