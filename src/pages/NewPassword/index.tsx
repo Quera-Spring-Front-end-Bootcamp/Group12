@@ -6,7 +6,7 @@ import { useForm } from '@mantine/form';
 import Button from '../../components/Button';
 import { notifications } from '@mantine/notifications';
 import myAxios from '../../helpers/myAxios';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const NewPassword = () => {
   const location = useLocation();
