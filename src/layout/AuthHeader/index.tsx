@@ -17,7 +17,7 @@ const AuthHeader = ({ loginPage }: { loginPage: boolean }) => {
       direction="row"
       wrap="wrap"
       px="80px"
-      pt="80px"
+      pt="55px"
     >
       <Logo />
       <Flex align="center" gap="8px">

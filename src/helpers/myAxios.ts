@@ -25,7 +25,7 @@ const refreshAuthLogic = (failedRequest: any) =>
 const myAxios = axios.create({
   baseURL: 'http://localhost:3000/api',
   headers: {
-    'x-auth-token': user.accessToken
+    'x-auth-token': user?.accessToken
   }
 });
 
