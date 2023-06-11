@@ -67,6 +67,7 @@ const Register = () => {
         value === false ? "لطفا قوانین را قبول کنید" : null,
     },
   });
+  
   return (
     <AuthLayout loginPage={false}>
       <Card
