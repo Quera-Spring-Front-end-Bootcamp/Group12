@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userSlice from './userSlice/userSlice';
+import WorkSpacesSlice from './dataSlice/workSpacesSlice';
 
 const store = configureStore({
   reducer: {
-    user: userSlice.reducer
+    user: userSlice.reducer,
+    workSpaces: WorkSpacesSlice.reducer
   }
 });
 

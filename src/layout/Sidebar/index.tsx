@@ -1,23 +1,21 @@
-import { Accordion, Box, Flex, NavLink, Navbar, Text, ScrollArea } from '@mantine/core';
+import { Accordion, Box, Flex, NavLink, Navbar, Text, ScrollArea, Badge } from '@mantine/core';
 import Logo from '../../components/Logo';
 import SearchInput from '../../components/Search';
 import Button from '../../components/Button';
 import { Dots, Exit, PlusSquare } from '../../assets/icons';
 import SidebarProfile from '../../components/SiderbarProfile';
 import userSlice from '../../data/userSlice/userSlice';
-import { useAppDispatch } from '../../data/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../data/reduxHooks';
 import { useEffect } from 'react';
-import myAxios from '../../helpers/myAxios';
+import { fetchWorkspaces } from '../../data/dataSlice/workSpacesSlice';
 import { Link } from 'react-router-dom';
 
 function Sidebar() {
-  useEffect(() => {
-    const request = async () => {
-      const workspases = await myAxios.get(`/workspace/get-all`);
-    };
-    request();
-  }, []);
   const dispatch = useAppDispatch();
+  useEffect(() => {
+
+    dispatch(fetchWorkspaces());
+  }, []);
   const { clearUser } = userSlice.actions;
   return (
     <>
@@ -43,8 +41,9 @@ function Sidebar() {
             miw="100%"
             // variant="default"
             chevronPosition="right"
-            defaultValue="ورک‌اسپیس‌ها"
-            style={{}}>
+            defaultValue="workspaces"
+            style={{}}
+          >
             <Flex justify="center" direction="column" align="center" w="100%">
               <Accordion.Item value="workspaces" w="100%">
                 <Accordion.Control>ورک‌اسپیس‌ها</Accordion.Control>
@@ -60,6 +59,66 @@ function Sidebar() {
                     ساختن اسپیس جدید
                   </Button>
                   <Box w="100%">
+                    {useAppSelector((state) => {
+                      return state.workSpaces.data.map((workSpace: any, index) => {
+                        return (
+                          <NavLink
+                            key={index}
+                            w="100%"
+                            className="group"
+                            icon={
+                              <Badge
+                                className="w-5 h-5 p-0"
+                                radius={'8px'}
+                                color=""
+                                variant="filled"
+                              />
+                            }
+                            label={
+                              <div className=" flex justify-between w-50 items-center ">
+                                <Text fz="16px" fw="500">
+                                  {workSpace.name}
+                                </Text>
+                                <Dots
+                                  width="24px"
+                                  className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                                />
+                              </div>
+                            }
+                          >
+                            {workSpace.projects.length > 0 ? (
+                              workSpace.projects.map((project: { name: string }, index: number) => {
+                                return (
+                                  <NavLink
+                                    className="group"
+                                    key={index}
+                                    label={
+                                      <div className="flex justify-between">
+                                        <Text>{project.name}</Text>
+
+                                        <Dots
+                                          width="24px"
+                                          className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                                        />
+                                      </div>
+                                    }
+                                  />
+                                );
+                              })
+                            ) : (
+                              <NavLink
+                                p={'0px'}
+                                label={
+                                  <Button bg={'white'} variant="outline" w={'100%'} h={'32px'}>
+                                    ساختن پروژه
+                                  </Button>
+                                }
+                              />
+                            )}
+                          </NavLink>
+                        );
+                      });
+                    })}
                     <NavLink
                       w="100%"
                       className="group"
@@ -103,8 +162,9 @@ function Sidebar() {
                           />
                         </div>
                       }
-                      icon={<div className="bg-amber-500 w-5 h-5 rounded-lg " />}>
-                        <Link to={"project/:projectID/board-view"}>
+                      icon={<div className="bg-amber-500 w-5 h-5 rounded-lg " />}
+                    >
+                      <Link to={'project/:projectID/board-view'}>
                         <NavLink
                           className="group"
                           label={
@@ -114,11 +174,11 @@ function Sidebar() {
                               <Dots
                                 width="24px"
                                 className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                                />
+                              />
                             </div>
                           }
-                          />
-                          </Link>
+                        />
+                      </Link>
                       <NavLink
                         className="group"
                         label={

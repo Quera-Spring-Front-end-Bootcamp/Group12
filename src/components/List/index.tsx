@@ -8,7 +8,7 @@ const List = () => {
   const { projectID } = useParams();
   return (
     <>
-      <FilterTask/>
+      <FilterTask />
       <ScrollArea mah="calc(100vh - 230px)">
         <Accordion chevronPosition="left" defaultValue="پروژه اول" variant="filled">
           <Accordion.Item value="پروژه اول">

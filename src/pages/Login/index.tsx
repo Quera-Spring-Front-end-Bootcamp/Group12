@@ -21,7 +21,10 @@ const Login = () => {
 
   //Email or username and password check
   const errorHandle = (error: Error | AxiosError) => {
-    if (error instanceof AxiosError && error?.response?.data?.message === 'Invalid email/username or password') {
+    if (
+      error instanceof AxiosError &&
+      error?.response?.data?.message === 'Invalid email/username or password'
+    ) {
       setErr('ایمیل یا نام کاربری یا رمزعبور نادرست است.');
     } else {
       notifications.show({ message: error.message, color: 'red' });
@@ -36,15 +39,15 @@ const Login = () => {
       dispatch(
         setUser({
           username: response.data.data.toBeSendUserData.username,
-          firstname:response.data.data.toBeSendUserData.firstname,
-          lastname:response.data.data.toBeSendUserData.lastname,
+          firstname: response.data.data.toBeSendUserData.firstname,
+          lastname: response.data.data.toBeSendUserData.lastname,
           email: response.data.data.toBeSendUserData.email,
           phone: response.data.data.toBeSendUserData.phone,
           accessToken: response.data.data.accessToken,
           refreshToken: response.data.data.refreshToken
         })
       );
-    } catch (error:any) {
+    } catch (error: any) {
       console.error(error);
       errorHandle(error);
     }

@@ -12,8 +12,7 @@ export default function MainLayout() {
         navbar={<Sidebar />}
         layout="alt"
       >
-        <Outlet/>
-
+        <Outlet />
       </AppShell>
     </>
   );
