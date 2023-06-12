@@ -42,8 +42,8 @@ const Register = () => {
   };
   const form = useForm({
     initialValues: {
-      name: '',
-      lastName: '',
+      firstname: '',
+      lastname: '',
       username: '',
       email: '',
       password: '',
@@ -52,8 +52,8 @@ const Register = () => {
 
     // functions will be used to validate values at corresponding key
     validate: {
-      name: (value) => (value.length < 2 ? 'حداقل نام باید دو حرف باشد' : null),
-      lastName: (value) => (value.length < 2 ? 'حداقل نام حانوادگی باید دو حرف باشد' : null),
+      firstname: (value) => (value.length < 2 ? 'حداقل نام باید دو حرف باشد' : null),
+      lastname: (value) => (value.length < 2 ? 'حداقل نام حانوادگی باید دو حرف باشد' : null),
       username: (value) => (value.length < 3 ? 'حداقل نام کاربری باید سه حرف باشد' : null),
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'لطفا ایمیل را درست وارد کنید'),
       password: (value) => (value.length < 8 ? 'حداقل پسورد باید 8 حرف باشد' : null),
@@ -81,7 +81,7 @@ const Register = () => {
                   fontSize: '14px'
                 }
               }}
-              {...form.getInputProps('name')}
+              {...form.getInputProps('firstname')}
             />
             <TextInput
               label="نام خانوادگی"
@@ -93,7 +93,7 @@ const Register = () => {
                   fontSize: '14px'
                 }
               }}
-              {...form.getInputProps('lastName')}
+              {...form.getInputProps('lastname')}
             />
           </Flex>
           <TextInput
