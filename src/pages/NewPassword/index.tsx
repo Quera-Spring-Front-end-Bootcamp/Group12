@@ -6,10 +6,15 @@ import { useForm } from '@mantine/form';
 import Button from '../../components/Button';
 import { notifications } from '@mantine/notifications';
 import myAxios from '../../helpers/myAxios';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 const NewPassword = () => {
-    const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const inputToken = searchParams.get('token');
+  // console.log(token);
+
+  const navigate = useNavigate();
   //form validation
   const form = useForm({
     initialValues: {
@@ -26,7 +31,7 @@ const NewPassword = () => {
   //on submit action
   async function handleClick() {
     const password = form.values.password;
-    const token = '131546468764';
+    const token = inputToken;
     const data = {
       token,
       password
@@ -34,7 +39,7 @@ const NewPassword = () => {
     try {
       await myAxios.post('/auth/reset-password', data);
       navigate('/login');
-    } catch (error:any) {
+    } catch (error: any) {
       notifications.show({ message: error?.response?.data?.message || error.message, color: 'red' });
     }
   }
@@ -58,7 +63,7 @@ const NewPassword = () => {
             {...form.getInputProps('password')}
           />
           <PasswordInput
-            label="رمز عبور جدید خود را وارد کنید"
+            label="تکرار رمز عبور"
             style={{ width: '100%' }}
             labelProps={{
               style: {
