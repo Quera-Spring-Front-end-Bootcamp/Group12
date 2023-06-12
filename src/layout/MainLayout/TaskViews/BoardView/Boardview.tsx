@@ -1,10 +1,12 @@
 import { Flex, ScrollArea, Text } from '@mantine/core';
 import TaskListHeader from '../../../../components/TaskListHeader';
 import TaskCard from '../../../../components/TaskCard';
+import FilterTask from '../../../../components/FilterTasks';
 
 const BoardView = () => (
   <>
-    <Flex style={{ flexShrink: '0' }} wrap="nowrap" gap="lg" mah="100%">
+    <FilterTask />
+    <Flex style={{ flexShrink: '0' }} wrap="nowrap" gap="lg" mah="100%" mt="sm">
       <Flex style={{ flexShrink: '0' }} direction="column" miw="250px" gap="md">
         <TaskListHeader color="red">
           <Text>درحال انجام</Text>

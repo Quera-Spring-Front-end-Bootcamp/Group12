@@ -8,6 +8,7 @@ import userSlice from '../../data/userSlice/userSlice';
 import { useAppDispatch, useAppSelector } from '../../data/reduxHooks';
 import { useEffect } from 'react';
 import { fetchWorkspaces } from '../../data/dataSlice/workSpacesSlice';
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
   const dispatch = useAppDispatch();
@@ -165,20 +166,21 @@ function Sidebar() {
                       }
                       icon={<div className="bg-amber-500 w-5 h-5 rounded-lg " />}
                     >
-                      <NavLink
-                        className="group"
-                        label={
-                          <div className="flex justify-between">
-                            <Text>پروژه اول</Text>
+                      <Link to={'project/:projectID/board-view'}>
+                        <NavLink
+                          className="group"
+                          label={
+                            <div className="flex justify-between">
+                              <Text>پروژه اول</Text>
 
-                            <Dots
-                              width="24px"
-                              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                            />
-                          </div>
-                        }
-                      />
-
+                              <Dots
+                                width="24px"
+                                className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                              />
+                            </div>
+                          }
+                        />
+                      </Link>
                       <NavLink
                         className="group"
                         label={

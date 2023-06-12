@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { notifications } from '@mantine/notifications';
 import userSlice from '../../data/userSlice/userSlice';
 import { useDispatch } from 'react-redux';
+import { AxiosError } from 'axios';
 
 const Login = () => {
   const [err, setErr] = useState('');
@@ -19,8 +20,11 @@ const Login = () => {
   const { colorScheme } = useMantineColorScheme();
 
   //Email or username and password check
-  const errorHandle = (error: any) => {
-    if (error?.response?.data?.message === 'Invalid email/username or password') {
+  const errorHandle = (error: Error | AxiosError) => {
+    if (
+      error instanceof AxiosError &&
+      error?.response?.data?.message === 'Invalid email/username or password'
+    ) {
       setErr('ایمیل یا نام کاربری یا رمزعبور نادرست است.');
     } else {
       notifications.show({ message: error.message, color: 'red' });
@@ -35,15 +39,15 @@ const Login = () => {
       dispatch(
         setUser({
           username: response.data.data.toBeSendUserData.username,
-          firstname:response.data.data.toBeSendUserData.firstname,
-          lastname:response.data.data.toBeSendUserData.firstname,
+          firstname: response.data.data.toBeSendUserData.firstname,
+          lastname: response.data.data.toBeSendUserData.lastname,
           email: response.data.data.toBeSendUserData.email,
           phone: response.data.data.toBeSendUserData.phone,
           accessToken: response.data.data.accessToken,
           refreshToken: response.data.data.refreshToken
         })
       );
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       errorHandle(error);
     }
