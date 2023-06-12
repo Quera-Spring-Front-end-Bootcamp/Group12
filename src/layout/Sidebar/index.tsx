@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 function Sidebar() {
   const dispatch = useAppDispatch();
   useEffect(() => {
+
     dispatch(fetchWorkspaces());
   }, []);
   const { clearUser } = userSlice.actions;
@@ -29,8 +30,7 @@ function Sidebar() {
 
           // When other breakpoints do not match base width is used, defaults to 100%
           base: 300
-        }}
-      >
+        }}>
         <Navbar.Section>
           <Flex justify="center" align="center" pt="40px">
             <Logo />
@@ -55,8 +55,7 @@ function Sidebar() {
                     fz="12px"
                     mt="md"
                     className="bg-stone-300 text-black hover:bg-stone-500 hover:text-white  !important"
-                    leftIcon={<PlusSquare width="1.3rem" />}
-                  >
+                    leftIcon={<PlusSquare width="1.3rem" />}>
                     ساختن اسپیس جدید
                   </Button>
                   <Box w="100%">
@@ -134,8 +133,7 @@ function Sidebar() {
                             className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
                           />
                         </div>
-                      }
-                    >
+                      }>
                       <NavLink
                         className="group"
                         label={
@@ -208,8 +206,7 @@ function Sidebar() {
                             className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
                           />
                         </div>
-                      }
-                    >
+                      }>
                       <NavLink
                         className="group"
                         label={
@@ -237,8 +234,7 @@ function Sidebar() {
                             className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
                           />
                         </div>
-                      }
-                    >
+                      }>
                       <NavLink
                         className="group"
                         label={
@@ -268,8 +264,7 @@ function Sidebar() {
               }}
               color="dark.3"
               variant="subtle"
-              leftIcon={<Exit width="16px" />}
-            >
+              leftIcon={<Exit width="16px" />}>
               خروج
             </Button>
           </Flex>

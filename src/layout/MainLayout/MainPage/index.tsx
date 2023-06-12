@@ -39,6 +39,7 @@ export default function MainPage() {
               fz="16px"
               fw="500"
               value="list-view"
+
               className="cursor-pointer"
             >
               نمایش لیستی
@@ -56,6 +57,7 @@ export default function MainPage() {
               fz="16px"
               fw="500"
               value="board-view"
+
               className="cursor-pointer"
             >
               نمایش ستونی
@@ -93,8 +95,7 @@ export default function MainPage() {
             style={{
               backgroundColor: 'transparent',
               color: 'inherit'
-            }}
-          >
+            }}>
             اشتراک‌گذاری
           </Button>
         </Flex>
@@ -106,6 +107,7 @@ export default function MainPage() {
           <SvgProvier>
             <PlusSquare />
           </SvgProvier>
+
         }
       >
         تسک جدید
