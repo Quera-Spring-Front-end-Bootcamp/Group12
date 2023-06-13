@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 
 interface AvatarProps extends MantineAvatarProps {
   usernameorid?: string;
+  firstname?: string;
+  lastname?: string;
 }
 const Avatar = (props: AvatarProps) => {
   useEffect(() => {
@@ -21,7 +23,10 @@ const Avatar = (props: AvatarProps) => {
     }
   }, []);
   const [user, setUser] = useState(useAppSelector((state) => state.user.user));
-  let profilePlaceholder = user.firstname[0] + user.lastname[0];
+  let profilePlaceholder =
+    props.firstname && props.lastname
+      ? props.firstname[0] + props.lastname[0]
+      : user.firstname[0] + user.lastname[0];
   return (
     <MantineAvatar
       src={user.profile_url}
