@@ -6,9 +6,10 @@ const initialState = {
     firstname: '',
     lastname: '',
     email: '',
-    phone:'',
+    phone: '',
     accessToken: '',
-    refreshToken: ''
+    refreshToken: '',
+    profile_url: ''
   }
 };
 let stateFromLocalStorage = initialState;
@@ -32,9 +33,10 @@ const userSlice = createSlice({
         firstname: '',
         lastname: '',
         email: '',
-        phone:'',
+        phone: '',
         accessToken: '',
-        refreshToken: ''
+        refreshToken: '',
+        profile_url: ''
       };
     }
   }

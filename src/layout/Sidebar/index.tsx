@@ -2,7 +2,7 @@ import { Accordion, Box, Flex, NavLink, Navbar, Text, ScrollArea, Badge } from '
 import Logo from '../../components/Logo';
 import SearchInput from '../../components/Search';
 import Button from '../../components/Button';
-import { Dots, Exit, PlusSquare } from '../../assets/icons';
+import { Dots, Exit, Plus, PlusSquare } from '../../assets/icons';
 import SidebarProfile from '../../components/SiderbarProfile';
 import userSlice from '../../data/userSlice/userSlice';
 import { useAppDispatch, useAppSelector } from '../../data/reduxHooks';
@@ -13,10 +13,11 @@ import { Link } from 'react-router-dom';
 function Sidebar() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-
     dispatch(fetchWorkspaces());
   }, []);
   const { clearUser } = userSlice.actions;
+  console.log(useAppSelector((state) => state.workSpaces));
+
   return (
     <>
       <Navbar
@@ -30,7 +31,8 @@ function Sidebar() {
 
           // When other breakpoints do not match base width is used, defaults to 100%
           base: 300
-        }}>
+        }}
+      >
         <Navbar.Section>
           <Flex justify="center" align="center" pt="40px">
             <Logo />
@@ -55,7 +57,8 @@ function Sidebar() {
                     fz="12px"
                     mt="md"
                     className="bg-stone-300 text-black hover:bg-stone-500 hover:text-white  !important"
-                    leftIcon={<PlusSquare width="1.3rem" />}>
+                    leftIcon={<PlusSquare width="1.3rem" />}
+                  >
                     ساختن اسپیس جدید
                   </Button>
                   <Box w="100%">
@@ -63,17 +66,12 @@ function Sidebar() {
                       return state.workSpaces.data.map((workSpace: any, index) => {
                         return (
                           <NavLink
+                            variant="filled"
+                            color="red"
                             key={index}
                             w="100%"
                             className="group"
-                            icon={
-                              <Badge
-                                className="w-5 h-5 p-0"
-                                radius={'8px'}
-                                color=""
-                                variant="filled"
-                              />
-                            }
+                            icon={<Badge className="w-5 h-5 p-0" radius={'8px'} variant="filled" />}
                             label={
                               <div className=" flex justify-between w-50 items-center ">
                                 <Text fz="16px" fw="500">
@@ -107,11 +105,18 @@ function Sidebar() {
                               })
                             ) : (
                               <NavLink
-                                p={'0px'}
+                                my={'xs'}
+                                h={'34px'}
+                                variant="subtle"
+                                color="green"
+                                className="bg-stone-300 w-fit rounded-md text-black hover:bg-stone-500 hover:text-white  !important"
                                 label={
-                                  <Button bg={'white'} variant="outline" w={'100%'} h={'32px'}>
-                                    ساختن پروژه
-                                  </Button>
+                                  <Flex align={'center'}>
+                                    <Plus width={'24px'} />
+                                    <Text fz={'12px'} fw={'600'} weight={'normal'}>
+                                      افزودن پروژه جدید
+                                    </Text>
+                                  </Flex>
                                 }
                               />
                             )}
@@ -133,7 +138,8 @@ function Sidebar() {
                             className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
                           />
                         </div>
-                      }>
+                      }
+                    >
                       <NavLink
                         className="group"
                         label={
@@ -193,62 +199,6 @@ function Sidebar() {
                         }
                       />
                     </NavLink>
-                    <NavLink
-                      className="group"
-                      icon={<div className="bg-green-500 w-5 h-5 rounded-lg " />}
-                      label={
-                        <div className=" flex justify-between  items-center">
-                          <Text fz="16px" fw="500">
-                            درس کامپایلر
-                          </Text>
-                          <Dots
-                            width="24px"
-                            className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                          />
-                        </div>
-                      }>
-                      <NavLink
-                        className="group"
-                        label={
-                          <div className="flex justify-between">
-                            <Text>پروژه اول</Text>
-
-                            <Dots
-                              width="24px"
-                              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                            />
-                          </div>
-                        }
-                      />
-                    </NavLink>
-                    <NavLink
-                      className="group"
-                      icon={<div className="bg-blue-500 w-5 h-5 rounded-lg " />}
-                      label={
-                        <div className=" flex justify-between  items-center">
-                          <Text fz="16px" fw="500">
-                            درس الگوریتم
-                          </Text>
-                          <Dots
-                            width="24px"
-                            className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                          />
-                        </div>
-                      }>
-                      <NavLink
-                        className="group"
-                        label={
-                          <div className="flex justify-between">
-                            <Text>پروژه اول</Text>
-
-                            <Dots
-                              width="24px"
-                              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                            />
-                          </div>
-                        }
-                      />
-                    </NavLink>
                   </Box>
                 </Accordion.Panel>
               </Accordion.Item>
@@ -264,7 +214,8 @@ function Sidebar() {
               }}
               color="dark.3"
               variant="subtle"
-              leftIcon={<Exit width="16px" />}>
+              leftIcon={<Exit width="16px" />}
+            >
               خروج
             </Button>
           </Flex>
