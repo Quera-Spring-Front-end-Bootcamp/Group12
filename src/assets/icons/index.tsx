@@ -19,6 +19,8 @@ import { ReactComponent as Delete } from './svg/Trash, Delete, Bin.svg';
 import { ReactComponent as Dots } from './svg/dots-menu.svg';
 import { ReactComponent as Done } from './svg/Checkmark, Done, Check.svg';
 import { ReactComponent as JustifyRight } from './svg/justify-right.svg';
+import { ReactComponent as Sun } from './svg/sun.svg';
+import { ReactComponent as MoonStars } from './svg/moon-stars.svg';
 import { ReactComponent as Share } from './svg/Share.svg';
 
 export {
@@ -43,5 +45,7 @@ export {
   Done,
   Dots,
   JustifyRight,
-  Share
+  Share,
+  Sun,
+  MoonStars
 };

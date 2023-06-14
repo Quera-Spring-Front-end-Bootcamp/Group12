@@ -31,7 +31,7 @@ const Avatar = (props: AvatarProps) => {
     <MantineAvatar
       src={user.profile_url}
       size="32px"
-      color="teal"
+      color="primary"
       radius="xl"
       variant="filled"
       {...props}

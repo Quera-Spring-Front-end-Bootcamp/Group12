@@ -13,7 +13,7 @@ const FilterTask = () => {
         fw={500}
         fz={12}
         leftIcon={
-          <SvgProvier color="#323232" style={{ height: '24px' }}>
+          <SvgProvier style={{ height: '24px' }}>
             <TwoLineSetting />
           </SvgProvier>
         }
