@@ -1,17 +1,19 @@
 import { ReactNode, useState } from 'react';
-import { Text, Flex, CardProps } from '@mantine/core';
+import { Text, Flex, CardProps, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import TaskListItem from '../TaskListItem';
 import { Plus, Dots } from '../../assets/icons';
 import SvgProvier from '../../assets/icons/SvgProvider';
 
 type TaskListHeaderProps = CardProps & {
-  color?: string;
   children?: ReactNode;
 };
 
 // popover not handled!
 
-const TaskListHeader = ({ children, color }: TaskListHeaderProps) => {
+const TaskListHeader = ({ children }: TaskListHeaderProps) => {
+  const { colorScheme } = useMantineColorScheme();
+  const theme = useMantineTheme();
+  const { primaryColor } = useMantineTheme();
   const [tasksNumber, setTasksNumber] = useState(0);
   const onMouseDownHandler = () => {
     setTasksNumber(tasksNumber + 1);
@@ -19,7 +21,7 @@ const TaskListHeader = ({ children, color }: TaskListHeaderProps) => {
   return (
     <TaskListItem
       style={{
-        borderTop: `1px solid ${color}`,
+        borderTop: `1px solid ${theme.colors[primaryColor][7]}`,
         padding: '8px 12px'
       }}
       shadow="0px 2px 8px rgba(0, 0, 0, 0.18)"
@@ -38,7 +40,7 @@ const TaskListHeader = ({ children, color }: TaskListHeaderProps) => {
           </Text>
           <Text
             style={{
-              backgroundColor: '#F4F4F4',
+              backgroundColor: colorScheme === 'light' ? '#F4F4F4' : 'black',
               borderRadius: '50%',
               padding: '2px 4px',
               fontSize: '10px',

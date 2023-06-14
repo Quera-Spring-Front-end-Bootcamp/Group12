@@ -1,11 +1,13 @@
-import { Flex, Tabs, Text, Divider } from '@mantine/core';
+import { Flex, Tabs, Text, Divider, Group, useMantineTheme } from '@mantine/core';
 import { Calender, CheckList, Column, PlusSquare, Share } from '../../../assets/icons';
 import Button from '../../../components/Button';
 
 import SvgProvier from '../../../assets/icons/SvgProvider';
 import { Link, Outlet, useParams } from 'react-router-dom';
+import DarkModeToggle from '../../../components/DarkModeToggle';
 
 export default function MainPage() {
+  const { primaryColor } = useMantineTheme();
   const params = useParams();
   const tab = params['*'];
   return (
@@ -14,7 +16,7 @@ export default function MainPage() {
         tab: {
           ...theme.fn.focusStyles(),
           '&[data-active]': {
-            color: '#208D8E'
+            color: theme.colors[primaryColor]
           }
         }
       })}
@@ -39,7 +41,6 @@ export default function MainPage() {
               fz="16px"
               fw="500"
               value="list-view"
-
               className="cursor-pointer"
             >
               نمایش لیستی
@@ -57,7 +58,6 @@ export default function MainPage() {
               fz="16px"
               fw="500"
               value="board-view"
-
               className="cursor-pointer"
             >
               نمایش ستونی
@@ -82,22 +82,24 @@ export default function MainPage() {
             </Tabs.Tab>
           </Link>
           <Divider mt="10px" h="24px" orientation="vertical" />
-
-          <Button
-            fz={16}
-            fw={500}
-            leftIcon={
-              <SvgProvier color="#323232" style={{ height: '24px' }}>
-                <Share />
-              </SvgProvier>
-            }
-            ml="auto"
-            style={{
-              backgroundColor: 'transparent',
-              color: 'inherit'
-            }}>
-            اشتراک‌گذاری
-          </Button>
+          <Group ml="auto">
+            <DarkModeToggle />
+            <Button
+              fz={16}
+              fw={500}
+              leftIcon={
+                <SvgProvier style={{ height: '24px' }}>
+                  <Share />
+                </SvgProvier>
+              }
+              style={{
+                backgroundColor: 'transparent',
+                color: 'inherit'
+              }}
+            >
+              اشتراک‌گذاری
+            </Button>
+          </Group>
         </Flex>
       </Tabs.List>
       <Outlet />
@@ -107,7 +109,6 @@ export default function MainPage() {
           <SvgProvier>
             <PlusSquare />
           </SvgProvier>
-
         }
       >
         تسک جدید

@@ -7,6 +7,7 @@ import {
 } from '@mantine/core';
 import { useLocalStorage } from '@mantine/hooks';
 import rtlPlugin from 'stylis-plugin-rtl';
+import { useAppSelector } from './data/reduxHooks';
 
 const rtlCache = createEmotionCache({
   key: 'mantine-rtl',
@@ -22,6 +23,7 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
+  const themeColor = useAppSelector((state) => state.theme.themeColor);
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: 'mantine-color-scheme',
     defaultValue: 'light',
@@ -41,7 +43,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
           fontFamily: 'dana , sans-serif',
 
           colors: {
-            firuzei: [
+            brand: [
               '#defdfd',
               '#bbf1f2',
               '#95e7e8',
@@ -55,7 +57,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
             ]
           },
           primaryShade: { light: 6, dark: 7 },
-          primaryColor: 'firuzei'
+          primaryColor: themeColor
         }}
       >
         {children}

@@ -16,7 +16,6 @@ function Sidebar() {
     dispatch(fetchWorkspaces());
   }, []);
   const { clearUser } = userSlice.actions;
-  console.log(useAppSelector((state) => state.workSpaces));
 
   return (
     <>
