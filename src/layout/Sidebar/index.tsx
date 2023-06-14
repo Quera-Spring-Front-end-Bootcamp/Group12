@@ -80,20 +80,22 @@ function Sidebar() {
                               </div>
                             }>
                             {workSpace.projects.length > 0 ? (
-                              workSpace.projects.map((project: { name: string }, index: number) => {
+                              workSpace.projects.map((project: any, index: number) => {
                                 return (
                                   <NavLink
                                     className="group"
                                     key={index}
                                     label={
-                                      <div className="flex justify-between">
-                                        <Text>{project.name}</Text>
+                                      <Link to={`project/${project._id}/board-view`}>
+                                        <div className="flex justify-between">
+                                          <Text>{project.name}</Text>
 
-                                        <Dots
-                                          width="24px"
-                                          className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                                        />
-                                      </div>
+                                          <Dots
+                                            width="24px"
+                                            className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                                          />
+                                        </div>
+                                      </Link>
                                     }
                                   />
                                 );
@@ -119,79 +121,6 @@ function Sidebar() {
                         );
                       });
                     })}
-                    <NavLink
-                      w="100%"
-                      className="group"
-                      icon={<div className="bg-red-500 w-5 h-5 rounded-lg " />}
-                      label={
-                        <div className=" flex justify-between w-50 items-center ">
-                          <Text fz="16px" fw="500">
-                            درس مدیریت پروژه
-                          </Text>
-                          <Dots
-                            width="24px"
-                            className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                          />
-                        </div>
-                      }>
-                      <NavLink
-                        className="group"
-                        label={
-                          <div className="flex justify-between">
-                            <Text>پروژه اول</Text>
-
-                            <Dots
-                              width="24px"
-                              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                            />
-                          </div>
-                        }
-                      />
-                    </NavLink>
-
-                    <NavLink
-                      className="group"
-                      label={
-                        <div className=" flex justify-between  items-center">
-                          <Text fz="16px" fw="500">
-                            کارهای شخصی
-                          </Text>
-                          <Dots
-                            width="24px"
-                            className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                          />
-                        </div>
-                      }
-                      icon={<div className="bg-amber-500 w-5 h-5 rounded-lg " />}>
-                      <Link to={'project/:projectID/board-view'}>
-                        <NavLink
-                          className="group"
-                          label={
-                            <div className="flex justify-between">
-                              <Text>پروژه اول</Text>
-
-                              <Dots
-                                width="24px"
-                                className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                              />
-                            </div>
-                          }
-                        />
-                      </Link>
-                      <NavLink
-                        className="group"
-                        label={
-                          <div className="flex justify-between">
-                            <Text>پروژه دوم</Text>
-
-                            <Dots
-                              width="24px"
-                              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                            />
-                          </div>
-                        }
-                      />
-                    </NavLink>
                   </Box>
                 </Accordion.Panel>
               </Accordion.Item>
