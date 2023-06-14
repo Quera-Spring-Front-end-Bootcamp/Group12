@@ -1,10 +1,13 @@
-import { Text } from '@mantine/core';
+import { Text, useMantineTheme } from '@mantine/core';
 
-const Logo = () => (
+const Logo = () => {
+  const themecolor = useMantineTheme()
+  const color = themecolor.colors[themecolor.primaryColor]
+  return(
   <Text
     fz="2rem"
     fw="800"
-    bg="linear-gradient(90deg, #118C80 0, #4AB7D8 120%)"
+    bg={`linear-gradient(90deg, ${color[3]} 0, ${color[7]} 120%)`}
     style={{
       backgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
@@ -13,6 +16,6 @@ const Logo = () => (
   >
     کوئرا تسک منیجر
   </Text>
-);
+)};
 
 export default Logo;

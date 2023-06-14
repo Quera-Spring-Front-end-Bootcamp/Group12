@@ -1,22 +1,24 @@
-import { Accordion, Box, Flex, NavLink, Navbar, Text, ScrollArea, Badge } from '@mantine/core';
+import { Accordion, Box, Flex, NavLink, Navbar, Text, ScrollArea } from '@mantine/core';
 import Logo from '../../components/Logo';
 import SearchInput from '../../components/Search';
 import Button from '../../components/Button';
-import { Dots, Exit, Plus, PlusSquare } from '../../assets/icons';
+import { Dots, Exit, PlusSquare } from '../../assets/icons';
 import SidebarProfile from '../../components/SiderbarProfile';
 import userSlice from '../../data/userSlice/userSlice';
-import { useAppDispatch, useAppSelector } from '../../data/reduxHooks';
+import { useAppDispatch } from '../../data/reduxHooks';
 import { useEffect } from 'react';
-import { fetchWorkspaces } from '../../data/dataSlice/workSpacesSlice';
+import myAxios from '../../helpers/myAxios';
 import { Link } from 'react-router-dom';
 
 function Sidebar() {
-  const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchWorkspaces());
+    const request = async () => {
+      const workspases = await myAxios.get(`/workspace/get-all`);
+    };
+    request();
   }, []);
+  const dispatch = useAppDispatch();
   const { clearUser } = userSlice.actions;
-
   return (
     <>
       <Navbar
@@ -30,8 +32,7 @@ function Sidebar() {
 
           // When other breakpoints do not match base width is used, defaults to 100%
           base: 300
-        }}
-      >
+        }}>
         <Navbar.Section>
           <Flex justify="center" align="center" pt="40px">
             <Logo />
@@ -42,9 +43,8 @@ function Sidebar() {
             miw="100%"
             // variant="default"
             chevronPosition="right"
-            defaultValue="workspaces"
-            style={{}}
-          >
+            defaultValue="ورک‌اسپیس‌ها"
+            style={{}}>
             <Flex justify="center" direction="column" align="center" w="100%">
               <Accordion.Item value="workspaces" w="100%">
                 <Accordion.Control>ورک‌اسپیس‌ها</Accordion.Control>
@@ -56,73 +56,10 @@ function Sidebar() {
                     fz="12px"
                     mt="md"
                     className="bg-stone-300 text-black hover:bg-stone-500 hover:text-white  !important"
-                    leftIcon={<PlusSquare width="1.3rem" />}
-                  >
+                    leftIcon={<PlusSquare width="1.3rem" />}>
                     ساختن اسپیس جدید
                   </Button>
                   <Box w="100%">
-                    {useAppSelector((state) => {
-                      return state.workSpaces.data.map((workSpace: any, index) => {
-                        return (
-                          <NavLink
-                            variant="filled"
-                            color="red"
-                            key={index}
-                            w="100%"
-                            className="group"
-                            icon={<Badge className="w-5 h-5 p-0" radius={'8px'} variant="filled" />}
-                            label={
-                              <div className=" flex justify-between w-50 items-center ">
-                                <Text fz="16px" fw="500">
-                                  {workSpace.name}
-                                </Text>
-                                <Dots
-                                  width="24px"
-                                  className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                                />
-                              </div>
-                            }
-                          >
-                            {workSpace.projects.length > 0 ? (
-                              workSpace.projects.map((project: { name: string }, index: number) => {
-                                return (
-                                  <NavLink
-                                    className="group"
-                                    key={index}
-                                    label={
-                                      <div className="flex justify-between">
-                                        <Text>{project.name}</Text>
-
-                                        <Dots
-                                          width="24px"
-                                          className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
-                                        />
-                                      </div>
-                                    }
-                                  />
-                                );
-                              })
-                            ) : (
-                              <NavLink
-                                my={'xs'}
-                                h={'34px'}
-                                variant="subtle"
-                                color="green"
-                                className="bg-stone-300 w-fit rounded-md text-black hover:bg-stone-500 hover:text-white  !important"
-                                label={
-                                  <Flex align={'center'}>
-                                    <Plus width={'24px'} />
-                                    <Text fz={'12px'} fw={'600'} weight={'normal'}>
-                                      افزودن پروژه جدید
-                                    </Text>
-                                  </Flex>
-                                }
-                              />
-                            )}
-                          </NavLink>
-                        );
-                      });
-                    })}
                     <NavLink
                       w="100%"
                       className="group"
@@ -137,8 +74,7 @@ function Sidebar() {
                             className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
                           />
                         </div>
-                      }
-                    >
+                      }>
                       <NavLink
                         className="group"
                         label={
@@ -167,8 +103,7 @@ function Sidebar() {
                           />
                         </div>
                       }
-                      icon={<div className="bg-amber-500 w-5 h-5 rounded-lg " />}
-                    >
+                      icon={<div className="bg-amber-500 w-5 h-5 rounded-lg " />}>
                       <Link to={'project/:projectID/board-view'}>
                         <NavLink
                           className="group"
@@ -198,6 +133,62 @@ function Sidebar() {
                         }
                       />
                     </NavLink>
+                    <NavLink
+                      className="group"
+                      icon={<div className="bg-green-500 w-5 h-5 rounded-lg " />}
+                      label={
+                        <div className=" flex justify-between  items-center">
+                          <Text fz="16px" fw="500">
+                            درس کامپایلر
+                          </Text>
+                          <Dots
+                            width="24px"
+                            className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                          />
+                        </div>
+                      }>
+                      <NavLink
+                        className="group"
+                        label={
+                          <div className="flex justify-between">
+                            <Text>پروژه اول</Text>
+
+                            <Dots
+                              width="24px"
+                              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                            />
+                          </div>
+                        }
+                      />
+                    </NavLink>
+                    <NavLink
+                      className="group"
+                      icon={<div className="bg-blue-500 w-5 h-5 rounded-lg " />}
+                      label={
+                        <div className=" flex justify-between  items-center">
+                          <Text fz="16px" fw="500">
+                            درس الگوریتم
+                          </Text>
+                          <Dots
+                            width="24px"
+                            className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                          />
+                        </div>
+                      }>
+                      <NavLink
+                        className="group"
+                        label={
+                          <div className="flex justify-between">
+                            <Text>پروژه اول</Text>
+
+                            <Dots
+                              width="24px"
+                              className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                            />
+                          </div>
+                        }
+                      />
+                    </NavLink>
                   </Box>
                 </Accordion.Panel>
               </Accordion.Item>
@@ -206,15 +197,16 @@ function Sidebar() {
         </Navbar.Section>
         <Navbar.Section>
           <Flex align={'start'} direction="column" gap={'md'} p="32px">
+            <Link to='/profile'>
             <SidebarProfile />
+            </Link>
             <Button
               onClick={() => {
                 dispatch(clearUser());
               }}
               color="dark.3"
               variant="subtle"
-              leftIcon={<Exit width="16px" />}
-            >
+              leftIcon={<Exit width="16px" />}>
               خروج
             </Button>
           </Flex>

@@ -10,6 +10,7 @@ import MainPage from '../layout/MainLayout/MainPage';
 import List from '../components/List';
 import BoardView from '../layout/MainLayout/TaskViews/BoardView/Boardview';
 import Calender from '../components/Calender';
+import ThemeSetting from '../layout/Setting/ThemeSetting';
 
 const MainRouter = () => {
   const user = useSelector((state: any) => state.user.user);
@@ -24,6 +25,7 @@ const MainRouter = () => {
         <Route path="/new-password" element={!isLogin ? <NewPassword /> : <Navigate to="/" />} />
         <Route element={<PrivateRoutes isLogin={isLogin} />}>
           <Route path="/" element={<MainLayout />}>
+            <Route path='/profile' element={<ThemeSetting/>}/>
             <Route path="project/:projectID/*" element={<MainPage />}>
               <Route path="list-view" element={<List />} />
               <Route path="board-view" element={<BoardView />} />

@@ -1,4 +1,4 @@
-import { Flex, Tabs, Text, Divider, Group, useMantineTheme } from '@mantine/core';
+import { Flex, Tabs, Text, Divider, Group, useMantineTheme, useMantineColorScheme } from '@mantine/core';
 import { Calender, CheckList, Column, PlusSquare, Share } from '../../../assets/icons';
 import Button from '../../../components/Button';
 
@@ -8,6 +8,8 @@ import DarkModeToggle from '../../../components/DarkModeToggle';
 
 export default function MainPage() {
   const { primaryColor } = useMantineTheme();
+  const { colorScheme } = useMantineColorScheme();
+  const primaryShade = colorScheme === 'light' ? 6 : 7;
   const params = useParams();
   const tab = params['*'];
   return (
@@ -16,7 +18,7 @@ export default function MainPage() {
         tab: {
           ...theme.fn.focusStyles(),
           '&[data-active]': {
-            color: theme.colors[primaryColor]
+            color: theme.colors[primaryColor][primaryShade]
           }
         }
       })}
