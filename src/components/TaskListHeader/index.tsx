@@ -5,21 +5,20 @@ import { Plus, Dots } from '../../assets/icons';
 import SvgProvier from '../../assets/icons/SvgProvider';
 
 type TaskListHeaderProps = CardProps & {
+  tasksCount: number;
   children?: ReactNode;
 };
 
 // popover not handled!
 
-const TaskListHeader = ({ children }: TaskListHeaderProps) => {
+const TaskListHeader = ({ children, tasksCount }: TaskListHeaderProps) => {
   const { colorScheme } = useMantineColorScheme();
   const theme = useMantineTheme();
   const { primaryColor } = useMantineTheme();
-  const [tasksNumber, setTasksNumber] = useState(0);
-  const onMouseDownHandler = () => {
-    setTasksNumber(tasksNumber + 1);
-  };
+
   return (
     <TaskListItem
+      w="256px"
       style={{
         borderTop: `1px solid ${theme.colors[primaryColor][7]}`,
         padding: '8px 12px'
@@ -38,17 +37,17 @@ const TaskListHeader = ({ children }: TaskListHeaderProps) => {
           >
             {children}
           </Text>
-          <Text
-            style={{
-              backgroundColor: colorScheme === 'light' ? '#F4F4F4' : 'black',
-              borderRadius: '50%',
-              padding: '2px 4px',
-              fontSize: '10px',
-              fontWeight: '500'
-            }}
+          <Flex
+            ml={8}
+            className="rounded-lg"
+            bg={colorScheme === 'light' ? '#F4F4F4' : 'black'}
+            px={6}
+            py={2}
+            justify={'center'}
+            align={'center'}
           >
-            {tasksNumber}
-          </Text>
+            <Text fw={'bold'}>{tasksCount}</Text>
+          </Flex>
         </Flex>
         <Flex
           className="invisible opacity-0 group-hover:visible duration-1000 group-hover:opacity-100"
@@ -61,7 +60,7 @@ const TaskListHeader = ({ children }: TaskListHeaderProps) => {
               <Dots />
             </SvgProvier>
           </Text>
-          <Text onMouseDown={onMouseDownHandler} style={{ cursor: 'default' }}>
+          <Text style={{ cursor: 'default' }}>
             <SvgProvier color="black" style={{ height: '20px' }}>
               <Plus />
             </SvgProvier>

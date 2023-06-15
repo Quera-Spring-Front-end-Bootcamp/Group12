@@ -2,8 +2,13 @@ import { Flex, Avatar, Text, Title, Group, Badge, Divider } from '@mantine/core'
 import { CheckmarkSqaure, Done, Dots, Flag, JustifyRight } from '../../assets/icons';
 import TaskListItem from '../TaskListItem';
 import SvgProvier from '../../assets/icons/SvgProvider';
+import { task } from '../../data/dataSlice/boardsSlice';
 
-const TaskCard = () => (
+type props = {
+  task?: task;
+};
+
+const TaskCard = ({ task }: props) => (
   <TaskListItem
     w="256px"
     pb="0px"
