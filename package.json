@@ -15,6 +15,8 @@
     ]
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.0.8",
+    "@dnd-kit/sortable": "^7.0.2",
     "@emotion/react": "^11.11.0",
     "@fullcalendar/core": "^6.1.8",
     "@fullcalendar/daygrid": "^6.1.8",
@@ -28,6 +30,7 @@
     "@mantine/notifications": "^6.0.13",
     "@mantine/nprogress": "^v6.0.13",
     "@reduxjs/toolkit": "^1.9.5",
+    "@types/react-beautiful-dnd": "^13.1.4",
     "axios": "^1.4.0",
     "axios-auth-refresh": "^3.3.6",
     "dayjs": "^1.11.7",
@@ -35,6 +38,7 @@
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-indiana-drag-scroll": "^2.2.0",
     "react-redux": "^8.0.7",

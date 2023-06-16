@@ -2,14 +2,15 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import myAxios from '../../helpers/myAxios';
 
 export type task = {
+  _id: string;
   name: string;
   description?: string;
   board: string;
   position: number;
-  deadline: Date;
-  taskTags: object[];
-  taskAssigns: object[];
-  comments: object[];
+  deadline?: Date;
+  taskTags?: object[];
+  taskAssigns?: object[];
+  comments?: object[];
 };
 
 type board = {

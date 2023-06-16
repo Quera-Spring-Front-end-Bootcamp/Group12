@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { Text, Flex, CardProps, useMantineColorScheme, useMantineTheme } from '@mantine/core';
 import TaskListItem from '../TaskListItem';
 import { Plus, Dots } from '../../assets/icons';
@@ -50,18 +50,18 @@ const TaskListHeader = ({ children, tasksCount }: TaskListHeaderProps) => {
           </Flex>
         </Flex>
         <Flex
-          className="invisible opacity-0 group-hover:visible duration-1000 group-hover:opacity-100"
+          className="invisible opacity-0 group-hover:visible duration-200 group-hover:opacity-100"
           align="center"
           justify="end"
           gap="4px"
         >
           <Text style={{ cursor: 'default' }}>
-            <SvgProvier color="black" style={{ height: '20px' }}>
+            <SvgProvier style={{ height: '20px' }}>
               <Dots />
             </SvgProvier>
           </Text>
           <Text style={{ cursor: 'default' }}>
-            <SvgProvier color="black" style={{ height: '20px' }}>
+            <SvgProvier style={{ height: '20px' }}>
               <Plus />
             </SvgProvier>
           </Text>
