@@ -13,6 +13,7 @@ function getRefreshToken(): string {
   if (localStorage.getItem('user')) {
     const localUser: string = localStorage.getItem('user') as string;
     const user = JSON.parse(localUser);
+    console.log(user);
     return user.refreshToken;
   }
   return '';
@@ -28,10 +29,11 @@ function getUser(): object {
 const refreshAuthLogic = (failedRequest: any) =>
   axios
     .post('http://localhost:3000/api/auth/refreshtoken', {
-      refreshToken: getRefreshToken
+      refreshToken: getRefreshToken()
     })
     .then((tokenRefreshResponse) => {
-      const newAccessToken = tokenRefreshResponse.data.accessToken;
+      const newAccessToken = tokenRefreshResponse.data.data.accessToken;
+      console.log(tokenRefreshResponse.data);
       localStorage.setItem(
         'user',
         JSON.stringify({

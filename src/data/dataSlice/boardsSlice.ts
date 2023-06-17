@@ -50,8 +50,10 @@ const boardsSlice = createSlice({
   initialState,
   reducers: {
     setProjectName: (state, action) => {
-      const name = action.payload;
-      state.projectName = name;
+      state.projectName = action.payload;
+    },
+    updateBoards: (state, action) => {
+      state.projectBoards = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -69,4 +71,4 @@ const boardsSlice = createSlice({
 });
 
 export const { setProjectName } = boardsSlice.actions;
-export default boardsSlice.reducer;
+export default boardsSlice;
