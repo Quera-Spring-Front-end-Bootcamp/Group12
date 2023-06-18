@@ -33,7 +33,6 @@ const refreshAuthLogic = (failedRequest: any) =>
     })
     .then((tokenRefreshResponse) => {
       const newAccessToken = tokenRefreshResponse.data.data.accessToken;
-      console.log(tokenRefreshResponse.data);
       localStorage.setItem(
         'user',
         JSON.stringify({

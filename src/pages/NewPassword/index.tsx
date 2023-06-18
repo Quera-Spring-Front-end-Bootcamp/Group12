@@ -12,7 +12,6 @@ const NewPassword = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const inputToken = searchParams.get('token');
-  // console.log(token);
 
   const navigate = useNavigate();
   //form validation

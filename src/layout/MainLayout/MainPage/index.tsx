@@ -29,13 +29,12 @@ export default function MainPage() {
   const projects = useAppSelector((state) => state.workSpaces.data);
   const projectn = projects?.map((projects: any) => projects.projects);
   const projectName = projectn[0]?.find((project: any) => project._id === projectID);
-
   useEffect(() => {
     dispatch(getProjectBoards(projectID));
-  }, []);
+  }, [projectID]);
 
   useEffect(() => {
-    dispatch(setProjectName(projectName?.name));
+    dispatch(setProjectName(projectName));
   }, [projectName]);
 
   return (
@@ -94,7 +93,7 @@ export default function MainPage() {
 
           <Divider mt="10px" h="24px" orientation="vertical" />
 
-          <Link to="calender-view">
+          <Link to="calendar-view">
             <Tabs.Tab
               icon={
                 <SvgProvier style={{ height: '24px' }}>

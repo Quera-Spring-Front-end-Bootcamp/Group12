@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   user: {
+    _id: '',
     username: '',
     firstname: '',
     lastname: '',
@@ -29,6 +30,7 @@ const userSlice = createSlice({
     clearUser: (state) => {
       localStorage.removeItem('user');
       state.user = {
+        _id: '',
         username: '',
         firstname: '',
         lastname: '',
