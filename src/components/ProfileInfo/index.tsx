@@ -46,7 +46,7 @@ function ProfileInfo() {
   const handleClick = async () => {
     try {
       setErr('');
-      const check = await myAxios.post(`/auth/login`, {
+      await myAxios.post(`/auth/login`, {
         emailOrUsername: user.username,
         password: form.values.password
       });
