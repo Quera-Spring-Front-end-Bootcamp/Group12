@@ -25,7 +25,7 @@ export default function MainPage() {
   const tab = params['*'];
   const { projectID }: any = useParams();
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.boards);
+  const { fetchStatus } = useAppSelector((state) => state.workSpaces);
   const projects = useAppSelector((state) => state.workSpaces.data);
   const projectn = projects?.map((projects: any) => projects.projects);
   const projectName = projectn[0]?.find((project: any) => project._id === projectID);
@@ -37,14 +37,6 @@ export default function MainPage() {
   useEffect(() => {
     dispatch(setProjectName(projectName?.name));
   }, [projectName]);
-
-  if (isLoading) {
-    return (
-      <div className="loading">
-        <h1>درحال بارگزاری...</h1>
-      </div>
-    );
-  }
 
   return (
     <Tabs
@@ -64,7 +56,7 @@ export default function MainPage() {
       <Tabs.List mb={10} w="100%">
         <Flex align="center" w="100%">
           <Text fz="20px" fw="600" pr={16} className="cursor-default ">
-            {projectName.name}
+            {fetchStatus === 'success' ? projectName.name : 'درحال بارگذاری'}
           </Text>
           <Divider mt="10px" h="24px" orientation="vertical" />
           <Link to="list-view">

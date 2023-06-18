@@ -24,13 +24,13 @@ type board = {
 type initialState = {
   projectBoards: board[];
   projectName: string;
-  isLoading: boolean;
+  isLoading: string;
 };
 
 const initialState: initialState = {
   projectBoards: [],
   projectName: '',
-  isLoading: true
+  isLoading: ''
 };
 
 export const getProjectBoards = createAsyncThunk<any, any>(
@@ -58,14 +58,14 @@ const boardsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getProjectBoards.pending, (state) => {
-      state.isLoading = true;
+      state.isLoading = 'pending';
     });
     builder.addCase(getProjectBoards.fulfilled, (state, action) => {
-      state.isLoading = false;
+      state.isLoading = 'seccuss';
       state.projectBoards = action.payload;
     });
     builder.addCase(getProjectBoards.rejected, (state) => {
-      state.isLoading = false;
+      state.isLoading = 'error';
     });
   }
 });

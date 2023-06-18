@@ -8,16 +8,17 @@ import Avatar from '../Avatar';
 type props = {
   task: task;
   projectName?: string;
+  dragTask: boolean;
 };
 
-const TaskCard = ({ task, projectName }: props) => {
+const TaskCard = ({ task, projectName, dragTask }: props) => {
   return (
     <TaskListItem
       my={'xs'}
       w="256px"
       pb="0px"
       withBorder
-      className="group"
+      className={`${!dragTask ? 'group' : 'rotate-6'}`}
       style={{ transition: '300ms ease-out' }}
     >
       <Flex direction="column" gap="16px" style={{ position: 'relative' }}>
@@ -38,7 +39,9 @@ const TaskCard = ({ task, projectName }: props) => {
           radius="xl"
           src={null}
           style={{ position: 'absolute', left: 0 }}
-          className="opacity-0 group-hover/:opacity-100 duration-300 transition-all"
+          className={`opacity-0 group-hover/:opacity-100 duration-300 transition-all ${
+            dragTask && 'opacity-100'
+          }`}
         ></Avatar>
 
         <Group>
@@ -62,18 +65,32 @@ const TaskCard = ({ task, projectName }: props) => {
           <Badge color="grape">پروژه</Badge>
         </Group>
       </Flex>
-      <div className="max-h-0  group-hover/:block group-hover/:max-h-20 transition-all ease-in-out duration-300 ">
+      <div
+        className={`max-h-0  group-hover/:block group-hover/:max-h-20 transition-all ease-in-out duration-300 ${
+          dragTask && 'block max-h-20'
+        }`}
+      >
         <Divider
           mb="16px"
           mt="16px"
-          className="invisible group-hover/:visible transition-all ease-in-out"
+          className={`group-hover/:visible transition-all ease-in-out${
+            dragTask ? 'visible' : 'invisible'
+          }`}
         />
         <Flex justify="space-between" mb="16px">
           <SvgProvier style={{ heigh: '20px' }}>
-            <Done className="opacity-0 group-hover/:opacity-100 transition-all ease-in-out duration-300" />
+            <Done
+              className={`opacity-0 group-hover/:opacity-100 transition-all ease-in-out duration-300 ${
+                dragTask && 'opacity-100'
+              }`}
+            />
           </SvgProvier>
           <SvgProvier style={{ heigh: '20px' }}>
-            <Dots className="invisible group-hover/:visible opacity-0 group-hover/:opacity-100 transition-all ease-in-out duration-300" />
+            <Dots
+              className={` group-hover/:visible group-hover/:opacity-100 transition-all ease-in-out duration-300 ${
+                dragTask ? 'visible opacity-100' : 'invisible opacity-0'
+              }`}
+            />
           </SvgProvier>
         </Flex>
       </div>

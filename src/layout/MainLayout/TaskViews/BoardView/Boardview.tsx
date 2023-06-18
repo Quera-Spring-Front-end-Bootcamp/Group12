@@ -1,4 +1,4 @@
-import { Flex } from '@mantine/core';
+import { Flex, Skeleton } from '@mantine/core';
 import FilterTask from '../../../../components/FilterTasks';
 import Board from '../../../../components/Board/Board';
 import { useAppDispatch, useAppSelector } from '../../../../data/reduxHooks';
@@ -6,12 +6,43 @@ import ScrollContainer from 'react-indiana-drag-scroll';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import boardsSlice, { task } from '../../../../data/dataSlice/boardsSlice';
 import myAxios from '../../../../helpers/myAxios';
+import { useState } from 'react';
+
 const BoardView = () => {
+  const { isLoading } = useAppSelector((state) => state.boards);
+  const storeBoards = useAppSelector((state) => state.boards.projectBoards);
+  const projectName = useAppSelector((state) => state.boards.projectName);
+
+  const [dragTask, setDragTask] = useState(false);
+  const toggleDragTask = () => {
+    setDragTask(!dragTask);
+  };
   const dispatch = useAppDispatch();
   const { updateBoards } = boardsSlice.actions;
-  const storeBoards = useAppSelector((state) => state.boards.projectBoards);
   const onDragEnd = (result: DropResult) => {
+    toggleDragTask();
     if (!result.destination) return;
+    if (result.destination.droppableId === 'delete') {
+      console.log('delete');
+      const sourceBoard = storeBoards.find((board) => board._id === result.source.droppableId);
+      const updatedSourceBoard = {
+        ...sourceBoard,
+        tasks: sourceBoard?.tasks
+          .filter((task) => task._id !== result.draggableId)
+          .map((task) => {
+            if (task.position > result.source.index + 1)
+              return { ...task, position: task.position - 1 };
+            return task;
+          })
+      };
+      const updatedBoards = storeBoards.map((storeBoard) => {
+        if (storeBoard._id === updatedSourceBoard._id) return updatedSourceBoard;
+        return storeBoard;
+      });
+      dispatch(updateBoards(updatedBoards));
+      myAxios.delete(`/task/${result.draggableId}`);
+      return;
+    }
     if (
       result.source.droppableId === result.destination?.droppableId &&
       result.source.index === result.destination?.index
@@ -112,7 +143,6 @@ const BoardView = () => {
         if (storeBoard._id === updatedDestinationBoard._id) return updatedDestinationBoard;
         return storeBoard;
       });
-      console.log(updatedBoards);
       dispatch(updateBoards(updatedBoards));
 
       myAxios
@@ -127,33 +157,76 @@ const BoardView = () => {
 
   return (
     <>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <FilterTask />
-        <Flex style={{ flexShrink: '0' }} wrap="nowrap" gap="lg" mah="100%" mt="sm">
-          <ScrollContainer
-            style={{
-              height: 'calc(100vh - 20px)',
-              display: 'flex',
-              gap: '16px',
-              paddingLeft: '4px'
-            }}
+      <DragDropContext onBeforeCapture={toggleDragTask} onDragEnd={onDragEnd}>
+        <FilterTask dragTask={dragTask} />
+        {!(isLoading === 'seccuss') ? (
+          <Flex gap={16}>
+            <Flex miw={256} gap={20} direction={'column'}>
+              <Skeleton mt={12} h={46} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+            </Flex>
+            <Flex miw={256} gap={20} direction={'column'}>
+              <Skeleton mt={12} h={46} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+            </Flex>
+            <Flex miw={256} gap={20} direction={'column'}>
+              <Skeleton mt={12} h={46} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+            </Flex>
+            <Flex miw={256} gap={20} direction={'column'}>
+              <Skeleton mt={12} h={46} />
+              <Skeleton radius={'md'} h={150} />
+            </Flex>
+            <Flex miw={256} gap={20} direction={'column'}>
+              <Skeleton mt={12} h={46} />
+            </Flex>
+            <Flex miw={256} gap={20} direction={'column'}>
+              <Skeleton mt={12} h={46} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+              <Skeleton radius={'md'} h={150} />
+            </Flex>
+          </Flex>
+        ) : (
+          <Flex
+            style={{ flexShrink: '0' }}
+            wrap="nowrap"
+            gap="lg"
+            mah="100%"
+            mt="sm"
+            direction={'column'}
           >
-            {/* boards container */}
-            {useAppSelector((state) => {
-              const sortedBoards = [...state.boards.projectBoards];
-              sortedBoards.sort((a, b) => a.position - b.position);
-              return sortedBoards.map((board) => (
+            <ScrollContainer
+              ignoreElements=".task"
+              style={{
+                height: 'calc(100vh - 20px)',
+                display: 'flex',
+                gap: '16px',
+                paddingLeft: '4px'
+              }}
+            >
+              {/* boards container */}
+              {storeBoards.map((board) => (
                 <Board
                   id={board._id}
                   key={board._id}
                   name={board.name}
                   tasks={board.tasks}
-                  projectName={state.boards.projectName}
+                  projectName={projectName}
                 />
-              ));
-            })}
-          </ScrollContainer>
-        </Flex>
+              ))}
+            </ScrollContainer>
+          </Flex>
+        )}
       </DragDropContext>
     </>
   );
