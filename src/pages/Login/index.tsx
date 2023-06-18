@@ -10,13 +10,13 @@ import { useForm } from '@mantine/form';
 import { useState } from 'react';
 import { notifications } from '@mantine/notifications';
 import userSlice from '../../data/userSlice/userSlice';
-import { useDispatch } from 'react-redux';
 import { AxiosError } from 'axios';
+import { useAppDispatch } from '../../data/reduxHooks';
 
 const Login = () => {
   const [err, setErr] = useState('');
   const { setUser } = userSlice.actions;
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { colorScheme } = useMantineColorScheme();
 
   //Email or username and password check
@@ -44,7 +44,8 @@ const Login = () => {
           email: response.data.data.toBeSendUserData.email,
           phone: response.data.data.toBeSendUserData.phone,
           accessToken: response.data.data.accessToken,
-          refreshToken: response.data.data.refreshToken
+          refreshToken: response.data.data.refreshToken,
+          _id: response.data.data.toBeSendUserData._id,
         })
       );
     } catch (error: any) {

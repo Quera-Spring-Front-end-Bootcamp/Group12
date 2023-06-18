@@ -28,10 +28,10 @@ function getUser(): object {
 const refreshAuthLogic = (failedRequest: any) =>
   axios
     .post('http://localhost:3000/api/auth/refreshtoken', {
-      refreshToken: getRefreshToken
+      refreshToken: getRefreshToken()
     })
     .then((tokenRefreshResponse) => {
-      const newAccessToken = tokenRefreshResponse.data.accessToken;
+      const newAccessToken = tokenRefreshResponse.data.data.accessToken;
       localStorage.setItem(
         'user',
         JSON.stringify({

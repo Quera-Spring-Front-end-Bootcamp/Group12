@@ -10,7 +10,11 @@ import MainPage from '../layout/MainLayout/MainPage';
 import List from '../components/List';
 import BoardView from '../layout/MainLayout/TaskViews/BoardView/Boardview';
 import Calender from '../components/Calender';
+import ProfileInfo from '../components/ProfileInfo';
+import ProfileMainPanel from '../components/ProfileMainPanel';
 import ThemeSetting from '../layout/Setting/ThemeSetting';
+import ProfilePage from '../layout/MainLayout/ProfilePage';
+
 
 const MainRouter = () => {
   const user = useSelector((state: any) => state.user.user);
@@ -25,12 +29,16 @@ const MainRouter = () => {
         <Route path="/new-password" element={!isLogin ? <NewPassword /> : <Navigate to="/" />} />
         <Route element={<PrivateRoutes isLogin={isLogin} />}>
           <Route path="/" element={<MainLayout />}>
-            <Route path='/profile' element={<ThemeSetting/>}/>
             <Route path="project/:projectID/*" element={<MainPage />}>
               <Route path="list-view" element={<List />} />
               <Route path="board-view" element={<BoardView />} />
               <Route path="calender-view" element={<Calender />} />
             </Route>
+          </Route>
+          <Route path='/profile' element={<ProfilePage />}>
+            <Route path="info" element={<ProfileInfo />} />
+            <Route path="panel" element={<ProfileMainPanel />} />
+            <Route path="setting" element={<ThemeSetting />} />
           </Route>
         </Route>
         <Route

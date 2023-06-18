@@ -129,7 +129,7 @@ function Sidebar() {
         </Navbar.Section>
         <Navbar.Section>
           <Flex align={'start'} direction="column" gap={'md'} p="32px">
-            <Link to="/profile">
+            <Link to="/profile/panel">
               <SidebarProfile />
             </Link>
             <Button
