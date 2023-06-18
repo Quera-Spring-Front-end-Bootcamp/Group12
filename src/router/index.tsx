@@ -9,9 +9,12 @@ import NewPassword from '../pages/NewPassword';
 import MainPage from '../layout/MainLayout/MainPage';
 import List from '../components/List';
 import BoardView from '../layout/MainLayout/TaskViews/BoardView/Boardview';
-import Calender from '../components/Calender';
+
 import ProfileInfo from '../components/ProfileInfo';
 import ProfileMainPanel from '../components/ProfileMainPanel';
+
+import Calendar from '../components/calendar';
+
 import ThemeSetting from '../layout/Setting/ThemeSetting';
 import ProfilePage from '../layout/MainLayout/ProfilePage';
 
@@ -32,7 +35,7 @@ const MainRouter = () => {
             <Route path="project/:projectID/*" element={<MainPage />}>
               <Route path="list-view" element={<List />} />
               <Route path="board-view" element={<BoardView />} />
-              <Route path="calender-view" element={<Calender />} />
+              <Route path="calendar-view" element={<Calendar />} />
             </Route>
           </Route>
           <Route path='/profile' element={<ProfilePage />}>
