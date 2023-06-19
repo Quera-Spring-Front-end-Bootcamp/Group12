@@ -55,8 +55,6 @@ function ProfileMainPanel() {
         })
       );
 
-      
-
       form.reset();
       setErr('تغییرات اعمال شد.')
     } catch (error) {
@@ -66,8 +64,6 @@ function ProfileMainPanel() {
       console.log(error);
     }
   };
-
-  // console.log(user);
 
   return (
     <>
@@ -79,7 +75,8 @@ function ProfileMainPanel() {
           </Flex>
           <Flex direction="column" m="0 12px">
             <Button
-              h={20}
+              h={40}
+              variant='outline'
               style={{
                 border: '1px solid #208D8E',
                 marginBottom: '8px',
