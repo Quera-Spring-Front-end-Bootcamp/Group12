@@ -25,19 +25,8 @@ export default function MainPage() {
   const tab = params['*'];
   const { projectID }: any = useParams();
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.boards);
-  const workspaces:any = useAppSelector((state) => state.workSpaces.data);
-  
-   let projectName = "";
- 
-  for (const workspace of workspaces) {
-    for (const project of workspace.projects) {
-      if (project._id === projectID) {
-        projectName = project?.name;
-        break;
-      }
-    }
-  }
+  const { fetchStatus } = useAppSelector((state) => state.workSpaces);
+  const projectName = params.projectName
   useEffect(() => {
     dispatch(getProjectBoards(projectID));
   }, [projectID]);
@@ -45,14 +34,6 @@ export default function MainPage() {
   useEffect(() => {
     dispatch(setProjectName(projectName));
   }, [projectName]);
-
-  if (isLoading) {
-    return (
-      <div className="loading">
-        <h1>درحال بارگزاری...</h1>
-      </div>
-    );
-  }
 
   return (
     <Tabs
@@ -67,11 +48,12 @@ export default function MainPage() {
       mah="100vh"
       mt={30}
       defaultValue={tab || 'board-view'}
-      w="100%">
+      w="100%"
+    >
       <Tabs.List mb={10} w="100%">
         <Flex align="center" w="100%">
           <Text fz="20px" fw="600" pr={16} className="cursor-default ">
-            {projectName}
+            {fetchStatus === 'success' ? projectName : 'درحال بارگذاری'}
           </Text>
           <Divider mt="10px" h="24px" orientation="vertical" />
           <Link to="list-view">
@@ -84,7 +66,8 @@ export default function MainPage() {
               fz="16px"
               fw="500"
               value="list-view"
-              className="cursor-pointer">
+              className="cursor-pointer"
+            >
               نمایش لیستی
             </Tabs.Tab>
           </Link>
@@ -100,7 +83,8 @@ export default function MainPage() {
               fz="16px"
               fw="500"
               value="board-view"
-              className="cursor-pointer">
+              className="cursor-pointer"
+            >
               نمایش ستونی
             </Tabs.Tab>
           </Link>
@@ -117,7 +101,8 @@ export default function MainPage() {
               fz="16px"
               fw="500"
               value="calendar-view"
-              className="cursor-pointer">
+              className="cursor-pointer"
+            >
               تقویم
             </Tabs.Tab>
           </Link>
@@ -135,7 +120,8 @@ export default function MainPage() {
               style={{
                 backgroundColor: 'transparent',
                 color: 'inherit'
-              }}>
+              }}
+            >
               اشتراک‌گذاری
             </Button>
           </Group>
@@ -148,7 +134,8 @@ export default function MainPage() {
           <SvgProvier>
             <PlusSquare />
           </SvgProvier>
-        }>
+        }
+      >
         تسک جدید
       </Button>
     </Tabs>
