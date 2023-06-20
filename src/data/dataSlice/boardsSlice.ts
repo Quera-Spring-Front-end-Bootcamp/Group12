@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import myAxios from '../../helpers/myAxios';
 
+
 export type tag = {
   _id: string;
   tagName: string;
@@ -60,6 +61,15 @@ const boardsSlice = createSlice({
     },
     updateBoards: (state, action) => {
       state.projectBoards = action.payload;
+    },
+    addTaskToBoard:(state,action) =>{
+      const boardId=action.payload.board
+       const boardIndex = state.projectBoards.findIndex((board:any)=>board._id===boardId)
+       if (boardIndex !== -1) {
+        const board = { ...state.projectBoards[boardIndex] };
+        board.tasks = [...board.tasks, action.payload];
+        state.projectBoards[boardIndex] = board;
+      }
     }
   },
   extraReducers: (builder) => {
@@ -76,5 +86,5 @@ const boardsSlice = createSlice({
   }
 });
 
-export const { setProjectName } = boardsSlice.actions;
+export const { setProjectName,addTaskToBoard,updateBoards } = boardsSlice.actions;
 export default boardsSlice;

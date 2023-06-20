@@ -4,9 +4,11 @@ import { useForm } from '@mantine/form';
 import TextInput from '../TextInput';
 import Button from '../Button';
 import { formatDate } from '@fullcalendar/core/index.js';
-import { useAppSelector } from '../../data/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../data/reduxHooks';
 import myAxios from '../../helpers/myAxios';
 import { notifications } from '@mantine/notifications';
+
+import { addTaskToBoard } from '../../data/dataSlice/boardsSlice';
 
 type props = {
   taskDate: string;
@@ -15,6 +17,7 @@ type props = {
 };
 const CreateTaskCalendarModal = ({ opened, onClose, taskDate }: props) => {
   const boards: any = useAppSelector((state) => state.boards.projectBoards);
+  const dispatch = useAppDispatch();
   const boardValues = boards.map((board: any) => {
     return { value: board._id, label: board.name };
   });
@@ -41,17 +44,19 @@ const CreateTaskCalendarModal = ({ opened, onClose, taskDate }: props) => {
   return (
     <Modal opened={opened} onClose={onClose} title="افزودن تسک" centered dir="rtl">
       <form
-        onSubmit={async(e) => {
+        onSubmit={async (e) => {
           e.preventDefault();
           if (form.validate().hasErrors === false) {
-            const data = { ...form.values, deadline: taskDate }
+            const data = { ...form.values, deadline: taskDate };
             try {
-                await myAxios.post('/task/',data)
-                notifications.show({ message: 'تسک ایجاد شد', color: 'green' });
-                form.reset()
-                onClose()
-            } catch (error) {
-                console.log(error)
+              const res = await myAxios.post('/task/', data);
+              dispatch(addTaskToBoard(res.data.data));
+              notifications.show({ message: 'تسک ایجاد شد', color: 'green' });
+              form.reset();
+              onClose();
+            } catch (error: any) {
+              console.log(error);
+              notifications.show({ message: error?.message, color: 'red' });
             }
           }
         }}>

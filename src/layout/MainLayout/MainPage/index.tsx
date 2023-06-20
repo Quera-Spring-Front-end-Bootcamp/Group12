@@ -48,8 +48,7 @@ export default function MainPage() {
       mah="100vh"
       mt={30}
       defaultValue={tab || 'board-view'}
-      w="100%"
-    >
+      w="100%">
       <Tabs.List mb={10} w="100%">
         <Flex align="center" w="100%">
           <Text fz="20px" fw="600" pr={16} className="cursor-default ">
@@ -66,8 +65,7 @@ export default function MainPage() {
               fz="16px"
               fw="500"
               value="list-view"
-              className="cursor-pointer"
-            >
+              className="cursor-pointer">
               نمایش لیستی
             </Tabs.Tab>
           </Link>
@@ -83,8 +81,7 @@ export default function MainPage() {
               fz="16px"
               fw="500"
               value="board-view"
-              className="cursor-pointer"
-            >
+              className="cursor-pointer">
               نمایش ستونی
             </Tabs.Tab>
           </Link>
@@ -100,9 +97,8 @@ export default function MainPage() {
               }
               fz="16px"
               fw="500"
-              value="calendar-view"
-              className="cursor-pointer"
-            >
+              value="calender-view"
+              className="cursor-pointer">
               تقویم
             </Tabs.Tab>
           </Link>
@@ -120,8 +116,7 @@ export default function MainPage() {
               style={{
                 backgroundColor: 'transparent',
                 color: 'inherit'
-              }}
-            >
+              }}>
               اشتراک‌گذاری
             </Button>
           </Group>
@@ -134,8 +129,7 @@ export default function MainPage() {
           <SvgProvier>
             <PlusSquare />
           </SvgProvier>
-        }
-      >
+        }>
         تسک جدید
       </Button>
     </Tabs>
