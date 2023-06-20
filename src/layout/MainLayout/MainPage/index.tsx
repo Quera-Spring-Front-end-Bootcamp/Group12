@@ -34,7 +34,7 @@ export default function MainPage() {
   }, [projectID]);
 
   useEffect(() => {
-    dispatch(setProjectName(projectName));
+    dispatch(setProjectName(projectName?.name));
   }, [projectName]);
 
   return (

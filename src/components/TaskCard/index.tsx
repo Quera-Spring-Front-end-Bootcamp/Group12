@@ -1,9 +1,11 @@
 import { Flex, Text, Title, Group, Badge, Divider } from '@mantine/core';
-import { CheckmarkSqaure, Done, Dots, Flag, JustifyRight } from '../../assets/icons';
+import { Done, Dots, JustifyRight } from '../../assets/icons';
 import TaskListItem from '../TaskListItem';
 import SvgProvier from '../../assets/icons/SvgProvider';
-import type { task } from '../../data/dataSlice/boardsSlice';
+import type { tag, task } from '../../data/dataSlice/boardsSlice';
 import Avatar from '../Avatar';
+import { useEffect, useState } from 'react';
+import myAxios from '../../helpers/myAxios';
 
 type props = {
   task: task;
@@ -11,7 +13,18 @@ type props = {
   dragTask: boolean;
 };
 
+type tags = tag[];
+const initialTags: tags = [];
 const TaskCard = ({ task, projectName, dragTask }: props) => {
+  const [tags, setTags] = useState(initialTags);
+
+  useEffect(() => {
+    myAxios.get(`/tags/task/${task._id}`).then((response) => {
+      console.log(response.data.data.tags);
+      setTags(response.data.data.tags);
+    });
+  }, []);
+
   return (
     <TaskListItem
       my={'xs'}
@@ -43,27 +56,21 @@ const TaskCard = ({ task, projectName, dragTask }: props) => {
             dragTask && 'opacity-100'
           }`}
         ></Avatar>
-
-        <Group>
-          <Group spacing="4px">
-            <SvgProvier color="#FB0606" style={{ height: '16px' }}>
-              <Flag />
-            </SvgProvier>
-            <Text size="12px">۵ مهر - فردا</Text>
+        {/* <Group spacing="4px">
+          <SvgProvier color="#FB0606" style={{ height: '16px' }}>
+            <Flag />
+          </SvgProvier>
+          <Text size="12px">۵ مهر - فردا</Text>
+        </Group> */}
+        {tags.length > 0 && (
+          <Group spacing="xs">
+            {tags.map((tag) => (
+              <Badge color={tag.color} key={tag._id}>
+                {tag.tagName}
+              </Badge>
+            ))}
           </Group>
-          <Group spacing="4px">
-            <SvgProvier style={{ height: '16px' }} color="#BDC0C6">
-              <CheckmarkSqaure color="#BDC0C6" />
-            </SvgProvier>
-            <Text color="#BDC0C6" size="12px">
-              ۲ / ۱۲
-            </Text>
-          </Group>
-        </Group>
-        <Group spacing="xs">
-          <Badge>درس</Badge>
-          <Badge color="grape">پروژه</Badge>
-        </Group>
+        )}
       </Flex>
       <div
         className={`max-h-0  group-hover/:block group-hover/:max-h-20 transition-all ease-in-out duration-300 ${
