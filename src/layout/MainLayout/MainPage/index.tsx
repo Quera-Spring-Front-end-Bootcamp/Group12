@@ -26,9 +26,7 @@ export default function MainPage() {
   const { projectID }: any = useParams();
   const dispatch = useAppDispatch();
   const { fetchStatus } = useAppSelector((state) => state.workSpaces);
-  const projects = useAppSelector((state) => state.workSpaces.data);
-  const projectn = projects?.map((projects: any) => projects.projects);
-  const projectName = projectn[0]?.find((project: any) => project._id === projectID);
+  const projectName = params.projectName
   useEffect(() => {
     dispatch(getProjectBoards(projectID));
   }, [projectID]);
@@ -55,7 +53,7 @@ export default function MainPage() {
       <Tabs.List mb={10} w="100%">
         <Flex align="center" w="100%">
           <Text fz="20px" fw="600" pr={16} className="cursor-default ">
-            {fetchStatus === 'success' ? projectName.name : 'درحال بارگذاری'}
+            {fetchStatus === 'success' ? projectName : 'درحال بارگذاری'}
           </Text>
           <Divider mt="10px" h="24px" orientation="vertical" />
           <Link to="list-view">
@@ -102,7 +100,7 @@ export default function MainPage() {
               }
               fz="16px"
               fw="500"
-              value="calender-view"
+              value="calendar-view"
               className="cursor-pointer"
             >
               تقویم

@@ -116,7 +116,7 @@ function Sidebar() {
                                     className="group"
                                     key={index}
                                     label={
-                                      <Link to={`project/${project._id}/board-view`}>
+                                      <Link to={`${workSpace.name}/${project.name}/${project._id}/board-view`}>
                                         <div className="flex justify-between">
                                           <Text>{project.name}</Text>
 

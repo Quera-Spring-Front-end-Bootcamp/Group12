@@ -13,7 +13,6 @@ function getRefreshToken(): string {
   if (localStorage.getItem('user')) {
     const localUser: string = localStorage.getItem('user') as string;
     const user = JSON.parse(localUser);
-    console.log(user);
     return user.refreshToken;
   }
   return '';
