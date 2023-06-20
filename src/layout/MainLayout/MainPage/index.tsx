@@ -11,9 +11,9 @@ import { Calender, CheckList, Column, PlusSquare, Share } from '../../../assets/
 import Button from '../../../components/Button';
 
 import SvgProvier from '../../../assets/icons/SvgProvider';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
 import DarkModeToggle from '../../../components/DarkModeToggle';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../data/reduxHooks';
 import { getProjectBoards, setProjectName } from '../../../data/dataSlice/boardsSlice';
 
@@ -23,6 +23,7 @@ export default function MainPage() {
   const primaryShade = colorScheme === 'light' ? 6 : 7;
   const params = useParams();
   const tab = params['*'];
+  const [activeTab, setActiveTab] = useState<any | null>(tab);
   const { projectID }: any = useParams();
   const dispatch = useAppDispatch();
   const { fetchStatus } = useAppSelector((state) => state.workSpaces);
@@ -33,8 +34,9 @@ export default function MainPage() {
 
   useEffect(() => {
     dispatch(setProjectName(projectName));
+    setActiveTab(tab)
   }, [projectName]);
-
+console.log(tab)
   return (
     <Tabs
       styles={(theme) => ({
@@ -47,7 +49,9 @@ export default function MainPage() {
       })}
       mah="100vh"
       mt={30}
-      defaultValue={tab || 'board-view'}
+      value={`${activeTab}`}
+      onTabChange={setActiveTab}
+      //defaultValue={tab}
       w="100%">
       <Tabs.List mb={10} w="100%">
         <Flex align="center" w="100%">
@@ -71,7 +75,11 @@ export default function MainPage() {
           </Link>
           <Divider mt="10px" h="24px" orientation="vertical" />
 
-          <Link to="board-view">
+          <NavLink
+            to="board-view"
+            className={({ isActive, isPending }) =>
+              isPending ? 'pending' : isActive ? 'text-red-300' : ''
+            }>
             <Tabs.Tab
               icon={
                 <SvgProvier style={{ height: '24px' }}>
@@ -84,11 +92,15 @@ export default function MainPage() {
               className="cursor-pointer">
               نمایش ستونی
             </Tabs.Tab>
-          </Link>
+          </NavLink>
 
           <Divider mt="10px" h="24px" orientation="vertical" />
 
-          <Link to="calendar-view">
+          <NavLink
+            to="calendar-view"
+            className={({ isActive, isPending }) =>
+              isPending ? 'pending' : isActive ? 'text-red-300' : ''
+            }>
             <Tabs.Tab
               icon={
                 <SvgProvier style={{ height: '24px' }}>
@@ -97,11 +109,11 @@ export default function MainPage() {
               }
               fz="16px"
               fw="500"
-              value="calender-view"
+              value="calendar-view"
               className="cursor-pointer">
               تقویم
             </Tabs.Tab>
-          </Link>
+          </NavLink>
           <Divider mt="10px" h="24px" orientation="vertical" />
           <Group ml="auto">
             <DarkModeToggle />

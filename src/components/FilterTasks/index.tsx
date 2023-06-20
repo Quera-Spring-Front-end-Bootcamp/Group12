@@ -34,39 +34,39 @@ const FilterTask = ({ dragTask }: props) => (
       دسته‌بندی‌شده با: وضعیت
     </Badge>
     {
-      <MyDroppable droppableId="delete">
-        {(provided, snapshot) => {
-          return (
-            <Flex
-              w={'100%'}
-              pb={dragTask ? 6 : 0}
-              ref={provided.innerRef}
-              h={dragTask ? 42 : 0}
-              style={{
-                overflow: 'hidden'
-              }}
-              className="transition-all duration-200 z-40"
-              {...provided.droppableProps}
-            >
-              <div
-                className={`rounded-md transition-all border duration-200 ${
-                  snapshot.isDraggingOver
-                    ? 'bg-red-500 text-white border-white'
-                    : 'border-red-500 text-red-500'
-                } w-full  z-50`}
-              >
-                <Group position="center" w={'100%'} align="center" h={'100%'}>
-                  <SvgProvier>
-                    <Delete />
-                  </SvgProvier>
-                  <Text color="">حذف تسک</Text>
-                  {/* {provided.placeholder} */}
-                </Group>
-              </div>
-            </Flex>
-          );
-        }}
-      </MyDroppable>
+      // <MyDroppable droppableId="delete">
+      //   {(provided, snapshot) => {
+      //     return (
+      //       <Flex
+      //         w={'100%'}
+      //         pb={dragTask ? 6 : 0}
+      //         ref={provided.innerRef}
+      //         h={dragTask ? 42 : 0}
+      //         style={{
+      //           overflow: 'hidden'
+      //         }}
+      //         className="transition-all duration-200 z-40"
+      //         {...provided.droppableProps}
+      //       >
+      //         <div
+      //           className={`rounded-md transition-all border duration-200 ${
+      //             snapshot.isDraggingOver
+      //               ? 'bg-red-500 text-white border-white'
+      //               : 'border-red-500 text-red-500'
+      //           } w-full  z-50`}
+      //         >
+      //           <Group position="center" w={'100%'} align="center" h={'100%'}>
+      //             <SvgProvier>
+      //               <Delete />
+      //             </SvgProvier>
+      //             <Text color="">حذف تسک</Text>
+      //             {/* {provided.placeholder} */}
+      //           </Group>
+      //         </div>
+      //       </Flex>
+      //     );
+      //   }}
+      // </MyDroppable>
     }
   </div>
 );

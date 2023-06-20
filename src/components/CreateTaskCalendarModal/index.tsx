@@ -3,7 +3,7 @@ import { useForm } from '@mantine/form';
 
 import TextInput from '../TextInput';
 import Button from '../Button';
-import { formatDate } from '@fullcalendar/core/index.js';
+import { formatDate } from '@fullcalendar/core';
 import { useAppDispatch, useAppSelector } from '../../data/reduxHooks';
 import myAxios from '../../helpers/myAxios';
 import { notifications } from '@mantine/notifications';
