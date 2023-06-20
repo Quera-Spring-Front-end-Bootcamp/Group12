@@ -26,7 +26,7 @@ export default function MainPage() {
   const { projectID }: any = useParams();
   const dispatch = useAppDispatch();
   const { fetchStatus } = useAppSelector((state) => state.workSpaces);
-  const projectName = params.projectName
+  const projectName = params.projectName;
   useEffect(() => {
     dispatch(getProjectBoards(projectID));
   }, [projectID]);
