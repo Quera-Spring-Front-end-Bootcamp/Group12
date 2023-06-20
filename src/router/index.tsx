@@ -32,7 +32,7 @@ const MainRouter = () => {
         <Route path="/new-password" element={!isLogin ? <NewPassword /> : <Navigate to="/" />} />
         <Route element={<PrivateRoutes isLogin={isLogin} />}>
           <Route path="/" element={<MainLayout />}>
-            <Route path="project/:projectID/*" element={<MainPage />}>
+            <Route path=":workspaceName/:projectName/:projectID/*" element={<MainPage />}>
               <Route path="list-view" element={<List />} />
               <Route path="board-view" element={<BoardView />} />
               <Route path="calendar-view" element={<Calendar />} />
