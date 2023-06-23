@@ -44,6 +44,7 @@ function ProfileInfo() {
 
       dispatch(
         setUser({
+          ...user,
           username: response.data.data.username,
           email: response.data.data.email,
         })
