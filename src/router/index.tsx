@@ -18,7 +18,6 @@ import Calendar from '../components/calendar';
 import ThemeSetting from '../layout/Setting/ThemeSetting';
 import ProfilePage from '../layout/MainLayout/ProfilePage';
 
-
 const MainRouter = () => {
   const user = useSelector((state: any) => state.user.user);
   let isLogin: boolean = user.accessToken ? true : false;
@@ -36,9 +35,17 @@ const MainRouter = () => {
               <Route path="list-view" element={<List />} />
               <Route path="board-view" element={<BoardView />} />
               <Route path="calendar-view" element={<Calendar />} />
+              {/* <Route
+                path="*"
+                element={
+                  <>
+                    <p>404 Not found</p>
+                  </>
+                }
+              /> */}
             </Route>
           </Route>
-          <Route path='/profile' element={<ProfilePage />}>
+          <Route path="/profile" element={<ProfilePage />}>
             <Route path="info" element={<ProfileInfo />} />
             <Route path="panel" element={<ProfileMainPanel />} />
             <Route path="setting" element={<ThemeSetting />} />

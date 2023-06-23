@@ -10,7 +10,6 @@ function ProfilePageSidebar() {
   function getSelectedPartFromURL(): string {
     const parts = location.pathname.split('/');
     const lastPart = parts[parts.length - 1];
-    console.log(lastPart);
     
     return lastPart || 'panel';
   }

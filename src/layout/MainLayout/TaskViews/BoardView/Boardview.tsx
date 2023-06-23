@@ -23,7 +23,6 @@ const BoardView = () => {
     toggleDragTask();
     if (!result.destination) return;
     if (result.destination.droppableId === 'delete') {
-      console.log('delete');
       const sourceBoard = storeBoards.find((board) => board._id === result.source.droppableId);
       const updatedSourceBoard = {
         ...sourceBoard,
@@ -122,7 +121,6 @@ const BoardView = () => {
           return { ...task, position: task.position + 1 };
         return task;
       });
-      console.log(result.destination.index, task, updatedBoardTasks);
       updatedBoardTasks?.splice(result.destination.index, 0, task as task);
       const updatedSourceBoard = {
         ...sourceBoard,
