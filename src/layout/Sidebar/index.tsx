@@ -7,7 +7,8 @@ import {
   Text,
   ScrollArea,
   Badge,
-  Skeleton
+  Skeleton,
+  useMantineTheme
 } from '@mantine/core';
 import Logo from '../../components/Logo';
 import SearchInput from '../../components/Search';
@@ -18,15 +19,16 @@ import userSlice from '../../data/userSlice/userSlice';
 import { useAppDispatch, useAppSelector } from '../../data/reduxHooks';
 import { useEffect } from 'react';
 import { fetchWorkspaces } from '../../data/dataSlice/workSpacesSlice';
-import { Link } from 'react-router-dom';
+import { NavLink as Link, useNavigate } from 'react-router-dom';
 
 function Sidebar() {
+  const {primaryColor} = useMantineTheme()
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchWorkspaces());
   }, []);
   const { clearUser } = userSlice.actions;
-
+  const navigate = useNavigate();
   return (
     <>
       <Navbar
@@ -40,8 +42,7 @@ function Sidebar() {
 
           // When other breakpoints do not match base width is used, defaults to 100%
           base: 300
-        }}
-      >
+        }}>
         <Navbar.Section>
           <Flex justify="center" align="center" pt="40px">
             <Logo />
@@ -53,8 +54,7 @@ function Sidebar() {
             // variant="default"
             chevronPosition="right"
             defaultValue="workspaces"
-            style={{}}
-          >
+            style={{}}>
             <Flex justify="center" direction="column" align="center" w="100%">
               <Accordion.Item value="workspaces" w="100%">
                 <Accordion.Control>ورک‌اسپیس‌ها</Accordion.Control>
@@ -66,8 +66,7 @@ function Sidebar() {
                     fz="12px"
                     mt="md"
                     className="bg-stone-300 text-black hover:bg-stone-500 hover:text-white  !important"
-                    leftIcon={<PlusSquare width="1.3rem" />}
-                  >
+                    leftIcon={<PlusSquare width="1.3rem" />}>
                     ساختن اسپیس جدید
                   </Button>
                   <Box mt={16} w="100%">
@@ -107,16 +106,23 @@ function Sidebar() {
                                   className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
                                 />
                               </div>
-                            }
-                          >
+                            }>
                             {workSpace.projects.length > 0 ? (
                               workSpace.projects.map((project: any, index: number) => {
                                 return (
                                   <NavLink
+                                  onClick={()=>{navigate(`${workSpace.name}/${project.name}/${project._id}/board-view`)}}
                                     className="group"
                                     key={index}
                                     label={
-                                      <Link to={`${workSpace.name}/${project.name}/${project._id}/board-view`}>
+                                      <Link
+                                      style={({ isActive, isPending }) => {
+                                        return {
+                                          fontWeight: isActive ? "bold" : "",
+                                          color: isActive ? primaryColor : "",
+                                        };
+                                      }}
+                                        to={`${workSpace.name}/${project.name}/${project._id}`}>
                                         <div className="flex justify-between">
                                           <Text>{project.name}</Text>
 
@@ -168,8 +174,7 @@ function Sidebar() {
               }}
               color="dark.3"
               variant="subtle"
-              leftIcon={<Exit width="16px" />}
-            >
+              leftIcon={<Exit width="16px" />}>
               خروج
             </Button>
           </Flex>

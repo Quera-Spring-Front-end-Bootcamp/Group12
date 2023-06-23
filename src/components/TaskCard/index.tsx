@@ -20,7 +20,7 @@ const TaskCard = ({ task, projectName, dragTask }: props) => {
 
   useEffect(() => {
     myAxios.get(`/tags/task/${task._id}`).then((response) => {
-      console.log(response.data.data.tags);
+      
       setTags(response.data.data.tags);
     });
   }, []);
