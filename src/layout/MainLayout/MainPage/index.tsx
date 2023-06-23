@@ -15,6 +15,7 @@ export default function MainPage() {
     dispatch(getProjectBoards(projectID));
   }, [projectID]);
 
+
   return (
     <>
       <ProjectHeader />
