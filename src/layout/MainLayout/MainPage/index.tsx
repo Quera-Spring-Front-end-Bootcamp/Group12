@@ -36,7 +36,7 @@ export default function MainPage() {
     dispatch(setProjectName(projectName));
     setActiveTab(tab)
   }, [projectName]);
-console.log(tab)
+  
   return (
     <Tabs
       styles={(theme) => ({
