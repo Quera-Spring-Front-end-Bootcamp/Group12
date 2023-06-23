@@ -11,37 +11,35 @@ interface AvatarProps extends MantineAvatarProps {
   size?: string;
 }
 const Avatar = (props: AvatarProps) => {
-  // const user = useAppSelector((state) => state.user.user);
-  // const [info, setInfo] = useState(user);
-  // useEffect(() => {
-  //   setInfo(user);
-  // }, [user]);
-  
-  const [user, setUser] = useState(useAppSelector((state) => state.user.user));
+  const user = useAppSelector((state) => state.user.user);
+  const [userInfo, setInfo] = useState(user);
   useEffect(() => {
-    const request = async () => {
-      const user = (await myAxios.get(`/users/${props.usernameorid}`)).data.data;
-      setUser(user);
-      const profilePlaceholder = user.firstname[0] + user.lastname[0];
-      console.log(profilePlaceholder);
-      return user;
-    };
-    if (props.usernameorid) {
-      request();
-    }
-  }, []);
-
-  let profilePlaceholder =
-    props.firstname && props.lastname
-      ? props.firstname[0] + props.lastname[0]
-      : user.firstname[0] + user.lastname[0];
-
+    setInfo(user);
+  }, [user]);
+  
+  // const [user, setUser] = useState(useAppSelector((state) => state.user.user));
+  // useEffect(() => {
+  //   const request = async () => {
+  //     const user = (await myAxios.get(`/users/${props.usernameorid}`)).data.data;
+  //     setUser(user);
+  //     return user;
+  //   };
+  //   if (props.usernameorid) {
+  //     request();
+  //   }
+  // }, []);
+  // let profilePlaceholder =
+  //   (props.firstname?.length > 0)
+  //     ? props.firstname[0]
+  //     : userInfo.firstname[0] + userInfo.lastname[0];
+  const  profilePlaceholder = props.firstname ? props.firstname[0] : userInfo.firstname[0] + userInfo.lastname[0];
   const avatarSize = props.size || "32px";
 
   return (
     <MantineAvatar
       src={user.profile_url}
       size={avatarSize}
+      alt={props.firstname || user.firstname}
       color="primary"
       radius="xl"
       variant="filled"
