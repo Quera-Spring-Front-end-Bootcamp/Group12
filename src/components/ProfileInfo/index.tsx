@@ -41,9 +41,12 @@ function ProfileInfo() {
     try {
       setErr('');
       const response = await myAxios.put(`/users/${user._id}`, form.values);
+      console.log(response);
+      
 
       dispatch(
         setUser({
+          ...user,
           username: response.data.data.username,
           email: response.data.data.email,
         })
