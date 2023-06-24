@@ -55,7 +55,6 @@ const CreateTaskCalendarModal = ({ opened, onClose, taskDate }: props) => {
               form.reset();
               onClose();
             } catch (error: any) {
-              console.log(error);
               notifications.show({ message: error?.message, color: 'red' });
             }
           }

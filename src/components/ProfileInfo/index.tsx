@@ -19,10 +19,6 @@ function ProfileInfo() {
   const errorHandle = (error: AxiosError<any, any>) => {
     if (error?.response?.data?.message === "Server error") {
       setErr("ایمیل یا نام کاربری تکراری می باشد");
-    } else if (
-      error instanceof AxiosError &&
-      error?.response?.data?.message === 'Invalid email/username or password') {
-      setErr("رمز عبور نادرست است");
     } else {
       notifications.show({ message: error.message, color: 'red' });
     }
@@ -31,13 +27,11 @@ function ProfileInfo() {
   const form = useForm({
     initialValues: {
       username: '',
-      password: '',
       email: ''
     },
 
     validate: {
       username: (value) => (value.length < 3 ? 'حداقل نام کاربری باید سه حرف باشد' : null),
-      password: (value) => (value.length < 8 ? 'حداقل پسورد باید 8 حرف باشد' : null),
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'لطفا ایمیل را درست وارد کنید')
     }
   })
@@ -46,11 +40,6 @@ function ProfileInfo() {
   const handleClick = async () => {
     try {
       setErr('');
-      await myAxios.post(`/auth/login`, {
-        emailOrUsername: user.username,
-        password: form.values.password
-      });
-
       const response = await myAxios.put(`/users/${user._id}`, form.values);
 
       dispatch(
@@ -65,7 +54,6 @@ function ProfileInfo() {
       if (axios.isAxiosError(error)) {
         errorHandle(error);
       }
-      console.log(error);
     }
   };
 
@@ -88,18 +76,6 @@ function ProfileInfo() {
               }
             }}
             {...form.getInputProps('email')}
-          />
-          <TextInput
-            label="رمز عبور"
-            m="12px 0"
-            labelProps={{
-              style: {
-                fontWeight: '500',
-                marginBottom: '8px',
-                fontSize: '12px'
-              }
-            }}
-            {...form.getInputProps('password')}
           />
 
           <TextInput

@@ -5,7 +5,7 @@ import ListRow from "../ListRows";
 
 interface ListAccordionprops {
   name: string,
-  tasks: task[];
+  tasks: task[]
 }
 
 export default function ListAccordion({ name, tasks }: ListAccordionprops) {
