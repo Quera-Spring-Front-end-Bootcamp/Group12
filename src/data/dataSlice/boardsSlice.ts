@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import myAxios from '../../helpers/myAxios';
 
-
 export type tag = {
   _id: string;
   tagName: string;
@@ -32,12 +31,14 @@ type initialState = {
   projectBoards: board[];
   projectName: string;
   isLoading: string;
+  projectMembers: Object[];
 };
 
 const initialState: initialState = {
   projectBoards: [],
   projectName: '',
-  isLoading: ''
+  isLoading: '',
+  projectMembers: []
 };
 
 export const getProjectBoards = createAsyncThunk<any, any>(
@@ -59,13 +60,16 @@ const boardsSlice = createSlice({
     setProjectName: (state, action) => {
       state.projectName = action.payload;
     },
+    setProjectMembers: (state, action) => {
+      state.projectMembers = action.payload;
+    },
     updateBoards: (state, action) => {
       state.projectBoards = action.payload;
     },
-    addTaskToBoard:(state,action) =>{
-      const boardId=action.payload.board
-       const boardIndex = state.projectBoards.findIndex((board:any)=>board._id===boardId)
-       if (boardIndex !== -1) {
+    addTaskToBoard: (state, action) => {
+      const boardId = action.payload.board;
+      const boardIndex = state.projectBoards.findIndex((board: any) => board._id === boardId);
+      if (boardIndex !== -1) {
         const board = { ...state.projectBoards[boardIndex] };
         board.tasks = [...board.tasks, action.payload];
         state.projectBoards[boardIndex] = board;
@@ -86,5 +90,5 @@ const boardsSlice = createSlice({
   }
 });
 
-export const { setProjectName,addTaskToBoard,updateBoards } = boardsSlice.actions;
+export const { setProjectName, addTaskToBoard, updateBoards,setProjectMembers } = boardsSlice.actions;
 export default boardsSlice;

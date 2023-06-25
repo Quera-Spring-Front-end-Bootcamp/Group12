@@ -2,10 +2,7 @@ import Fullcalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import SvgProvier from '../../assets/icons/SvgProvider';
-import { PlusSquare } from '../../assets/icons';
 import { useMantineTheme } from '@mantine/core';
-import Button from '../Button';
 import { useAppSelector } from '../../data/reduxHooks';
 import CreateTaskCalendarModal from '../CreateTaskCalendarModal';
 import { useDisclosure } from '@mantine/hooks';
@@ -57,7 +54,7 @@ const Calendar = () => {
         events={events}
         eventColor={color[8]}
         eventTextColor={color[0]}
-        height="600px"
+        height="620px"
       />
     </>
   );
