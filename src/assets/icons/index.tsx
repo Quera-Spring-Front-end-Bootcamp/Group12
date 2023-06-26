@@ -1,5 +1,6 @@
 import { ReactComponent as Arrow } from './svg/Arrow-borderless.svg';
 import { ReactComponent as ArrowCircleBorder } from './svg/Arrow.svg';
+import { ReactComponent as Edit } from './svg/Edit.svg';
 import { ReactComponent as Calender } from './svg/Calendar,Schedule.svg';
 import { ReactComponent as CheckmarkSqaure } from './svg/checkmark-sqaure.svg';
 import { ReactComponent as ColorPalette } from './svg/Color, Palette.svg';
@@ -27,6 +28,7 @@ export {
   Arrow,
   ArrowCircleBorder,
   Calender,
+  Edit,
   CheckmarkSqaure,
   ColorPalette,
   Column,
