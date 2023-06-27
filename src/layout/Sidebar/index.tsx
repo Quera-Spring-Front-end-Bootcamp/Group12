@@ -44,7 +44,7 @@ function Sidebar() {
   const { primaryColor } = useMantineTheme();
   const dispatch = useAppDispatch();
   const worksaces = useAppSelector((state: any) => state.workSpaces);
-  const renderWorkspaces = worksaces.search ? worksaces.search : worksaces.data
+  const renderWorkspaces = worksaces.search.length > 0 ? worksaces.search : worksaces.data;
   //fetching worksaces and projects and store them to redux wokspace slice
   useEffect(() => {
     dispatch(fetchWorkspaces());
