@@ -8,7 +8,8 @@ import {
   ScrollArea,
   Badge,
   Skeleton,
-  useMantineTheme
+  useMantineTheme,
+  useMantineColorScheme
 } from '@mantine/core';
 import Logo from '../../components/Logo';
 import SearchInput from '../../components/Search';
@@ -41,10 +42,12 @@ function Sidebar() {
   const [openedAddProject, { open: openProject, close: closeAddProject }] = useDisclosure(false);
   // hook for open edit workspace modal (contains delete and edit project)
   const [openedEditProject, { open: editProject, close: closeProject }] = useDisclosure(false);
-  const { primaryColor } = useMantineTheme();
+  const { colors, primaryColor } = useMantineTheme();
+  const { colorScheme } = useMantineColorScheme();
+  const primaryShade = colorScheme === 'light' ? 6 : 7;
   const dispatch = useAppDispatch();
   const worksaces = useAppSelector((state: any) => state.workSpaces);
-  const renderWorkspaces = worksaces.search.length > 0 ? worksaces.search : worksaces.data;
+  const renderWorkspaces = search ? worksaces.search : worksaces.data;
   //fetching worksaces and projects and store them to redux wokspace slice
   useEffect(() => {
     dispatch(fetchWorkspaces());
@@ -96,7 +99,8 @@ function Sidebar() {
 
           // When other breakpoints do not match base width is used, defaults to 100%
           base: 300
-        }}>
+        }}
+      >
         <Navbar.Section>
           <Flex justify="center" align="center" pt="40px">
             <Logo />
@@ -108,7 +112,8 @@ function Sidebar() {
             // variant="default"
             chevronPosition="right"
             defaultValue="workspaces"
-            style={{}}>
+            style={{}}
+          >
             <Flex justify="center" direction="column" align="center" w="100%">
               <Accordion.Item value="workspaces" w="100%">
                 <Accordion.Control>ورک‌اسپیس‌ها</Accordion.Control>
@@ -127,10 +132,11 @@ function Sidebar() {
                     onClick={() => {
                       open();
                     }}
-                    leftIcon={<PlusSquare width="1.3rem" />}>
+                    leftIcon={<PlusSquare width="1.3rem" />}
+                  >
                     ساختن اسپیس جدید
                   </Button>
-                  
+
                   <Box mt={16} w="100%">
                     {useAppSelector((state) => {
                       if (state.workSpaces.fetchStatus === 'pending') {
@@ -148,8 +154,8 @@ function Sidebar() {
                           );
                         }
                       }
-                      
-                      return renderWorkspaces.map((workSpace: any, index:any) => {
+
+                      return renderWorkspaces.map((workSpace: any, index: any) => {
                         return (
                           <NavLink
                             mt={8}
@@ -170,7 +176,8 @@ function Sidebar() {
                                   className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200 hover:w-5"
                                 />
                               </div>
-                            }>
+                            }
+                          >
                             {workSpace.projects.length > 0 ? (
                               workSpace.projects.map((project: any, index: number) => {
                                 return (
@@ -184,16 +191,20 @@ function Sidebar() {
                                           navigate(
                                             `${workSpace.name}/${project.name}/${project._id}/board-view`
                                           );
-                                        }}>
+                                        }}
+                                      >
                                         <Text>
                                           <Link
                                             style={({ isActive }) => {
                                               return {
                                                 fontWeight: isActive ? 'bold' : '',
-                                                color: isActive ? primaryColor : ''
+                                                color: isActive
+                                                  ? colors[primaryColor][primaryShade]
+                                                  : ''
                                               };
                                             }}
-                                            to={`${workSpace.name}/${project.name}/${project._id}`}>
+                                            to={`${workSpace.name}/${project.name}/${project._id}`}
+                                          >
                                             {project.name}
                                           </Link>
                                         </Text>
@@ -222,7 +233,8 @@ function Sidebar() {
                                       onClick={(e) => {
                                         e.stopPropagation();
                                         openProject();
-                                      }}>
+                                      }}
+                                    >
                                       <Plus width={'24px'} />
                                       <Text fz={'12px'} fw={'600'} weight={'normal'}>
                                         افزودن پروژه جدید
@@ -253,7 +265,8 @@ function Sidebar() {
               }}
               color="dark.3"
               variant="subtle"
-              leftIcon={<Exit width="16px" />}>
+              leftIcon={<Exit width="16px" />}
+            >
               خروج
             </Button>
           </Flex>

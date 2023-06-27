@@ -24,7 +24,6 @@ const TaskListHeader = ({ children, tasksCount }: TaskListHeaderProps) => {
         padding: '8px 12px'
       }}
       shadow="0px 2px 8px rgba(0, 0, 0, 0.18)"
-      radius="4px"
       className="group"
     >
       <Flex justify="space-between">
