@@ -10,7 +10,6 @@ import { useState } from 'react';
 import TaskListItem from '../../../../components/TaskListItem';
 import SvgProvier from '../../../../assets/icons/SvgProvider';
 import { Plus } from '../../../../assets/icons';
-import { useParams } from 'react-router';
 import AddBoardModal from '../../../../components/AddBoardModal';
 import { useDisclosure } from '@mantine/hooks';
 
@@ -19,7 +18,6 @@ const BoardView = () => {
   const storeBoards = useAppSelector((state) => state.boards.projectBoards);
   const projectName = useAppSelector((state) => state.boards.projectName);
   const [boardOpened, { open: openboard, close: closeboard }] = useDisclosure(false);
-  const { projectID } = useParams();
   const [dragTask, setDragTask] = useState(false);
   const toggleDragTask = () => {
     setDragTask(!dragTask);
@@ -168,7 +166,7 @@ const BoardView = () => {
 
   return (
     <>
-      <AddBoardModal opened={boardOpened} onClose={closeboard} id={projectID} />
+      <AddBoardModal opened={boardOpened} onClose={closeboard} />
       <DragDropContext onBeforeCapture={toggleDragTask} onDragEnd={onDragEnd}>
         <FilterTask dragTask={dragTask} />
         {!(isLoading === 'seccuss') ? (
