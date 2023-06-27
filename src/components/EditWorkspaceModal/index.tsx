@@ -16,9 +16,9 @@ type props = {
 };
 
 const EditWorkspaceModal = ({ opened, onClose, id }: props) => {
-    //its for edit workspace name
+    //this modal is  for edit workspace name
   const [nameOpened, { open: openName, close: closeName }] = useDisclosure(false);
-    // its for make new project for current workspace
+    // this hook  is  for make new project for current workspace
   const [projectOpened, { open: openProject, close: closeProject }] = useDisclosure(false);
   const dispatch = useAppDispatch();
 

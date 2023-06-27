@@ -66,6 +66,9 @@ const boardsSlice = createSlice({
     updateBoards: (state, action) => {
       state.projectBoards = action.payload;
     },
+    addBoard: (state, action) => {
+      state.projectBoards = [...state.projectBoards, action.payload];
+    },
     addTaskToBoard: (state, action) => {
       const boardId = action.payload.board;
       const boardIndex = state.projectBoards.findIndex((board: any) => board._id === boardId);
@@ -90,5 +93,6 @@ const boardsSlice = createSlice({
   }
 });
 
-export const { setProjectName, addTaskToBoard, updateBoards,setProjectMembers } = boardsSlice.actions;
+export const { setProjectName, addTaskToBoard, updateBoards, setProjectMembers,addBoard } =
+  boardsSlice.actions;
 export default boardsSlice;

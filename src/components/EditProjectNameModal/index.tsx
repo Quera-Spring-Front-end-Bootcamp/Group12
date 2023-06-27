@@ -1,21 +1,21 @@
 import { useForm } from '@mantine/form';
 import { useAppDispatch } from '../../data/reduxHooks';
-import { Button, Modal, TextInput } from '@mantine/core';
-import { notifications } from '@mantine/notifications';
+import { Button, Modal } from '@mantine/core';
+import TextInput from '../TextInput';
 import myAxios from '../../helpers/myAxios';
-import { addProject } from '../../data/dataSlice/workSpacesSlice';
+import { notifications } from '@mantine/notifications';
+import { editProjectName } from '../../data/dataSlice/workSpacesSlice';
 
 type props = {
   opened: boolean;
   onClose: () => void;
   id: string;
 };
-const AddProjectModal = ({ opened, onClose, id }: props) => {
+const EditProjectNameModal = ({ opened, onClose, id }: props) => {
   const dispatch = useAppDispatch();
   const form = useForm({
     initialValues: {
-      name: '',
-      workspaceId: id
+      name: ''
     },
 
     validate: {
@@ -26,9 +26,9 @@ const AddProjectModal = ({ opened, onClose, id }: props) => {
     e.preventDefault();
     if (form.validate().hasErrors === false) {
       try {
-        const res = await myAxios.post(`/projects`, { name: form.values.name, workspaceId: id });
-        dispatch(addProject(res.data.data));
-        notifications.show({ message: 'پروژه ایجاد شد', color: 'green' });
+        const res = await myAxios.put(`/projects/${id}`, form.values);
+        dispatch(editProjectName(res.data.data));
+        notifications.show({ message: 'نام ویرایش شد', color: 'green' });
         form.reset();
         onClose();
       } catch (error: any) {
@@ -37,10 +37,10 @@ const AddProjectModal = ({ opened, onClose, id }: props) => {
     }
   };
   return (
-    <Modal opened={opened} onClose={onClose} size="md" centered dir="rtl" title="اظافه کردن پروژه">
+    <Modal opened={opened} onClose={onClose} size="md" centered dir="rtl" title="تغییر نام پروژه">
       <form>
         <TextInput
-          label="نام پروژه را وارد کنید"
+          label="نام جدید پروژه را وارد کنید"
           labelProps={{
             style: {
               marginBottom: '8px'
@@ -49,15 +49,15 @@ const AddProjectModal = ({ opened, onClose, id }: props) => {
           fw="500"
           color="#C8C8C8"
           fz="md"
-          placeholder="نام پروژه را وارد کنید"
+          placeholder="نام جدید پروژه را وارد کنید"
           {...form.getInputProps('name')}
         />
         <Button type="submit" className="mt-4" onClick={(e) => handleSubmit(e)}>
-          ایجاد پروژه
+          تغییر نام
         </Button>
       </form>
     </Modal>
   );
 };
 
-export default AddProjectModal;
+export default EditProjectNameModal;
