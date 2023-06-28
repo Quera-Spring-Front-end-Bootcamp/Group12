@@ -8,6 +8,7 @@ import { useAppDispatch } from "../../data/reduxHooks";
 import { deleteProject } from "../../data/dataSlice/workSpacesSlice";
 import EditProjectNameModal from "../EditProjectNameModal";
 import AddBoardModal from "../AddBoardModal";
+import ShareProjectModal from "../ShareProjectModal";
 
 type props = {
     opened: boolean;
@@ -20,10 +21,11 @@ const EditProjectModal = ({ opened, onClose, id }: props) => {
     const [boardOpened, { open: openboard, close: closeboard }] = useDisclosure(false);
     //hook for edit project name modal
     const [nameOpened, { open: openName, close: closeName }] = useDisclosure(false);
+    //hook for share project to a user modal
+    const [shareOpened, { open: openShare, close: closeShare }] = useDisclosure(false);
     const handleDelete = async () => {
         try {
           const res = await myAxios.delete(`/projects/${id}`);
-          console.log(res.data.data)
           dispatch(deleteProject(res.data.data));
           notifications.show({ message: 'پروژه حذف شد', color: 'blue' });
           onClose();
@@ -32,9 +34,10 @@ const EditProjectModal = ({ opened, onClose, id }: props) => {
         }
       };
   return (
-      <Modal opened={opened} onClose={onClose} size="215px" centered dir="rtl">
+      <Modal opened={opened} onClose={onClose} size="215px" centered dir="rtl" withCloseButton={false}>
         <EditProjectNameModal opened={nameOpened} onClose={closeName} id={id}/>
         <AddBoardModal opened={boardOpened} onClose={closeboard} id={id}/>
+        <ShareProjectModal opened={shareOpened} onClose={closeShare} id={id} />
         <List spacing="2px" size="sm">
           <List.Item>
             <Flex className="cursor-pointer hover:underline" align="center" onClick={openboard}>
@@ -63,7 +66,7 @@ const EditProjectModal = ({ opened, onClose, id }: props) => {
               حذف{' '}
             </Flex>
           </List.Item>
-          <Button>
+          <Button onClick={openShare}>
             <SvgProvier>
               <Share />
             </SvgProvier>
