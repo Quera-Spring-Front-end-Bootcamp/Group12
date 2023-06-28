@@ -68,7 +68,7 @@ function Sidebar() {
   // this func change workspace id and pass it to modal user selected
   const handleAddProject = (id: string) => {
     setWorkspaceId(id);
-    editProject();
+    openProject();
   };
 
   // this func change project id and pass it to modal user selected
@@ -211,7 +211,7 @@ function Sidebar() {
                                         <Dots
                                           onClick={(e) => handleEditProject(e, project._id)}
                                           width="24px"
-                                          className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200"
+                                          className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200 hover:w-5" 
                                         />
                                       </div>
                                     }
@@ -230,10 +230,7 @@ function Sidebar() {
                                   label={
                                     <Flex
                                       align={'center'}
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        openProject();
-                                      }}
+                                      
                                     >
                                       <Plus width={'24px'} />
                                       <Text fz={'12px'} fw={'600'} weight={'normal'}>

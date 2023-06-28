@@ -26,7 +26,7 @@ const AddProjectModal = ({ opened, onClose, id }: props) => {
     e.preventDefault();
     if (form.validate().hasErrors === false) {
       try {
-        const res = await myAxios.post(`/projects`, { name: form.values.name, workspaceId: id });
+        const res = await myAxios.post(`/projects/`, { name: form.values.name, workspaceId: id });
         dispatch(addProject(res.data.data));
         notifications.show({ message: 'پروژه ایجاد شد', color: 'green' });
         form.reset();
