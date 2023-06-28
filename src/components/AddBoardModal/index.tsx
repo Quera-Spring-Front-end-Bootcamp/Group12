@@ -40,7 +40,7 @@ const AddBoardModal = ({ opened, onClose, id }: props) => {
     }
   };
   return (
-    <Modal opened={opened} onClose={onClose} size="md" centered dir="rtl" title="اظافه کردن پروژه">
+    <Modal opened={opened} onClose={onClose} size="md" centered dir="rtl" title="اظافه کردن بورد به پروژه">
       <form>
         <TextInput
           label="نام بورد را وارد کنید"
