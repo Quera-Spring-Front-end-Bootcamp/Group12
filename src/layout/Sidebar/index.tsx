@@ -26,6 +26,7 @@ import AddWorkspaceModal from '../../components/AddWorkspaceModal';
 import EditWorkspaceModal from '../../components/EditWorkspaceModal';
 import AddProjectModal from '../../components/AddProjectModal';
 import EditProjectModal from '../../components/EditProjectModal';
+import { setProjectName } from '../../data/dataSlice/boardsSlice';
 
 function Sidebar() {
   // state for store seach param
@@ -188,10 +189,12 @@ function Sidebar() {
                                       <div
                                         className="flex justify-between"
                                         onClick={() => {
+                                          dispatch(setProjectName(project.name))
                                           navigate(
                                             `${workSpace.name}/${project.name}/${project._id}/board-view`
-                                          );
-                                        }}
+                                            );
+                                            
+                                          }}
                                       >
                                         <Text>
                                           <Link

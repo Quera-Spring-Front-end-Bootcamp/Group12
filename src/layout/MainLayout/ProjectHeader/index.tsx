@@ -19,11 +19,12 @@ const ProjectHeader = () => {
   const params = useParams();
   const tab = params['*'];
   const { fetchStatus } = useAppSelector((state) => state.workSpaces);
+  const projectName = useAppSelector(state=>state.boards.projectName)
   const [activeTab, setActiveTab] = useState<any | null>(tab);
   const dispatch = useAppDispatch();
-  const projectName = params.projectName;
   useEffect(() => {
-    dispatch(setProjectName(projectName));
+    
+    //dispatch(setProjectName(project));
     setActiveTab(tab);
   }, [projectName]);
 
