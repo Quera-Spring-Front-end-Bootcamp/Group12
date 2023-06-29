@@ -10,7 +10,6 @@ import MyDroppable from '../MyDroppable/MyDroppable';
 import { useDisclosure } from '@mantine/hooks';
 import AddTaskModal from '../AddTaskModal';
 
-
 type props = {
   name: string;
   tasks: task[];
@@ -27,7 +26,7 @@ const Board = ({ name, tasks, projectName, id }: props) => {
   const tasksCount = sortedTasks.length;
   return (
     <Flex direction="column" miw="250px" gap="sm" className="transition-all duration-200 shrink-0">
-      <AddTaskModal opened={opened} onClose={close} boardName={name} boardId={id}/>
+      <AddTaskModal opened={opened} onClose={close} boardName={name} boardId={id} />
       <TaskListHeader tasksCount={tasksCount}>
         <Text>{name}</Text>
       </TaskListHeader>
@@ -58,6 +57,7 @@ const Board = ({ name, tasks, projectName, id }: props) => {
                         {...provided.dragHandleProps}
                       >
                         <TaskCard
+                          boardName={name}
                           dragTask={snapshot.isDragging}
                           task={task}
                           projectName={projectName}
@@ -74,7 +74,9 @@ const Board = ({ name, tasks, projectName, id }: props) => {
           )}
         </MyDroppable>
         <Button
-        onClick={()=>{open()}}
+          onClick={() => {
+            open();
+          }}
           styles={{
             root: {
               display: 'flex',

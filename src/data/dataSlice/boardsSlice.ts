@@ -7,6 +7,16 @@ export type tag = {
   color: string;
 };
 
+type user = {
+  _id: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  phone: string;
+  profile_url: '';
+};
+
 export type task = {
   _id: string;
   name: string;
@@ -15,8 +25,15 @@ export type task = {
   position: number;
   deadline?: Date;
   taskTags?: tag[];
-  taskAssigns?: object[];
-  comments?: object[];
+  taskAssigns: user[];
+  comments?: comment[];
+};
+
+type comment = {
+  _id: string;
+  text: string;
+  user: user;
+  createdAt: string;
 };
 
 type board = {
@@ -93,6 +110,6 @@ const boardsSlice = createSlice({
   }
 });
 
-export const { setProjectName, addTaskToBoard, updateBoards, setProjectMembers,addBoard } =
+export const { setProjectName, addTaskToBoard, updateBoards, setProjectMembers, addBoard } =
   boardsSlice.actions;
 export default boardsSlice;

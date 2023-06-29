@@ -6,12 +6,14 @@ import myAxios from '../../helpers/myAxios';
 import { notifications } from '@mantine/notifications';
 import { useAppDispatch } from '../../data/reduxHooks';
 import { updateWorkspaces } from '../../data/dataSlice/workSpacesSlice';
+import { useState } from 'react';
 
 type props = {
   opened: boolean;
   onClose: () => void;
 };
 const AddWorkspaceModal = ({ opened, onClose }: props) => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const form = useForm({
     initialValues: {
@@ -27,6 +29,7 @@ const AddWorkspaceModal = ({ opened, onClose }: props) => {
       <form
         onSubmit={async (e) => {
           e.preventDefault();
+          setLoading(true);
           if (form.validate().hasErrors === false) {
             try {
               const res = await myAxios.post('/workspace/create', form.values);
@@ -38,7 +41,8 @@ const AddWorkspaceModal = ({ opened, onClose }: props) => {
               notifications.show({ message: error?.message, color: 'red' });
             }
           }
-        }}>
+        }}
+      >
         <Flex direction="column" px="sm" gap="lg">
           <TextInput
             w="100%"
@@ -58,7 +62,9 @@ const AddWorkspaceModal = ({ opened, onClose }: props) => {
             mt={'lg'}
             mb="lg"
           />
-          <Button type="submit">ساختن ورک اسپیس</Button>
+          <Button loading={loading} type="submit">
+            ساختن ورک اسپیس
+          </Button>
         </Flex>
       </form>
     </Modal>

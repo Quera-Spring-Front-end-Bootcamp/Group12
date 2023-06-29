@@ -22,6 +22,7 @@ type props = {
   boardId?: any;
 };
 const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState<any>(null);
   const [message, setMeassage] = useState('');
   const boards: any = useAppSelector((state) => state.boards.projectBoards);
@@ -33,7 +34,7 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
   const form = useForm({
     initialValues: {
       name: '',
-      boardId: boardId? boardId.toString():'',
+      boardId: boardId ? boardId.toString() : '',
       description: ''
     },
 
@@ -48,6 +49,7 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
         className="h-96"
         onSubmit={async (e) => {
           e.preventDefault();
+          setLoading(true);
           if (!value) {
             setMeassage('با کلیک بر آیکون تقویم تاریخ را انتخاب کنید');
             return;
@@ -68,7 +70,8 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
               notifications.show({ message: error?.message, color: 'red' });
             }
           }
-        }}>
+        }}
+      >
         <Flex direction="column" px="sm" gap={'lg'}>
           <TextInput
             mt={'32px'}
@@ -81,13 +84,12 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
           />
 
           <Select
-           label="در برد:"
+            label="در برد:"
             placeholder={'نام برد'}
             defaultValue={boardId?.toString()}
             mt="lg"
             data={boardId ? boardValue : boardValues}
             {...form.getInputProps('boardId')}
-            
           />
 
           <Text>
@@ -106,7 +108,9 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
               format={'YYYY/MM/DD'}
               required
             />
-            <Button type="submit">ساختن تسک</Button>
+            <Button loading={loading} type="submit">
+              ساختن تسک
+            </Button>
           </Flex>
         </Flex>
       </form>
