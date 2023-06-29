@@ -19,11 +19,11 @@ const ProjectHeader = () => {
   const params = useParams();
   const tab = params['*'];
   const { fetchStatus } = useAppSelector((state) => state.workSpaces);
+  const projectName = useAppSelector((state) => state.boards.projectName);
   const [activeTab, setActiveTab] = useState<any | null>(tab);
   const dispatch = useAppDispatch();
-  const projectName = params.projectName;
   useEffect(() => {
-    dispatch(setProjectName(projectName));
+    //dispatch(setProjectName(project));
     setActiveTab(tab);
   }, [projectName]);
 
@@ -44,7 +44,8 @@ const ProjectHeader = () => {
         value={`${activeTab}`}
         onTabChange={setActiveTab}
         defaultValue={'board-view'}
-        w="100%">
+        w="100%"
+      >
         <Tabs.List mb={10} w="100%">
           <Flex align="center" w="100%">
             <Text fz="20px" fw="600" pr={16} className="cursor-default ">
@@ -61,7 +62,8 @@ const ProjectHeader = () => {
                 fz="16px"
                 fw="500"
                 value="list-view"
-                className="cursor-pointer">
+                className="cursor-pointer"
+              >
                 نمایش لیستی
               </Tabs.Tab>
             </NavLink>
@@ -77,7 +79,8 @@ const ProjectHeader = () => {
                 fz="16px"
                 fw="500"
                 value="board-view"
-                className="cursor-pointer">
+                className="cursor-pointer"
+              >
                 نمایش ستونی
               </Tabs.Tab>
             </NavLink>
@@ -94,7 +97,8 @@ const ProjectHeader = () => {
                 fz="16px"
                 fw="500"
                 value="calendar-view"
-                className="cursor-pointer">
+                className="cursor-pointer"
+              >
                 تقویم
               </Tabs.Tab>
             </NavLink>
@@ -113,7 +117,8 @@ const ProjectHeader = () => {
                 style={{
                   backgroundColor: 'transparent',
                   color: 'inherit'
-                }}>
+                }}
+              >
                 اشتراک‌گذاری
               </Button>
             </Group>

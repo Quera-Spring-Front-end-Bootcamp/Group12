@@ -6,6 +6,12 @@ export type tag = {
   tagName: string;
   color: string;
 };
+export type taskAssign = {
+  _id: string;
+  username: string;
+  email: string;
+  firstname: string;
+};
 
 type user = {
   _id: string;
@@ -25,7 +31,7 @@ export type task = {
   position: number;
   deadline?: Date;
   taskTags?: tag[];
-  taskAssigns: user[];
+  taskAssigns: taskAssign[];
   comments?: comment[];
 };
 
@@ -49,13 +55,19 @@ type initialState = {
   projectName: string;
   isLoading: string;
   projectMembers: Object[];
+  search: board[];
+  searchTerm: String;
+  filterTask: board[];
 };
 
 const initialState: initialState = {
   projectBoards: [],
   projectName: '',
   isLoading: '',
-  projectMembers: []
+  projectMembers: [],
+  search: [],
+  filterTask: [],
+  searchTerm: ''
 };
 
 export const getProjectBoards = createAsyncThunk<any, any>(
@@ -94,6 +106,30 @@ const boardsSlice = createSlice({
         board.tasks = [...board.tasks, action.payload];
         state.projectBoards[boardIndex] = board;
       }
+    },
+    searchTask: (state, action) => {
+      state.searchTerm = action.payload;
+      const filterTasks = state.projectBoards.map((board) => {
+        return {
+          ...board,
+          tasks: board.tasks.filter((task) => task.name.toLowerCase().includes(action.payload))
+        };
+      });
+      state.search = filterTasks;
+    },
+    filterTasks: (state, action) => {
+      const filterTasks = state.projectBoards.map((board) => {
+        return {
+          ...board,
+          tasks: board.tasks.filter((task) =>
+            task.taskAssigns.some((taskasign) => taskasign._id === action.payload)
+          )
+        };
+      });
+      state.filterTask = filterTasks;
+    },
+    removeFilter: (state) => {
+      state.filterTask = [];
     }
   },
   extraReducers: (builder) => {
@@ -110,6 +146,14 @@ const boardsSlice = createSlice({
   }
 });
 
-export const { setProjectName, addTaskToBoard, updateBoards, setProjectMembers, addBoard } =
-  boardsSlice.actions;
+export const {
+  setProjectName,
+  addTaskToBoard,
+  updateBoards,
+  setProjectMembers,
+  addBoard,
+  searchTask,
+  filterTasks,
+  removeFilter
+} = boardsSlice.actions;
 export default boardsSlice;

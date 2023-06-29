@@ -4,7 +4,7 @@ import Board from '../../../../components/Board/Board';
 import { useAppDispatch, useAppSelector } from '../../../../data/reduxHooks';
 import ScrollContainer from 'react-indiana-drag-scroll';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import boardsSlice, { task } from '../../../../data/dataSlice/boardsSlice';
+import boardsSlice, { searchTask, task } from '../../../../data/dataSlice/boardsSlice';
 import myAxios from '../../../../helpers/myAxios';
 import { useState } from 'react';
 import TaskListItem from '../../../../components/TaskListItem';
@@ -15,7 +15,7 @@ import { useDisclosure } from '@mantine/hooks';
 
 const BoardView = () => {
   const { isLoading } = useAppSelector((state) => state.boards);
-  const storeBoards = useAppSelector((state) => state.boards.projectBoards);
+  const storeBoards = useAppSelector((state) => state.boards);
   const projectName = useAppSelector((state) => state.boards.projectName);
   const [boardOpened, { open: openboard, close: closeboard }] = useDisclosure(false);
   const [dragTask, setDragTask] = useState(false);
@@ -24,13 +24,20 @@ const BoardView = () => {
   };
   const dispatch = useAppDispatch();
   const { updateBoards } = boardsSlice.actions;
+  const renderBoards =
+    storeBoards.searchTerm.length > 0
+      ? storeBoards.search
+      : storeBoards.filterTask.length > 0
+      ? storeBoards.filterTask
+      : storeBoards.projectBoards;
   const onDragEnd = (result: DropResult) => {
     toggleDragTask();
-    console.log(result);
     if (!result.destination) return;
     //delete task by dnd
     if (result.destination.droppableId === 'delete') {
-      const sourceBoard = storeBoards.find((board) => board._id === result.source.droppableId);
+      const sourceBoard = storeBoards.projectBoards.find(
+        (board) => board._id === result.source.droppableId
+      );
       const updatedSourceBoard = {
         ...sourceBoard,
         tasks: sourceBoard?.tasks
@@ -41,11 +48,14 @@ const BoardView = () => {
             return task;
           })
       };
-      const updatedBoards = storeBoards.map((storeBoard) => {
+      const updatedBoards = storeBoards.projectBoards.map((storeBoard) => {
         if (storeBoard._id === updatedSourceBoard._id) return updatedSourceBoard;
-        return storeBoard;
+        {
+          return storeBoard;
+        }
       });
       dispatch(updateBoards(updatedBoards));
+      dispatch(searchTask(storeBoards.searchTerm));
       myAxios.delete(`/task/${result.draggableId}`);
       return;
     }
@@ -57,7 +67,9 @@ const BoardView = () => {
       return;
     //change index of task in the same board
     if (result.source.droppableId === result.destination?.droppableId) {
-      const board = storeBoards.find((board) => board._id === result.source.droppableId);
+      const board = storeBoards.projectBoards.find(
+        (board) => board._id === result.source.droppableId
+      );
       const updatedTasks = board?.tasks.map((task) => {
         if (
           (result.destination &&
@@ -105,7 +117,7 @@ const BoardView = () => {
           return updatedTask;
         }
       });
-      const updatedBoards = storeBoards.map((storeBoard) => {
+      const updatedBoards = storeBoards.projectBoards.map((storeBoard) => {
         if (storeBoard._id === board?._id)
           return {
             ...board,
@@ -115,14 +127,19 @@ const BoardView = () => {
       });
       console.log(updatedBoards);
       dispatch(updateBoards(updatedBoards));
+      dispatch(searchTask(storeBoards.searchTerm));
       myAxios.put(`/task/${result.draggableId}/position/${result.destination.index + 1}`);
       return;
     }
     //change task board and index
     if (result.destination && result.source.droppableId !== result.destination.droppableId) {
       const destination = result.destination;
-      const sourceBoard = storeBoards.find((board) => board._id === result.source.droppableId);
-      const destinationBoard = storeBoards.find((board) => board._id === destination.droppableId);
+      const sourceBoard = storeBoards.projectBoards.find(
+        (board) => board._id === result.source.droppableId
+      );
+      const destinationBoard = storeBoards.projectBoards.find(
+        (board) => board._id === destination.droppableId
+      );
       const task = { ...sourceBoard?.tasks.find((task) => task._id === result.draggableId) };
       if (task?.position) task.position = result.destination.index + 1;
       if (task?.board) task.board = result.destination.droppableId;
@@ -147,12 +164,13 @@ const BoardView = () => {
         ...destinationBoard,
         tasks: updatedBoardTasks
       };
-      const updatedBoards = storeBoards.map((storeBoard) => {
+      const updatedBoards = storeBoards.projectBoards.map((storeBoard) => {
         if (storeBoard._id === updatedSourceBoard._id) return updatedSourceBoard;
         if (storeBoard._id === updatedDestinationBoard._id) return updatedDestinationBoard;
         return storeBoard;
       });
       dispatch(updateBoards(updatedBoards));
+      dispatch(searchTask(storeBoards.searchTerm));
 
       myAxios
         .put(`/task/${result.draggableId}/board/${result.destination.droppableId}`)
@@ -169,7 +187,7 @@ const BoardView = () => {
       <AddBoardModal opened={boardOpened} onClose={closeboard} />
       <DragDropContext onBeforeCapture={toggleDragTask} onDragEnd={onDragEnd}>
         <FilterTask dragTask={dragTask} />
-        {!(isLoading === 'seccuss') ? (
+        {isLoading === 'pending' ? (
           <Flex gap={16}>
             <Flex miw={256} gap={20} direction={'column'}>
               <Skeleton mt={12} h={46} />
@@ -225,7 +243,7 @@ const BoardView = () => {
               }}
             >
               {/* boards container */}
-              {storeBoards.map((board) => (
+              {renderBoards.map((board) => (
                 <Board
                   id={board._id}
                   key={board._id}
