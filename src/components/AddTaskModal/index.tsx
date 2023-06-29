@@ -33,8 +33,8 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
   const form = useForm({
     initialValues: {
       name: '',
-      boardId: boardId? boardId.toString():'',
-      description: ''
+      description: '',
+      boardId: boardId ? boardId.toString() : ''
     },
 
     validate: {
@@ -56,11 +56,12 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
             const deadline = moment(value.format(), 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
             let data = {};
             boardId
-              ? (data = { name: form.values.name, deadline, boardId })
+              ? (data = { name: form.values.name, deadline, boardId,description:form.values.description })
               : (data = { ...form.values, deadline });
             try {
               const res = await myAxios.post('/task/', data);
               dispatch(addTaskToBoard(res.data.data));
+              console.log(res.data.data);
               notifications.show({ message: 'تسک ایجاد شد', color: 'green' });
               form.reset();
               onClose();
@@ -81,13 +82,12 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
           />
 
           <Select
-           label="در برد:"
+            label="در برد:"
             placeholder={'نام برد'}
             defaultValue={boardId?.toString()}
             mt="lg"
             data={boardId ? boardValue : boardValues}
             {...form.getInputProps('boardId')}
-            
           />
 
           <Text>

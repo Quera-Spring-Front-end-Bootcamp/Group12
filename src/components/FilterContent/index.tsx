@@ -1,15 +1,19 @@
 import { Text, Flex, Select } from '@mantine/core';
 import { useAppSelector } from '../../data/reduxHooks';
 
-const FilterContent = () => {
+type props = {
+  setMember: () => void;
+};
+
+const FilterContent = ({setMember}:props) => {
   const members = useAppSelector((state) => state.boards.projectMembers);
-  const data = members.map((m: any) => {
-    return { value: m._id, label: m.name };
+  const value = members.map((m: any) => {
+    return { value: m.user._id, label: `${m.user.firstname} ${m.user.lastname}` };
   });
   return (
     <Flex align="center" gap="xs">
       <Text> تسک هایی که اعضای آن ها </Text>
-      <Select placeholder="اعضا" data={data} className="text-sm" />
+      <Select  onChange={setMember} data={value} className="text-sm"   withinPortal  width={"50px"}/>
       <Text>می باشد</Text>
     </Flex>
   );
