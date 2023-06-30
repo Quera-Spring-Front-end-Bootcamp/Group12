@@ -1,5 +1,9 @@
 import { Outlet, useParams } from 'react-router';
-import { getProjectBoards, setProjectMembers } from '../../../data/dataSlice/boardsSlice';
+import {
+  getProjectBoards,
+  setProjectMembers,
+  setProjectName
+} from '../../../data/dataSlice/boardsSlice';
 import { useAppDispatch } from '../../../data/reduxHooks';
 import { useEffect } from 'react';
 import Button from '../../../components/Button';
@@ -19,6 +23,7 @@ export default function MainPage() {
     try {
       const res: any = await myAxios.get(`/projects/${projectID}`);
       dispatch(setProjectMembers(res?.data?.data?.members));
+      dispatch(setProjectName(res?.data?.data?.name));
     } catch (error: any) {
       notifications.show({ message: error.message, color: 'red' });
     }
@@ -27,17 +32,18 @@ export default function MainPage() {
   useEffect(() => {
     dispatch(getProjectBoards(projectID));
     getProjectMembers();
-    
   }, [projectID]);
 
   return (
     <>
       <ProjectHeader />
       <Outlet />
-      <AddTaskModal opened={opened} onClose={close}/>
+      <AddTaskModal opened={opened} onClose={close} />
       <Button
         className="absolute bottom-6 left-4 z-10"
-        onClick={()=>{open()}}
+        onClick={() => {
+          open();
+        }}
         leftIcon={
           <SvgProvier>
             <PlusSquare />

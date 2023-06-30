@@ -15,8 +15,7 @@ type props = {
 };
 const EditProjectNameModal = ({ opened, onClose, id }: props) => {
   const dispatch = useAppDispatch();
-  const { projectName } = useParams();
-  const stateProjectName = useAppSelector((state) => state.boards.projectName);
+  const { projectID } = useParams();
   const form = useForm({
     initialValues: {
       name: ''
@@ -31,9 +30,11 @@ const EditProjectNameModal = ({ opened, onClose, id }: props) => {
     if (form.validate().hasErrors === false) {
       try {
         const res = await myAxios.put(`/projects/${id}`, form.values);
-        const isProjectName = projectName ? projectName === stateProjectName : false;
+        
         dispatch(editProjectName(res.data.data));
-        if (isProjectName) dispatch(setProjectName(res.data.data.name));
+        if (projectID === id) {
+          dispatch(setProjectName(res.data.data.name));
+        }
         notifications.show({ message: 'نام ویرایش شد', color: 'green' });
         form.reset();
         onClose();
