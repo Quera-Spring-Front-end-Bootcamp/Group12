@@ -4,6 +4,7 @@ import { Button, Modal, TextInput } from '@mantine/core';
 import { notifications } from '@mantine/notifications';
 import myAxios from '../../helpers/myAxios';
 import { addProject } from '../../data/dataSlice/workSpacesSlice';
+import { useState } from 'react';
 
 type props = {
   opened: boolean;
@@ -11,6 +12,7 @@ type props = {
   id: string;
 };
 const AddProjectModal = ({ opened, onClose, id }: props) => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const form = useForm({
     initialValues: {
@@ -24,6 +26,7 @@ const AddProjectModal = ({ opened, onClose, id }: props) => {
   });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     if (form.validate().hasErrors === false) {
       try {
         const res = await myAxios.post(`/projects/`, { name: form.values.name, workspaceId: id });
@@ -52,7 +55,7 @@ const AddProjectModal = ({ opened, onClose, id }: props) => {
           placeholder="نام پروژه را وارد کنید"
           {...form.getInputProps('name')}
         />
-        <Button type="submit" className="mt-4" onClick={(e) => handleSubmit(e)}>
+        <Button loading={loading} type="submit" className="mt-4" onClick={(e) => handleSubmit(e)}>
           ایجاد پروژه
         </Button>
       </form>

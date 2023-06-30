@@ -5,6 +5,7 @@ import { notifications } from '@mantine/notifications';
 import { Button, Modal, TextInput } from '@mantine/core';
 import { useParams } from 'react-router';
 import { addBoard } from '../../data/dataSlice/boardsSlice';
+import { useState } from 'react';
 
 type props = {
   opened: boolean;
@@ -13,8 +14,9 @@ type props = {
 };
 
 const AddBoardModal = ({ opened, onClose, id }: props) => {
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
-  const {projectID} = useParams();
+  const { projectID } = useParams();
   const form = useForm({
     initialValues: {
       name: ''
@@ -26,6 +28,7 @@ const AddBoardModal = ({ opened, onClose, id }: props) => {
   });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setLoading(true);
     const projectId = id || projectID;
     if (form.validate().hasErrors === false) {
       try {
@@ -40,7 +43,14 @@ const AddBoardModal = ({ opened, onClose, id }: props) => {
     }
   };
   return (
-    <Modal opened={opened} onClose={onClose} size="md" centered dir="rtl" title="اظافه کردن بورد به پروژه">
+    <Modal
+      opened={opened}
+      onClose={onClose}
+      size="md"
+      centered
+      dir="rtl"
+      title="اظافه کردن بورد به پروژه"
+    >
       <form>
         <TextInput
           label="نام بورد را وارد کنید"
@@ -55,12 +65,12 @@ const AddBoardModal = ({ opened, onClose, id }: props) => {
           placeholder="نام بورد را وارد کنید"
           {...form.getInputProps('name')}
         />
-        <Button type="submit" className="mt-4" onClick={(e) => handleSubmit(e)}>
+        <Button loading={loading} type="submit" className="mt-4" onClick={(e) => handleSubmit(e)}>
           ایجاد بورد
         </Button>
       </form>
     </Modal>
-  )
+  );
 };
 
 export default AddBoardModal;

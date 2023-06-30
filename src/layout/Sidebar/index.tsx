@@ -189,12 +189,11 @@ function Sidebar() {
                                       <div
                                         className="flex justify-between"
                                         onClick={() => {
-                                          dispatch(setProjectName(project.name))
+                                          dispatch(setProjectName(project.name));
                                           navigate(
                                             `${workSpace.name}/${project.name}/${project._id}/board-view`
-                                            );
-                                            
-                                          }}
+                                          );
+                                        }}
                                       >
                                         <Text>
                                           <Link
@@ -214,7 +213,7 @@ function Sidebar() {
                                         <Dots
                                           onClick={(e) => handleEditProject(e, project._id)}
                                           width="24px"
-                                          className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200 hover:w-5" 
+                                          className="invisible opacity-0 group-hover:visible group-hover:opacity-100 transition duration-200 hover:w-5"
                                         />
                                       </div>
                                     }
@@ -231,10 +230,7 @@ function Sidebar() {
                                   className="bg-stone-300 w-fit rounded-md text-black hover:bg-stone-500 hover:text-white  !important"
                                   onClick={() => handleAddProject(workSpace._id)}
                                   label={
-                                    <Flex
-                                      align={'center'}
-                                      
-                                    >
+                                    <Flex align={'center'}>
                                       <Plus width={'24px'} />
                                       <Text fz={'12px'} fw={'600'} weight={'normal'}>
                                         افزودن پروژه جدید

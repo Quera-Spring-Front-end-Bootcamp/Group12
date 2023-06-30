@@ -38,9 +38,9 @@ const FilterTask = ({ dragTask }: props) => {
       />
       <Divider orientation="vertical" />
       <FilterComponent />
-      
+
       <Badge className="shrink-0" size="lg" color="cyan">
-        دسته‌بندی‌شده با: {filter}{' '  }
+        دسته‌بندی‌شده با: {filter}{' '}
       </Badge>
       {page === 'board-view' && (
         <MyDroppable droppableId="delete">
@@ -55,13 +55,15 @@ const FilterTask = ({ dragTask }: props) => {
                   overflow: 'hidden'
                 }}
                 className="transition-all duration-200 z-40"
-                {...provided.droppableProps}>
+                {...provided.droppableProps}
+              >
                 <div
                   className={`rounded-md transition-all border duration-200 ${
                     snapshot.isDraggingOver
                       ? 'bg-red-500 text-white border-white'
                       : 'border-red-500 text-red-500'
-                  } w-full  z-50`}>
+                  } w-full  z-50`}
+                >
                   <Group position="center" w={'100%'} align="center" h={'100%'}>
                     <SvgProvier>
                       <Delete />

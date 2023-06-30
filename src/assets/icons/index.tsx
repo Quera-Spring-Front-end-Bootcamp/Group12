@@ -23,6 +23,14 @@ import { ReactComponent as JustifyRight } from './svg/justify-right.svg';
 import { ReactComponent as Sun } from './svg/sun.svg';
 import { ReactComponent as MoonStars } from './svg/moon-stars.svg';
 import { ReactComponent as Share } from './svg/Share.svg';
+import { ReactComponent as DoneBox } from './svg/Done Box.svg';
+import { ReactComponent as TagsCircle } from './svg/tags circle.svg';
+import { ReactComponent as AssignCircle } from './svg/assign circlesvg.svg';
+import { ReactComponent as Chat } from './svg/chat-message.svg';
+import { ReactComponent as Email } from './svg/Email, @, Mail, Mail icon.svg';
+import { ReactComponent as Emoji } from './svg/Smileys.svg';
+import { ReactComponent as Docs } from './svg/Documents, File.svg';
+import { ReactComponent as Attachment } from './svg/attachment-link.3.svg';
 
 export {
   Arrow,
@@ -49,5 +57,13 @@ export {
   JustifyRight,
   Share,
   Sun,
-  MoonStars
+  MoonStars,
+  DoneBox,
+  TagsCircle,
+  AssignCircle,
+  Chat,
+  Emoji,
+  Docs,
+  Attachment,
+  Email
 };

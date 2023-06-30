@@ -22,6 +22,7 @@ type props = {
   boardId?: any;
 };
 const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState<any>(null);
   const [message, setMeassage] = useState('');
   const boards: any = useAppSelector((state) => state.boards.projectBoards);
@@ -48,6 +49,7 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
         className="h-96"
         onSubmit={async (e) => {
           e.preventDefault();
+          setLoading(true);
           if (!value) {
             setMeassage('با کلیک بر آیکون تقویم تاریخ را انتخاب کنید');
             return;
@@ -56,7 +58,12 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
             const deadline = moment(value.format(), 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
             let data = {};
             boardId
-              ? (data = { name: form.values.name, deadline, boardId,description:form.values.description })
+              ? (data = {
+                  name: form.values.name,
+                  deadline,
+                  boardId,
+                  description: form.values.description
+                })
               : (data = { ...form.values, deadline });
             try {
               const res = await myAxios.post('/task/', data);
@@ -69,7 +76,8 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
               notifications.show({ message: error?.message, color: 'red' });
             }
           }
-        }}>
+        }}
+      >
         <Flex direction="column" px="sm" gap={'lg'}>
           <TextInput
             mt={'32px'}
@@ -106,7 +114,9 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
               format={'YYYY/MM/DD'}
               required
             />
-            <Button type="submit">ساختن تسک</Button>
+            <Button loading={loading} type="submit">
+              ساختن تسک
+            </Button>
           </Flex>
         </Flex>
       </form>

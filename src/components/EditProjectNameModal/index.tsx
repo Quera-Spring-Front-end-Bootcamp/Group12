@@ -16,7 +16,7 @@ type props = {
 const EditProjectNameModal = ({ opened, onClose, id }: props) => {
   const dispatch = useAppDispatch();
   const { projectName } = useParams();
-  const stateProjectName = useAppSelector(state=>state.boards.projectName)
+  const stateProjectName = useAppSelector((state) => state.boards.projectName);
   const form = useForm({
     initialValues: {
       name: ''

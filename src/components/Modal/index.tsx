@@ -1,20 +1,10 @@
 import { Modal as MantineModal } from '@mantine/core';
+import { ModalProps as MantineModalProps } from '@mantine/core';
 
-interface ModalProps {
-  opened: boolean;
-  onClose: () => void;
-  title: string;
-  size?: string;
-  style?: React.CSSProperties;
-  children?: React.ReactNode;
-}
-
-export default function Modal({ children, opened, onClose, title, size, style }: ModalProps) {
+export default function Modal(props: MantineModalProps) {
   return (
     <>
-      <MantineModal opened={opened} onClose={onClose} title={title} size={size} style={style}>
-        {children}
-      </MantineModal>
+      <MantineModal {...props}></MantineModal>
     </>
   );
 }

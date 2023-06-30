@@ -25,13 +25,19 @@ const BoardView = () => {
   const dispatch = useAppDispatch();
   const { updateBoards } = boardsSlice.actions;
   const renderBoards =
-    storeBoards.searchTerm.length > 0 ? storeBoards.search : (storeBoards.filterTask.length>0?storeBoards.filterTask: storeBoards.projectBoards);
+    storeBoards.searchTerm.length > 0
+      ? storeBoards.search
+      : storeBoards.filterTask.length > 0
+      ? storeBoards.filterTask
+      : storeBoards.projectBoards;
   const onDragEnd = (result: DropResult) => {
     toggleDragTask();
     if (!result.destination) return;
     //delete task by dnd
     if (result.destination.droppableId === 'delete') {
-      const sourceBoard = storeBoards.projectBoards.find((board) => board._id === result.source.droppableId);
+      const sourceBoard = storeBoards.projectBoards.find(
+        (board) => board._id === result.source.droppableId
+      );
       const updatedSourceBoard = {
         ...sourceBoard,
         tasks: sourceBoard?.tasks
@@ -43,12 +49,13 @@ const BoardView = () => {
           })
       };
       const updatedBoards = storeBoards.projectBoards.map((storeBoard) => {
-        if (storeBoard._id === updatedSourceBoard._id) return updatedSourceBoard;{
+        if (storeBoard._id === updatedSourceBoard._id) return updatedSourceBoard;
+        {
           return storeBoard;
         }
       });
       dispatch(updateBoards(updatedBoards));
-      dispatch(searchTask(storeBoards.searchTerm))
+      dispatch(searchTask(storeBoards.searchTerm));
       myAxios.delete(`/task/${result.draggableId}`);
       return;
     }
@@ -60,7 +67,9 @@ const BoardView = () => {
       return;
     //change index of task in the same board
     if (result.source.droppableId === result.destination?.droppableId) {
-      const board = storeBoards.projectBoards.find((board) => board._id === result.source.droppableId);
+      const board = storeBoards.projectBoards.find(
+        (board) => board._id === result.source.droppableId
+      );
       const updatedTasks = board?.tasks.map((task) => {
         if (
           (result.destination &&
@@ -118,15 +127,19 @@ const BoardView = () => {
       });
       console.log(updatedBoards);
       dispatch(updateBoards(updatedBoards));
-      dispatch(searchTask(storeBoards.searchTerm))
+      dispatch(searchTask(storeBoards.searchTerm));
       myAxios.put(`/task/${result.draggableId}/position/${result.destination.index + 1}`);
       return;
     }
     //change task board and index
     if (result.destination && result.source.droppableId !== result.destination.droppableId) {
       const destination = result.destination;
-      const sourceBoard = storeBoards.projectBoards.find((board) => board._id === result.source.droppableId);
-      const destinationBoard = storeBoards.projectBoards.find((board) => board._id === destination.droppableId);
+      const sourceBoard = storeBoards.projectBoards.find(
+        (board) => board._id === result.source.droppableId
+      );
+      const destinationBoard = storeBoards.projectBoards.find(
+        (board) => board._id === destination.droppableId
+      );
       const task = { ...sourceBoard?.tasks.find((task) => task._id === result.draggableId) };
       if (task?.position) task.position = result.destination.index + 1;
       if (task?.board) task.board = result.destination.droppableId;
@@ -157,7 +170,7 @@ const BoardView = () => {
         return storeBoard;
       });
       dispatch(updateBoards(updatedBoards));
-      dispatch(searchTask(storeBoards.searchTerm))
+      dispatch(searchTask(storeBoards.searchTerm));
 
       myAxios
         .put(`/task/${result.draggableId}/board/${result.destination.droppableId}`)
@@ -218,7 +231,8 @@ const BoardView = () => {
             gap="lg"
             mah="100%"
             mt="sm"
-            direction={'column'}>
+            direction={'column'}
+          >
             <ScrollContainer
               ignoreElements=".task"
               style={{
@@ -226,7 +240,8 @@ const BoardView = () => {
                 display: 'flex',
                 gap: '16px',
                 paddingLeft: '4px'
-              }}>
+              }}
+            >
               {/* boards container */}
               {renderBoards.map((board) => (
                 <Board
@@ -242,7 +257,8 @@ const BoardView = () => {
                   p={16}
                   className="shrink-0 cursor-pointer hover:shadow-lg hover:translate-y-1 transition-all duration-100"
                   h={45}
-                  w={256}>
+                  w={256}
+                >
                   <Flex h={'100%'} align={'center'}>
                     <SvgProvier>
                       <Plus />

@@ -10,7 +10,11 @@ const List = () => {
 
   const storeBoards = useAppSelector((state) => state.boards);
   const renderBoards =
-    storeBoards.searchTerm.length > 0 ? storeBoards.search : (storeBoards.filterTask.length>0?storeBoards.filterTask: storeBoards.projectBoards);
+    storeBoards.searchTerm.length > 0
+      ? storeBoards.search
+      : storeBoards.filterTask.length > 0
+      ? storeBoards.filterTask
+      : storeBoards.projectBoards;
   return (
     <>
       <FilterTask />
@@ -21,11 +25,7 @@ const List = () => {
               <Accordion.Control>{projectName}</Accordion.Control>
               <Accordion.Panel>
                 {renderBoards.map((boards) => (
-                  <ListAccordion
-                    key={boards._id}
-                    name={boards.name}
-                    tasks={boards.tasks}
-                  />
+                  <ListAccordion key={boards._id} name={boards.name} tasks={boards.tasks} />
                 ))}
               </Accordion.Panel>
             </Accordion.Item>

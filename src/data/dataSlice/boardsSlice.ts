@@ -13,6 +13,16 @@ export type taskAssign = {
   firstname: string;
 };
 
+type user = {
+  _id: string;
+  username: string;
+  firstname: string;
+  lastname: string;
+  email: string;
+  phone: string;
+  profile_url: '';
+};
+
 export type task = {
   _id: string;
   name: string;
@@ -22,7 +32,14 @@ export type task = {
   deadline?: Date;
   taskTags?: tag[];
   taskAssigns: taskAssign[];
-  comments?: object[];
+  comments?: comment[];
+};
+
+type comment = {
+  _id: string;
+  text: string;
+  user: user;
+  createdAt: string;
 };
 
 type board = {

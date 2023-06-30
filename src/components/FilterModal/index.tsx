@@ -6,13 +6,13 @@ import { useAppDispatch, useAppSelector } from '../../data/reduxHooks';
 import { useForm } from '@mantine/form';
 import { filterTasks, removeFilter } from '../../data/dataSlice/boardsSlice';
 const FilterComponent = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const members = useAppSelector((state) => state.boards.projectMembers);
   const value = members.map((m: any) => {
     return { value: m.user._id, label: `${m.user.firstname} ${m.user.lastname}` };
   });
   const [opened, { open, close }] = useDisclosure(false);
-  
+
   const form = useForm({
     initialValues: {
       member: ''
@@ -22,21 +22,20 @@ const FilterComponent = () => {
       member: (value) => (value.length > 2 ? null : 'لطفا عضو مورد نظر را انتخاب کنید')
     }
   });
-  
+
   //filterin functionality
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (form.validate().hasErrors === false) {
-      dispatch(filterTasks(form.values.member))
+      dispatch(filterTasks(form.values.member));
       close();
     }
-      
   };
   return (
     <>
       <Modal title="فیلترها" opened={opened} onClose={close} size="xl">
-        <form >
-          <Flex gap="sm" align='center'>
+        <form>
+          <Flex gap="sm" align="center">
             {/* <FilterContent /> */}
             <Text> تسک هایی که اعضای آن ها </Text>
             <Select
@@ -47,7 +46,7 @@ const FilterComponent = () => {
             />
             <Text>می باشد</Text>
             <Button onClick={handleSubmit}>فیلتر کردن</Button>
-            <Button onClick={()=>dispatch(removeFilter())}>لغو فیلتر</Button>
+            <Button onClick={() => dispatch(removeFilter())}>لغو فیلتر</Button>
           </Flex>
         </form>
       </Modal>
@@ -65,7 +64,8 @@ const FilterComponent = () => {
         style={{
           backgroundColor: 'transparent',
           color: 'inherit'
-        }}>
+        }}
+      >
         فیلترها
       </Button>
     </>
