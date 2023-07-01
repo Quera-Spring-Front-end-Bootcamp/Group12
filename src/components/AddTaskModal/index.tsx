@@ -58,7 +58,6 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
   });
 
   const submitTag = (a: string, b: string) => {
-    console.log(a, b);
     SetTag({ name: a, color: b });
   };
 

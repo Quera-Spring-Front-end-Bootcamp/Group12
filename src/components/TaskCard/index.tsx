@@ -20,7 +20,7 @@ import TaskInformationModal from '../TaskInformationModal';
 import { useDisclosure } from '@mantine/hooks';
 import { formatDate } from '@fullcalendar/core/index.js';
 import UnasignMember from '../UnasignUser';
-import { AvatarGroup } from '@mantine/core/lib/Avatar/AvatarGroup/AvatarGroup';
+import EditTaskMenu from '../EditTaskMenu';
 
 type props = {
   task: task;
@@ -70,7 +70,7 @@ const TaskCard = ({ task, projectName, dragTask, boardName }: props) => {
         withBorder
         className={`${!dragTask ? 'group' : 'rotate-6'}`}
         style={{ transition: '300ms ease-out' }}>
-        <Flex  direction="column" gap="16px" style={{ position: 'relative' }}>
+        <Flex direction="column" gap="16px" style={{ position: 'relative' }}>
           <Flex direction="column" gap="8px">
             <Text size="12px">{projectName}</Text>
             <Flex gap="4px" align="center">
@@ -78,7 +78,10 @@ const TaskCard = ({ task, projectName, dragTask, boardName }: props) => {
                 {task?.name}
               </Title>
               <SvgProvier color="#BDC0C6" style={{ height: '12px' }}>
-                <JustifyRight onClick={openTaskInfo} className={` hover:scale-110 hover:font-extrabold `} />
+                <JustifyRight
+                  onClick={openTaskInfo}
+                  className={` hover:scale-110 hover:font-extrabold `}
+                />
               </SvgProvier>
             </Flex>
           </Flex>
@@ -104,7 +107,7 @@ const TaskCard = ({ task, projectName, dragTask, boardName }: props) => {
                 })
               : null}
           </Avatar.Group>
-          
+
           <Group spacing="4px">
             <Text size="12px">{dateFa}</Text>
           </Group>
@@ -130,20 +133,22 @@ const TaskCard = ({ task, projectName, dragTask, boardName }: props) => {
             }`}
           />
           <Flex justify="space-between" mb="16px">
-            <SvgProvier  style={{ heigh: '20px' }}>
+            <SvgProvier style={{ heigh: '20px' }}>
               <Done
                 className={`opacity-0 group-hover/:opacity-100 transition-all ease-in-out duration-300 ${
                   dragTask && 'opacity-100'
                 }`}
               />
             </SvgProvier>
-            <SvgProvier style={{ heigh: '20px' }}>
-              <Dots
-                className={` group-hover/:visible group-hover/:opacity-100 transition-all ease-in-out duration-300 ${
-                  dragTask ? 'visible opacity-100' : 'invisible opacity-0'
-                }`}
-              />
-            </SvgProvier>
+            <EditTaskMenu id={task._id}/>
+              {/* <SvgProvier style={{ heigh: '20px' }}>
+                <Dots
+                  className={` group-hover/:visible group-hover/:opacity-100 transition-all ease-in-out duration-300 ${
+                    dragTask ? 'visible opacity-100' : 'invisible opacity-0'
+                  }`}
+                />
+              </SvgProvier> */}
+            
           </Flex>
         </div>
       </TaskListItem>
