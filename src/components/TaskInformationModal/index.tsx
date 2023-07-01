@@ -39,7 +39,7 @@ type props = {
   opened: boolean;
   onClose: () => void;
   task: task;
-  boardName: string;
+  boardName?: string;
   tags: tag[];
   setTags: any;
 };

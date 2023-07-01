@@ -9,6 +9,7 @@ interface ListAccordionprops {
 }
 
 export default function ListAccordion({ name, tasks }: ListAccordionprops) {
+  console.log(name)
   const storeTasks = [...tasks];
   
   if (tasks) {
@@ -29,6 +30,7 @@ export default function ListAccordion({ name, tasks }: ListAccordionprops) {
               <ListRow 
                 key={tasks._id}
                 task={tasks}
+                name={name}
               />
             ))}
           </Accordion.Panel>
