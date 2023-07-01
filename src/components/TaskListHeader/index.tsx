@@ -115,6 +115,7 @@ const TaskListHeader = ({ children, tasksCount, boardId, openAddModal }: TaskLis
               </Menu.Item>
 
               <Menu.Item
+                color="red"
                 onClick={deleteBoard}
                 icon={
                   <SvgProvier style={{ height: '20px' }}>

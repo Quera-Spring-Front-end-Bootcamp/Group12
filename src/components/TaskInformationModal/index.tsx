@@ -6,7 +6,8 @@ import {
   Text,
   useMantineTheme,
   Badge,
-  Textarea
+  Textarea,
+  Menu
 } from '@mantine/core';
 import Modal from '../Modal';
 import boardsSlice, { tag, task } from '../../data/dataSlice/boardsSlice';
@@ -16,8 +17,10 @@ import {
   AssignCircle,
   Attachment,
   Chat,
+  Delete,
   Docs,
   DoneBox,
+  Edit,
   Email,
   Emoji,
   Share,
@@ -54,9 +57,19 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [open, setOpen] = useState(false);
   const [tagOpened, { open: openTag, close: closeTag }] = useDisclosure(false);
-  // const openTagModal = () => {
-  //   setTagOpen(true)
-  // }
+
+  const deleteTag = async (name: string) => {
+    try {
+      await myAxios.delete(`/tags/${name}`);
+      setTags(tags.filter((tag) => tag.tagName !== name));
+      notifications.show({ message: 'تگ حذف شد', color: 'green' });
+    } catch (error: any) {
+      notifications.show({ message: error?.message, color: 'red' });
+    }
+  };
+
+  const editTag = () => {};
+
   const openCommentSection = () => {
     setOpen(true);
     setTimeout(() => {
@@ -68,6 +81,7 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
   const [newComment, setNewComment] = useState('');
   const [loading, setLoading] = useState(false);
   dayjs.extend(relativeTime);
+  console.log(tags);
   const submitComment = async () => {
     setLoading(true);
     const data = {
@@ -79,6 +93,7 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
       const boards = await myAxios.get(`/board/${projectID}`);
       dispatch(updateBoards(boards.data.data));
       setLoading(false);
+      setNewComment('');
     } catch (error: any) {
       notifications.show({ message: error?.message, color: 'red' });
     }
@@ -211,9 +226,44 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                 {tags.length > 0 && (
                   <Group pt={4} spacing="xs">
                     {tags.map((tag) => (
-                      <Badge size="lg" color={tag.color} key={tag._id}>
-                        {tag.tagName}
-                      </Badge>
+                      <Menu
+                        key={tag._id}
+                        trigger="hover"
+                        shadow="md"
+                        width={150}
+                        openDelay={300}
+                        withArrow
+                        closeDelay={100}
+                      >
+                        <Menu.Target>
+                          <Badge size="lg" color={tag.color}>
+                            {tag.tagName}
+                          </Badge>
+                        </Menu.Target>
+                        <Menu.Dropdown>
+                          <Menu.Item
+                            onClick={editTag}
+                            icon={
+                              <SvgProvier style={{ height: '20px' }}>
+                                <Edit />
+                              </SvgProvier>
+                            }
+                          >
+                            ادیت تگ
+                          </Menu.Item>
+                          <Menu.Item
+                            onClick={() => deleteTag(tag.tagName)}
+                            color="red"
+                            icon={
+                              <SvgProvier style={{ height: '20px' }}>
+                                <Delete />
+                              </SvgProvier>
+                            }
+                          >
+                            حذف تگ
+                          </Menu.Item>
+                        </Menu.Dropdown>
+                      </Menu>
                     ))}
                   </Group>
                 )}
@@ -318,6 +368,7 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                   <Textarea
                     ref={inputRef}
                     opacity={open ? 1 : 0}
+                    value={newComment}
                     className="transition-all duration-75"
                     onChange={(e) => {
                       setNewComment(e.target.value);
