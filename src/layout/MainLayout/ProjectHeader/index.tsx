@@ -23,7 +23,7 @@ const ProjectHeader = () => {
   const [activeTab, setActiveTab] = useState<any | null>(tab);
   const dispatch = useAppDispatch();
   useEffect(() => {
-    //dispatch(setProjectName(project));
+    dispatch(setProjectName(projectName));
     setActiveTab(tab);
   }, [projectName]);
 
