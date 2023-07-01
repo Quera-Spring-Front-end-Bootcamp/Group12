@@ -96,8 +96,7 @@ const AddTagModal = ({ opened, onClose, taskId, setTags, tags }: props) => {
                 transitionDuration={200}
                 styles={{
                   radio: {
-                    background: theme.colors[color][primaryShade],
-                    border: 'none'
+                    background: theme.colors[color][primaryShade]
                   }
                 }}
                 className={`transition-all hover:scale-110 `}

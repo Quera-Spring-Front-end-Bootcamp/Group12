@@ -39,9 +39,11 @@ const FilterTask = ({ dragTask }: props) => {
       <Divider orientation="vertical" />
       <FilterComponent />
 
-      <Badge className="shrink-0" size="lg" color="cyan">
-        دسته‌بندی‌شده با: {filter}{' '}
-      </Badge>
+      {filter === 'اعضا' && (
+        <Badge className="shrink-0" size="lg">
+          دسته‌بندی‌شده با: {filter}{' '}
+        </Badge>
+      )}
       {page === 'board-view' && (
         <MyDroppable droppableId="delete">
           {(provided, snapshot) => {
