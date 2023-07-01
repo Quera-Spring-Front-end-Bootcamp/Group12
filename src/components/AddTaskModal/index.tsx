@@ -1,4 +1,4 @@
-import { Flex, Modal, Select, Text, Textarea } from '@mantine/core';
+import { Badge, Flex, Modal, Select, Text, Textarea } from '@mantine/core';
 import 'dayjs/locale/fa';
 import TextInput from '../TextInput';
 import { useAppDispatch, useAppSelector } from '../../data/reduxHooks';
@@ -58,6 +58,7 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
   });
 
   const submitTag = (a: string, b: string) => {
+    console.log(a, b);
     SetTag({ name: a, color: b });
   };
 
@@ -75,6 +76,7 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
   // add tag to task func
   const addTagToTask = async (taskId: string) => {
     if (tag.name) {
+      console.log(tag);
       try {
         const res = await myAxios.post(`/tags`, { ...tag, taskId });
         SetTag({ name: '', color: '' });
@@ -91,7 +93,8 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
         title="افزودن تسک"
         centered
         dir="rtl"
-        className="relative">
+        className="relative"
+      >
         <form
           className="h-96"
           onSubmit={async (e) => {
@@ -100,8 +103,8 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
               setMeassage('با کلیک بر آیکون تقویم تاریخ را انتخاب کنید');
               return;
             }
-            setLoading(true);
             if (form.validate().hasErrors === false) {
+              setLoading(true);
               const deadline = moment(value.format(), 'jYYYY/jMM/jDD').format('YYYY-MM-DD');
               let data = {};
               boardId
@@ -115,12 +118,12 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
               try {
                 setMeassage('');
                 const res = await myAxios.post('/task/', data);
-                dispatch(addTaskToBoard(res.data.data));
                 setValue('');
                 let promise = await Promise.all([
                   addTagToTask(res.data.data._id),
                   addMemberToTask(res.data.data._id)
                 ]);
+                dispatch(addTaskToBoard(res.data.data));
                 notifications.show({ message: 'تسک ایجاد شد', color: 'green' });
                 form.reset();
                 setLoading(false);
@@ -130,14 +133,15 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
                 notifications.show({ message: error?.message, color: 'red' });
               }
             }
-          }}>
+          }}
+        >
           {boards.length <= 0 ? (
             <>
-            <AddBoardModal opened={boardOpened} onClose={closeboard}/>
-            <Flex align='center' justify='center' direction='column'>
-              <Text mb='md'>لطفا ابتدا به پروژه بورد اظافه کنید</Text>
-              <Button onClick={openboard}>اظافه کردن بورد</Button>
-            </Flex>
+              <AddBoardModal opened={boardOpened} onClose={closeboard} />
+              <Flex align="center" justify="center" direction="column">
+                <Text mb="md">لطفا ابتدا به پروژه بورد اظافه کنید</Text>
+                <Button onClick={openboard}>اظافه کردن بورد</Button>
+              </Flex>
             </>
           ) : (
             <Flex direction="column" px="sm" gap={'md'}>
@@ -175,12 +179,7 @@ const AddTaskModal = ({ opened, onClose, boardId, boardName }: props) => {
                   <span className="font-medium text-red-600">{message}</span>
                 )}
               </Text>
-              <Text>
-                تگ:{' '}
-                <div className="inline-block px-2 rounded" style={{ background: tag.color }}>
-                  {tag.name}
-                </div>
-              </Text>
+              <Text>تگ: {tag.name && <Badge color={tag.color}>{tag.name}</Badge>}</Text>
               <Flex justify="space-between" align="center" mt="lg">
                 <Flex align="center" gap="sm">
                   <DatePicker

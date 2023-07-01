@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import myAxios from '../../helpers/myAxios';
 import TaskInformationModal from '../TaskInformationModal';
 import { useDisclosure } from '@mantine/hooks';
+import { formatDate } from '@fullcalendar/core/index.js';
 
 type props = {
   task: task;
@@ -18,16 +19,23 @@ type props = {
 
 type tags = tag[];
 const initialTags: tags = [];
-const TaskCard = ({ task, projectName, dragTask, boardName }: props) => {
-  const [tags, setTags] = useState(initialTags);
 
+const TaskCard = ({ task, projectName, dragTask, boardName }: props) => {
+  const date: any = task.deadline?.toString()?.split('T')[0];
+  const dateFa = formatDate(date, {
+    timeZone: 'local',
+    locale: 'fa',
+    month: 'long',
+    day: 'numeric'
+  });
+
+  const [tags, setTags] = useState(initialTags);
   useEffect(() => {
     myAxios.get(`/tags/task/${task._id}`).then((response) => {
       setTags(response.data.data.tags);
     });
   }, []);
   const [TaskInfoOpened, { open: openTaskInfo, close: closeTaskinfo }] = useDisclosure(false);
-
   return (
     <>
       <TaskInformationModal
@@ -36,6 +44,7 @@ const TaskCard = ({ task, projectName, dragTask, boardName }: props) => {
         boardName={boardName}
         tags={tags}
         task={task}
+        setTags={setTags}
       />
 
       <TaskListItem
@@ -68,12 +77,9 @@ const TaskCard = ({ task, projectName, dragTask, boardName }: props) => {
               dragTask && 'opacity-100'
             }`}
           ></Avatar>
-          {/* <Group spacing="4px">
-          <SvgProvier color="#FB0606" style={{ height: '16px' }}>
-            <Flag />
-          </SvgProvier>
-          <Text size="12px">۵ مهر - فردا</Text>
-        </Group> */}
+          <Group spacing="4px">
+            <Text size="12px">{dateFa}</Text>
+          </Group>
           {tags.length > 0 && (
             <Group spacing="xs">
               {tags.map((tag) => (
