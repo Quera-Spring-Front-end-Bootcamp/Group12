@@ -31,6 +31,7 @@ import { ReactComponent as Email } from './svg/Email, @, Mail, Mail icon.svg';
 import { ReactComponent as Emoji } from './svg/Smileys.svg';
 import { ReactComponent as Docs } from './svg/Documents, File.svg';
 import { ReactComponent as Attachment } from './svg/attachment-link.3.svg';
+import { ReactComponent as EmptyPage } from './svg/emptyPage.svg';
 
 export {
   Arrow,
@@ -65,5 +66,6 @@ export {
   Emoji,
   Docs,
   Attachment,
-  Email
+  Email,
+  EmptyPage
 };

@@ -1,8 +1,10 @@
-import { AppShell, useMantineColorScheme } from '@mantine/core';
+import { AppShell, useMantineColorScheme, Flex, Text } from '@mantine/core';
 import Sidebar from '../Sidebar';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
+import { EmptyPage } from '../../assets/icons';
 
 export default function MainLayout() {
+  const { projectID } = useParams();
   const { colorScheme } = useMantineColorScheme();
   return (
     <>
@@ -12,7 +14,16 @@ export default function MainLayout() {
         navbar={<Sidebar />}
         layout="alt"
       >
-        <Outlet />
+        {projectID ? (
+          <Outlet />
+        ) : (
+          <Flex justify={'center'} align={'center'} gap={'xl'} direction={'column'} h={'100%'}>
+            <EmptyPage style={{ height: '500px' }} />
+            <Text weight={'bolder'} size={40}>
+              کدوم پروژه رو نشون بدم؟ یکیشو انتخاب کن:)
+            </Text>
+          </Flex>
+        )}
       </AppShell>
     </>
   );
