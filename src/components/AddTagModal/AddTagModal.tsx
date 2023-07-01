@@ -13,6 +13,7 @@ import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 import myAxios from '../../helpers/myAxios';
 import { tag } from '../../data/dataSlice/boardsSlice';
+import { useState } from 'react';
 
 type props = {
   opened: boolean;
@@ -24,6 +25,7 @@ type props = {
 
 const AddTagModal = ({ opened, onClose, taskId, setTags, tags }: props) => {
   const { colors } = useMantineTheme();
+  const [loading, setLoading] = useState(false);
 
   const theme = useMantineTheme();
 
@@ -42,6 +44,8 @@ const AddTagModal = ({ opened, onClose, taskId, setTags, tags }: props) => {
   });
   const handleSubmit = async () => {
     if (form.validate().hasErrors === false) {
+      setLoading(true);
+
       try {
         const res = await myAxios.post(`/tags`, {
           name: form.values.name,
@@ -60,7 +64,7 @@ const AddTagModal = ({ opened, onClose, taskId, setTags, tags }: props) => {
       } catch (error: any) {
         notifications.show({ message: error?.message, color: 'red' });
       }
-
+      setLoading(false);
       form.reset();
       onClose();
     }
@@ -105,7 +109,9 @@ const AddTagModal = ({ opened, onClose, taskId, setTags, tags }: props) => {
         </Radio.Group>
         <Text>رنگ تگ:{form.values.color}</Text>
 
-        <Button onClick={handleSubmit}>تایید</Button>
+        <Button loading={loading} onClick={handleSubmit}>
+          تایید
+        </Button>
       </Flex>
     </Modal>
   );

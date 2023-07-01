@@ -27,7 +27,7 @@ const Board = ({ name, tasks, projectName, id }: props) => {
   return (
     <Flex direction="column" miw="250px" gap="sm" className="transition-all duration-200 shrink-0">
       <AddTaskModal opened={opened} onClose={close} boardName={name} boardId={id} />
-      <TaskListHeader tasksCount={tasksCount}>
+      <TaskListHeader boardId={id} openAddModal={open} tasksCount={tasksCount}>
         <Text>{name}</Text>
       </TaskListHeader>
 
