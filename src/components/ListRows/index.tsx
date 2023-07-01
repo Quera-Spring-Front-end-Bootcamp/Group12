@@ -4,6 +4,7 @@ import { Flag, JustifyRight } from '../../assets/icons';
 import { task } from '../../data/dataSlice/boardsSlice';
 import MyAvatar from '../Avatar';
 import { formatDate } from '@fullcalendar/core/index.js';
+import UnasignMember from '../UnasignUser';
 
 interface propTypes {
   task: task
@@ -30,7 +31,7 @@ export default function ListRow({ task }: propTypes) {
           
           {storeAssigns?.length > 0 ?
             storeAssigns?.map((user:any) => {              
-                return <MyAvatar key={user._id} {...user} />;
+                return <UnasignMember key={user._id} taskId={task._id} username={user.username}><MyAvatar key={user._id} {...user} /></UnasignMember>;
             }): "ندارد"}
         </Avatar.Group>
       </Flex>

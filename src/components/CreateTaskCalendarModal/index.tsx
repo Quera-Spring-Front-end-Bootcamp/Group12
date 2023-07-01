@@ -9,6 +9,8 @@ import myAxios from '../../helpers/myAxios';
 import { notifications } from '@mantine/notifications';
 
 import { addTaskToBoard } from '../../data/dataSlice/boardsSlice';
+import { useDisclosure } from '@mantine/hooks';
+import AddBoardModal from '../AddBoardModal';
 
 type props = {
   taskDate: string;
@@ -16,6 +18,7 @@ type props = {
   onClose: () => void;
 };
 const CreateTaskCalendarModal = ({ opened, onClose, taskDate }: props) => {
+  const [boardOpened, { open: openboard, close: closeboard }] = useDisclosure(false);
   const boards: any = useAppSelector((state) => state.boards.projectBoards);
   const dispatch = useAppDispatch();
   const boardValues = boards.map((board: any) => {
@@ -59,32 +62,42 @@ const CreateTaskCalendarModal = ({ opened, onClose, taskDate }: props) => {
             }
           }
         }}>
-        <Flex direction="column" px="sm">
-          <TextInput
-            w="165px"
-            fw="500"
-            color="#C8C8C8"
-            fz="md"
-            placeholder="نام تسک را وارد کنید"
-            {...form.getInputProps('name')}
-          />
-          <Select
-            placeholder="نام برد"
-            searchable
-            defaultValue={'sd'}
-            mt="md"
-            maxDropdownHeight={45}
-            data={boardValues}
-            {...form.getInputProps('boardId')}
-          />
-          <Textarea placeholder="توضیحات تسک" mt="sm" {...form.getInputProps('description')} />
-          <Flex justify="space-between" align="center" mt="lg" c={primaryColor}>
-            <Text fw="500" fz="lg">
-              {date}
-            </Text>
-            <Button type="submit">ساختن تسک</Button>
+        {boards.length <= 0 ? (
+          <>
+            <AddBoardModal opened={boardOpened} onClose={closeboard} />
+            <Flex align="center" justify="center" direction="column">
+              <Text mb="md">لطفا ابتدا به پروژه بورد اظافه کنید</Text>
+              <Button onClick={openboard}>اظافه کردن بورد</Button>
+            </Flex>
+          </>
+        ) : (
+          <Flex direction="column" px="sm">
+            <TextInput
+              w="165px"
+              fw="500"
+              color="#C8C8C8"
+              fz="md"
+              placeholder="نام تسک را وارد کنید"
+              {...form.getInputProps('name')}
+            />
+            <Select
+              placeholder="نام برد"
+              searchable
+              defaultValue={'sd'}
+              mt="md"
+              maxDropdownHeight={45}
+              data={boardValues}
+              {...form.getInputProps('boardId')}
+            />
+            <Textarea placeholder="توضیحات تسک" mt="sm" {...form.getInputProps('description')} />
+            <Flex justify="space-between" align="center" mt="lg" c={primaryColor}>
+              <Text fw="500" fz="lg">
+                {date}
+              </Text>
+              <Button type="submit">ساختن تسک</Button>
+            </Flex>
           </Flex>
-        </Flex>
+        )}
       </form>
     </Modal>
   );
