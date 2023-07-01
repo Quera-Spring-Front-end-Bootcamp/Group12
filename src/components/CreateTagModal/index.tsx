@@ -1,6 +1,13 @@
 import { useDisclosure } from '@mantine/hooks';
 import Modal from '../Modal';
-import { ColorPicker, Flex, Text, TextInput } from '@mantine/core';
+import {
+  Flex,
+  Radio,
+  Text,
+  TextInput,
+  useMantineColorScheme,
+  useMantineTheme
+} from '@mantine/core';
 import SvgProvier from '../../assets/icons/SvgProvider';
 import { TagsCircle } from '../../assets/icons';
 import Button from '../Button';
@@ -8,6 +15,10 @@ import { useForm } from '@mantine/form';
 
 const CreateTagModal = ({ setTag }: any) => {
   const [opened, { open, close }] = useDisclosure(false);
+  const { colors } = useMantineTheme();
+  const theme = useMantineTheme();
+  const { colorScheme } = useMantineColorScheme();
+  const primaryShade = colorScheme === 'light' ? 6 : 7;
   const form = useForm({
     initialValues: {
       name: '',
@@ -28,11 +39,44 @@ const CreateTagModal = ({ setTag }: any) => {
   };
   return (
     <>
-      <Modal opened={opened} onClose={close} title="ساختن تگ" centered>
-        <Flex direction="column" gap="lg" className="h-96 mt-5">
+      <Modal
+        overlayProps={{
+          opacity: 0.55,
+          blur: 3,
+          zIndex: 201
+        }}
+        opened={opened}
+        onClose={close}
+        title="ساختن تگ"
+        centered
+      >
+        <Flex direction="column" gap="lg" className=" mt-5">
           <TextInput required label="نام تگ" {...form.getInputProps('name')} />
 
-          <ColorPicker {...form.getInputProps('color')} />
+          <Radio.Group
+            size="md"
+            name="themeColorPicker"
+            title="انتخاب تم"
+            {...form.getInputProps('color')}
+          >
+            <Flex gap={8} justify={'left'} wrap={'wrap'} w={'65%'} align={'center'}>
+              {Object.keys(colors).map((color, index) => (
+                <Radio
+                  key={index}
+                  transitionDuration={200}
+                  styles={{
+                    radio: {
+                      background: theme.colors[color][primaryShade],
+                      border: 'none'
+                    }
+                  }}
+                  className={`transition-all hover:scale-110 `}
+                  value={color}
+                  color={color}
+                />
+              ))}
+            </Flex>
+          </Radio.Group>
           <Text>رنگ تگ:{form.values.color}</Text>
 
           <Button onClick={handleSubmit}>تایید</Button>
