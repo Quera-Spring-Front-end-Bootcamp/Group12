@@ -75,8 +75,7 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
       taskId: task._id
     };
     try {
-      const res = await myAxios.post('/comments/', data);
-      console.log(res);
+      await myAxios.post('/comments/', data);
       const boards = await myAxios.get(`/board/${projectID}`);
       dispatch(updateBoards(boards.data.data));
       setLoading(false);
