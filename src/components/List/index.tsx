@@ -1,4 +1,4 @@
-import { Accordion, Paper, ScrollArea } from '@mantine/core';
+import { Accordion, Paper } from '@mantine/core';
 import { useParams } from 'react-router-dom';
 import FilterTask from '../FilterTasks';
 import { useAppSelector } from '../../data/reduxHooks';
@@ -18,8 +18,7 @@ const List = () => {
   return (
     <>
       <FilterTask />
-      <ScrollArea mah="calc(100vh - 230px)">
-        <Paper style={{ maxHeight: '500px', overflowY: 'auto' }}>
+        <Paper style={{ maxHeight: 'calc(100vh - 230px)', overflowY: 'auto' }}>
           <Accordion chevronPosition="left" defaultValue={projectName} variant="filled">
             <Accordion.Item value={projectName}>
               <Accordion.Control>{projectName}</Accordion.Control>
@@ -31,7 +30,6 @@ const List = () => {
             </Accordion.Item>
           </Accordion>
         </Paper>
-      </ScrollArea>
     </>
   );
 };
