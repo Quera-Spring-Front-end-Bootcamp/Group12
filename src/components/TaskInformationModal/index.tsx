@@ -14,7 +14,6 @@ import boardsSlice, { tag, task } from '../../data/dataSlice/boardsSlice';
 import SvgProvier from '../../assets/icons/SvgProvider';
 import {
   Arrow,
-  AssignCircle,
   Attachment,
   Chat,
   Delete,
@@ -50,7 +49,6 @@ type props = {
 };
 
 const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags }: props) => {
-  console.log(tags)
   const { primaryColor } = useMantineTheme();
   const dispatch = useAppDispatch();
   const { updateBoards } = boardsSlice.actions;
@@ -128,7 +126,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
             margin: '0px'
           }
         }}
-        centered>
+        centered
+      >
         <AddTagModal
           onClose={closeTag}
           opened={tagOpened}
@@ -152,7 +151,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
               borderLeft: `2px solid ${borderColor}`
             }}
             pb={32}
-            direction={'column'}>
+            direction={'column'}
+          >
             {/* right side header */}
             <Flex
               justify={'space-between'}
@@ -161,7 +161,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
               px={32}
               style={{
                 borderBottom: `2px solid ${borderColor}`
-              }}>
+              }}
+            >
               <Flex gap={24}>
                 <Group spacing={'2px'} className="shrink-0">
                   <Box
@@ -174,7 +175,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                           ? theme.colors[theme.primaryColor][7]
                           : theme.colors[theme.primaryColor][6],
                       color: 'white'
-                    })}>
+                    })}
+                  >
                     <Text>{boardName}</Text>
                   </Box>
                   <Box
@@ -188,7 +190,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                           : theme.colors[theme.primaryColor][6],
                       color: 'white',
                       borderRadius: '0px 3px 3px 0px'
-                    })}>
+                    })}
+                  >
                     <SvgProvier style={{ transform: 'rotate(90deg)' }}>
                       <Arrow />
                     </SvgProvier>
@@ -202,7 +205,7 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                     return <Avatar size="34px" key={user._id} {...user} />;
                   })}
 
-                  <AddMemberToTask taskId={task._id}/>
+                  <AddMemberToTask taskId={task._id} />
                 </MantineAvatar.Group>
               </Flex>
               <Button
@@ -217,7 +220,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                 style={{
                   backgroundColor: 'transparent',
                   color: 'inherit'
-                }}>
+                }}
+              >
                 اشتراک‌گذاری
               </Button>
             </Flex>
@@ -239,7 +243,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                         width={150}
                         openDelay={300}
                         withArrow
-                        closeDelay={100}>
+                        closeDelay={100}
+                      >
                         <Menu.Target>
                           <Badge size="lg" color={tag.color}>
                             {tag.tagName}
@@ -252,7 +257,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                               <SvgProvier style={{ height: '20px' }}>
                                 <Edit />
                               </SvgProvier>
-                            }>
+                            }
+                          >
                             ادیت تگ
                           </Menu.Item>
                           <Menu.Item
@@ -262,7 +268,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                               <SvgProvier style={{ height: '20px' }}>
                                 <Delete />
                               </SvgProvier>
-                            }>
+                            }
+                          >
                             حذف تگ
                           </Menu.Item>
                         </Menu.Dropdown>
@@ -282,7 +289,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                   width: '100%',
                   minHeight: '48px',
                   padding: '12px'
-                }}>
+                }}
+              >
                 {task.description}
               </div>
             </Flex>
@@ -298,7 +306,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
               className="shrink-0"
               style={{
                 borderBottom: `2px solid ${borderColor}`
-              }}>
+              }}
+            >
               <Flex gap={'xs'} direction={'column'}>
                 <Text opacity={'0.3'}>ددلاین</Text>
                 <Text size={20}>{dayjs(task.deadline).locale('fa').toNow(true)} دیگر</Text>
@@ -313,7 +322,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                 gap={'md'}
                 direction={'column'}
                 h={open ? 216 : 362}
-                className="grow-0 shrink overflow-scroll transition-all duration-200">
+                className="grow-0 shrink overflow-scroll transition-all duration-200"
+              >
                 {(task.comments?.length as number) > 0
                   ? task.comments?.map((comment) => {
                       return (
@@ -326,7 +336,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                             style={{
                               border: `1px solid ${borderColor}`,
                               borderRadius: '12px'
-                            }}>
+                            }}
+                          >
                             <Flex justify={'space-between'} pb={8}>
                               <Text size={'lg'} color={primaryColor}>
                                 {comment.user.firstname}
@@ -356,7 +367,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                     borderColor,
                     borderWidth: '1px 1px 0 0',
                     borderRadius: '0 16px 0 0'
-                  }}>
+                  }}
+                >
                   <Flex justify={'space-between'} align={'center'}>
                     <Text opacity={'0.3'}>کامنت</Text>
                     <SvgProvier>
@@ -377,7 +389,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                         fontSize: '16px'
                       }
                     }}
-                    variant="unstyled"></Textarea>
+                    variant="unstyled"
+                  ></Textarea>
                   {/* comment input icons and submit button */}
                   <Flex justify={'space-between'}>
                     <Group spacing={'md'} py={16}>
@@ -399,7 +412,8 @@ const TaskInformationModal = ({ opened, onClose, task, boardName, tags, setTags 
                       disabled={!newComment}
                       onClick={submitComment}
                       loading={loading}
-                      radius={'md'}>
+                      radius={'md'}
+                    >
                       ثبت کامنت
                     </Button>
                   </Flex>

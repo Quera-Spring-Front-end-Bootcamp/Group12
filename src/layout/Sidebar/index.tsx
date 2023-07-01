@@ -27,6 +27,7 @@ import EditWorkspaceModal from '../../components/EditWorkspaceModal';
 import AddProjectModal from '../../components/AddProjectModal';
 import EditProjectModal from '../../components/EditProjectModal';
 import { setProjectName } from '../../data/dataSlice/boardsSlice';
+import DarkModeToggle from '../../components/DarkModeToggle';
 
 function Sidebar() {
   // state for store seach param
@@ -255,16 +256,19 @@ function Sidebar() {
             <Link to="/profile/panel">
               <SidebarProfile />
             </Link>
-            <Button
-              onClick={() => {
-                dispatch(clearUser());
-              }}
-              color="dark.3"
-              variant="subtle"
-              leftIcon={<Exit width="16px" />}
-            >
-              خروج
-            </Button>
+            <Flex w={'100%'} justify={'space-between'}>
+              <Button
+                onClick={() => {
+                  dispatch(clearUser());
+                }}
+                color="dark.3"
+                variant="subtle"
+                leftIcon={<Exit width="16px" />}
+              >
+                خروج
+              </Button>
+              <DarkModeToggle />
+            </Flex>
           </Flex>
         </Navbar.Section>
       </Navbar>

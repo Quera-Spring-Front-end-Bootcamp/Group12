@@ -1,10 +1,10 @@
 import { useDisclosure } from '@mantine/hooks';
 import Modal from '../Modal';
-import { Button, Flex, Select, Text } from '@mantine/core';
+import { Button, Flex, Text } from '@mantine/core';
 import SvgProvier from '../../assets/icons/SvgProvider';
 import { AssignCircle } from '../../assets/icons';
 import { useForm } from '@mantine/form';
-import { useAppDispatch, useAppSelector } from '../../data/reduxHooks';
+import { useAppDispatch } from '../../data/reduxHooks';
 import myAxios from '../../helpers/myAxios';
 import { notifications } from '@mantine/notifications';
 import { updateBoards } from '../../data/dataSlice/boardsSlice';
@@ -28,10 +28,6 @@ const AddMemberToTask = ({ taskId }: Props) => {
       member: (value) => (value.length > 2 ? null : 'لطفا عضو مورد نظر را انتخاب کنید')
     }
   });
-  const members = useAppSelector((state) => state.boards.projectMembers);
-  const value = members.map((m: any) => {
-    return { value: m.user.username, label: `${m.user.firstname} ${m.user.lastname}` };
-  });
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (form.validate().hasErrors === false) {
@@ -53,8 +49,8 @@ const AddMemberToTask = ({ taskId }: Props) => {
     <>
       <Modal opened={opened} onClose={close} title="اظافه کردن ممبر به تسک">
         <Flex direction="column" gap="sm">
-            <Text>نام کاربری کاربر مورد نظررا وارد کنید:</Text>
-          <TextInput placeholder='username' {...form.getInputProps('member')} />
+          <Text>نام کاربری کاربر مورد نظررا وارد کنید:</Text>
+          <TextInput placeholder="username" {...form.getInputProps('member')} />
 
           <Button loading={loading} onClick={handleSubmit}>
             اظافه کردن
@@ -63,7 +59,7 @@ const AddMemberToTask = ({ taskId }: Props) => {
       </Modal>
 
       <SvgProvier>
-        <AssignCircle onClick={open} className="cursor-pointer" />
+        <AssignCircle onClick={open} className="cursor-pointer w-[30px] my-[2px] -mr-3" />
       </SvgProvier>
     </>
   );

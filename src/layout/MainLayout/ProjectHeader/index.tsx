@@ -2,11 +2,10 @@ import { useMantineColorScheme, useMantineTheme } from '@mantine/styles';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useAppDispatch, useAppSelector } from '../../../data/reduxHooks';
-import { Button, Divider, Flex, Group, Tabs, Text } from '@mantine/core';
+import { Button, Divider, Flex, Tabs, Text } from '@mantine/core';
 import { NavLink } from 'react-router-dom';
 import SvgProvier from '../../../assets/icons/SvgProvider';
 import { Calender, CheckList, Column, Share } from '../../../assets/icons';
-import DarkModeToggle from '../../../components/DarkModeToggle';
 import { setProjectName } from '../../../data/dataSlice/boardsSlice';
 import { useDisclosure } from '@mantine/hooks';
 import ShareProjectModal from '../../../components/ShareProjectModal';
@@ -103,25 +102,23 @@ const ProjectHeader = () => {
               </Tabs.Tab>
             </NavLink>
             <Divider mt="10px" h="24px" orientation="vertical" />
-            <Group ml="auto">
-              <DarkModeToggle />
-              <Button
-                fz={16}
-                fw={500}
-                onClick={open}
-                leftIcon={
-                  <SvgProvier style={{ height: '24px' }}>
-                    <Share />
-                  </SvgProvier>
-                }
-                style={{
-                  backgroundColor: 'transparent',
-                  color: 'inherit'
-                }}
-              >
-                اشتراک‌گذاری
-              </Button>
-            </Group>
+            <Button
+              ml={'auto'}
+              fz={16}
+              fw={500}
+              onClick={open}
+              leftIcon={
+                <SvgProvier style={{ height: '24px' }}>
+                  <Share />
+                </SvgProvier>
+              }
+              style={{
+                backgroundColor: 'transparent',
+                color: 'inherit'
+              }}
+            >
+              اشتراک‌گذاری
+            </Button>
           </Flex>
         </Tabs.List>
       </Tabs>
