@@ -9,7 +9,6 @@ interface ListAccordionprops {
 }
 
 export default function ListAccordion({ name, tasks }: ListAccordionprops) {
-  console.log(name)
   const storeTasks = [...tasks];
   
   if (tasks) {
