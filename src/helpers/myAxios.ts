@@ -27,7 +27,7 @@ function getUser(): object {
 }
 const refreshAuthLogic = (failedRequest: any) =>
   axios
-    .post('http://localhost:3000/api/auth/refreshtoken', {
+    .post('https://queratrello.iran.liara.run/api/auth/refreshtoken', {
       refreshToken: getRefreshToken()
     })
     .then((tokenRefreshResponse) => {
@@ -44,7 +44,7 @@ const refreshAuthLogic = (failedRequest: any) =>
     });
 
 const myAxios = axios.create({
-  baseURL: 'http://localhost:3000/api'
+  baseURL: 'https://queratrello.iran.liara.run/api'
 });
 myAxios.interceptors.request.use((config: any) => {
   if (localStorage.getItem('user')) {

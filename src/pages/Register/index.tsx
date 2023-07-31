@@ -63,8 +63,8 @@ const Register = () => {
   return (
     <AuthLayout loginPage={false}>
       <Card miw="402px" shadow="0px 12px 50px rgba(0, 0, 0, 0.18)" radius="20px" p="24px">
-        <Flex direction="column" align="center" gap="10px" bg="#fff">
-          <Text fz="32px" fw="600" color="#000">
+        <Flex direction="column" align="center" gap="10px">
+          <Text fz="32px" fw="600">
             ثبت‌نام در کوئرا تسک منیجر
           </Text>
           <Text c="red" display={`${err.length > 0 ? 'block' : 'none'}`}>
